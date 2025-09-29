@@ -22,7 +22,7 @@ jobs:
     
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'hyoo/template' #FIXME namespace of this package
+        package: 'ainews' #FIXME namespace of this package
         modules: 'app' #FIXME which modules to build, remove line if only on module at the root
     
     #FIXME remove one of the following
@@ -36,4 +36,4 @@ jobs:
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:
-        folder: 'hyoo/template/app/-' #FIXME path to build app
+        folder: 'ainews/app/-' #FIXME path to build app
