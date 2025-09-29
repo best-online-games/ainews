@@ -2696,6 +2696,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    const $ainews_theme: Record<"image" | "line" | "text" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "field" | "spirit", $mol_style_func<"var", unknown>>;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	export class $mol_theme_auto extends $mol_plugin {
 		dark( ): string
@@ -2715,6 +2722,16 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $ {
+
+	export class $ainews_theme_auto extends $mol_theme_auto {
+		light( ): string
+		dark( ): string
+	}
+	
+}
+
+//# sourceMappingURL=auto.view.tree.d.ts.map
 declare namespace $ {
 
 	type $mol_image__uri_ainews_app_1 = $mol_type_enforce<
@@ -2738,7 +2755,7 @@ declare namespace $ {
 		enabled( ): boolean
 		time( next?: $mol_time_moment ): $mol_time_moment
 		Date( ): $mol_date
-		Theme( ): $mol_theme_auto
+		Theme( ): $ainews_theme_auto
 		head( ): readonly(any)[]
 		plugins( ): readonly(any)[]
 	}

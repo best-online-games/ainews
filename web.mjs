@@ -7821,6 +7821,34 @@ var $;
 })($ || ($ = {}));
 
 ;
+"use strict";
+var $;
+(function ($) {
+    $.$ainews_theme = $mol_style_prop('mol_theme', [
+        'back',
+        'hover',
+        'card',
+        'current',
+        'special',
+        'text',
+        'control',
+        'shade',
+        'line',
+        'focus',
+        'field',
+        'image',
+        'spirit',
+    ]);
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("ainews/theme/theme.css", ":root {\n\t--mol_theme_hue: 645deg;\n\t--mol_theme_hue_spread: 90deg;\n\n\t/* алиасы фиксами, чтобы не ломать совместимость */\n\t--mol_theme_primary_hue: 645deg;\n\t--mol_theme_secondary_hue: 735deg;\n\t--mol_theme_tertiary_hue: 555deg;\n\t--mol_theme_accent_hue: 180deg;\n}\n\n:where([mol_theme]) {\n\tcolor: var(--mol_theme_text);\n\tfill: var(--mol_theme_text);\n\tbackground-color: var(--mol_theme_back);\n}\n\n/* ===================== DARK ===================== */\n\n:root,\n[mol_theme='$mol_theme_dark'],\n:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t--mol_theme_luma: -1;\n\t--mol_theme_image: invert(1) hue-rotate(180deg);\n\t--mol_theme_spirit: #000000bf;\n\n\t/* ВАЖНО: mol_* — именно их читает демка */\n\t--mol_theme_back: #121317;\n\t--mol_theme_card: #1d202540; /* 25% */\n\t--mol_theme_field: #181b2040; /* 25% */\n\t--mol_theme_hover: #8080801a; /* 10% */\n\n\t--mol_theme_text: #e5e7eb;\n\t--mol_theme_shade: #9ca3b0;\n\t--mol_theme_line: #737b8c40; /* 25% */\n\t--mol_theme_focus: #4da3ff;\n\n\t--mol_theme_control: #4da3ff;\n\t--mol_theme_current: #20d3ee;\n\t--mol_theme_special: #f59f0a;\n}\n\n/* можно оставить дубликат в @supports — тоже mol_* */\n@supports (color: oklch(0% 0 0deg)) {\n\t:root,\n\t[mol_theme='$mol_theme_dark'],\n\t:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t\t--mol_theme_back: #121317;\n\t\t--mol_theme_card: #1d202540;\n\t\t--mol_theme_field: #181b2040;\n\t\t--mol_theme_hover: #8080801a;\n\n\t\t--mol_theme_text: #e5e7eb;\n\t\t--mol_theme_shade: #9ca3b0;\n\t\t--mol_theme_line: #737b8c40;\n\t\t--mol_theme_focus: #4da3ff;\n\n\t\t--mol_theme_control: #4da3ff;\n\t\t--mol_theme_current: #20d3ee;\n\t\t--mol_theme_special: #f59f0a;\n\t}\n}\n\n/* ===================== LIGHT ===================== */\n\n[mol_theme='$mol_theme_light'],\n:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t--mol_theme_luma: 1;\n\t--mol_theme_image: none;\n\t--mol_theme_spirit: #ffffffbf; /* 75% */\n\n\t--mol_theme_back: #f6f7f9; /* #F5F6F8 близко */\n\t--mol_theme_card: #ffffff80; /* 50% */\n\t--mol_theme_field: #ffffffbf; /* 75% */\n\t--mol_theme_hover: #8080801a; /* 10% */\n\n\t--mol_theme_text: #1a1a1a;\n\t--mol_theme_shade: #666666;\n\t--mol_theme_line: #80808040; /* 25% */\n\t--mol_theme_focus: #297eff; /* ≈ #2A7FFF */\n\n\t--mol_theme_control: #297eff;\n\t--mol_theme_current: #1db9a4;\n\t--mol_theme_special: #ffb01f;\n}\n\n@supports (color: oklch(0% 0 0deg)) {\n\t[mol_theme='$mol_theme_light'],\n\t:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t\t--mol_theme_back: #f6f7f9;\n\t\t--mol_theme_card: #ffffff80;\n\t\t--mol_theme_field: #ffffffbf;\n\t\t--mol_theme_hover: #8080801a;\n\n\t\t--mol_theme_text: #1a1a1a;\n\t\t--mol_theme_shade: #666666;\n\t\t--mol_theme_line: #80808040;\n\t\t--mol_theme_focus: #297eff;\n\n\t\t--mol_theme_control: #297eff;\n\t\t--mol_theme_current: #1db9a4;\n\t\t--mol_theme_special: #ffb01f;\n\t}\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_theme_auto) = class $mol_theme_auto extends ($.$mol_plugin) {
 		dark(){
 			return "$mol_theme_dark";
@@ -7856,10 +7884,24 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$ainews_theme_auto) = class $ainews_theme_auto extends ($.$mol_theme_auto) {
+		light(){
+			return "$mol_theme_light";
+		}
+		dark(){
+			return "$mol_theme_dark";
+		}
+	};
+
+
+;
+"use strict";
+
+;
 	($.$ainews_app) = class $ainews_app extends ($.$mol_page) {
 		Logo(){
 			const obj = new this.$.$mol_image();
-			(obj.uri) = () => ("bog/horrorgamelanding/logo/logo.jpg");
+			(obj.uri) = () => ("ainews/horrorgamelanding/logo/logo.jpg");
 			return obj;
 		}
 		Lights(){
@@ -7881,7 +7923,7 @@ var $;
 			return obj;
 		}
 		Theme(){
-			const obj = new this.$.$mol_theme_auto();
+			const obj = new this.$.$ainews_theme_auto();
 			return obj;
 		}
 		head(){

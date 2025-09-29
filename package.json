@@ -188,6 +188,8 @@
     "$mol_support_css",
     "$mol_support",
     "$mol_hor",
+    "$ainews_theme_auto",
+    "$ainews_theme",
     "$mol_theme_auto"
   ],
   "dependencies": {

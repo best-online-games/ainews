@@ -355,13 +355,17 @@ $mol_theme_auto $mol_plugin
 	light \$mol_theme_light
 	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
+$ainews_theme_auto $mol_theme_auto
+	light \$mol_theme_light
+	dark \$mol_theme_dark
+
 $ainews_app $mol_page
 	head /
 		<= Logo $mol_image
-			uri \bog/horrorgamelanding/logo/logo.jpg
+			uri \ainews/horrorgamelanding/logo/logo.jpg
 		<= Lights $mol_lights_toggle
 		<= Date $mol_date
 			enabled <= enabled true
 			value_moment? <=> time? $mol_time_moment
 	plugins /
-		<= Theme $mol_theme_auto
+		<= Theme $ainews_theme_auto
