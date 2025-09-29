@@ -17,8 +17,10 @@
   "keywords": [
     "$ainews_app",
     "$ainews",
-    "$mol_page",
+    "$mol_offline_install",
+    "$mol_offline",
     "$mol",
+    "$mol_page",
     "$mol_view_view",
     "$mol_view",
     "$mol_style_attach",

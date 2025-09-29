@@ -15,6 +15,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $mol_offline(): void;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     var $mol_dom_context: typeof globalThis;
 }
 
