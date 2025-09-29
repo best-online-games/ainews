@@ -1,0 +1,104 @@
+:root {
+	--mol_theme_hue: 645deg;
+	--mol_theme_hue_spread: 90deg;
+
+	/* алиасы фиксами, чтобы не ломать совместимость */
+	--mol_theme_primary_hue: 645deg;
+	--mol_theme_secondary_hue: 735deg;
+	--mol_theme_tertiary_hue: 555deg;
+	--mol_theme_accent_hue: 180deg;
+}
+
+:where([mol_theme]) {
+	color: var(--mol_theme_text);
+	fill: var(--mol_theme_text);
+	background-color: var(--mol_theme_back);
+}
+
+/* ===================== DARK ===================== */
+
+:root,
+[mol_theme='$mol_theme_dark'],
+:where([mol_theme='$mol_theme_dark']) [mol_theme] {
+	--mol_theme_luma: -1;
+	--mol_theme_image: invert(1) hue-rotate(180deg);
+	--mol_theme_spirit: #000000bf;
+
+	/* ВАЖНО: mol_* — именно их читает демка */
+	--mol_theme_back: #121317;
+	--mol_theme_card: #1d202540; /* 25% */
+	--mol_theme_field: #181b2040; /* 25% */
+	--mol_theme_hover: #8080801a; /* 10% */
+
+	--mol_theme_text: #e5e7eb;
+	--mol_theme_shade: #9ca3b0;
+	--mol_theme_line: #737b8c40; /* 25% */
+	--mol_theme_focus: #4da3ff;
+
+	--mol_theme_control: #4da3ff;
+	--mol_theme_current: #20d3ee;
+	--mol_theme_special: #f59f0a;
+}
+
+/* можно оставить дубликат в @supports — тоже mol_* */
+@supports (color: oklch(0% 0 0deg)) {
+	:root,
+	[mol_theme='$mol_theme_dark'],
+	:where([mol_theme='$mol_theme_dark']) [mol_theme] {
+		--mol_theme_back: #121317;
+		--mol_theme_card: #1d202540;
+		--mol_theme_field: #181b2040;
+		--mol_theme_hover: #8080801a;
+
+		--mol_theme_text: #e5e7eb;
+		--mol_theme_shade: #9ca3b0;
+		--mol_theme_line: #737b8c40;
+		--mol_theme_focus: #4da3ff;
+
+		--mol_theme_control: #4da3ff;
+		--mol_theme_current: #20d3ee;
+		--mol_theme_special: #f59f0a;
+	}
+}
+
+/* ===================== LIGHT ===================== */
+
+[mol_theme='$mol_theme_light'],
+:where([mol_theme='$mol_theme_light']) [mol_theme] {
+	--mol_theme_luma: 1;
+	--mol_theme_image: none;
+	--mol_theme_spirit: #ffffffbf; /* 75% */
+
+	--mol_theme_back: #f6f7f9; /* #F5F6F8 близко */
+	--mol_theme_card: #ffffff80; /* 50% */
+	--mol_theme_field: #ffffffbf; /* 75% */
+	--mol_theme_hover: #8080801a; /* 10% */
+
+	--mol_theme_text: #1a1a1a;
+	--mol_theme_shade: #666666;
+	--mol_theme_line: #80808040; /* 25% */
+	--mol_theme_focus: #297eff; /* ≈ #2A7FFF */
+
+	--mol_theme_control: #297eff;
+	--mol_theme_current: #1db9a4;
+	--mol_theme_special: #ffb01f;
+}
+
+@supports (color: oklch(0% 0 0deg)) {
+	[mol_theme='$mol_theme_light'],
+	:where([mol_theme='$mol_theme_light']) [mol_theme] {
+		--mol_theme_back: #f6f7f9;
+		--mol_theme_card: #ffffff80;
+		--mol_theme_field: #ffffffbf;
+		--mol_theme_hover: #8080801a;
+
+		--mol_theme_text: #1a1a1a;
+		--mol_theme_shade: #666666;
+		--mol_theme_line: #80808040;
+		--mol_theme_focus: #297eff;
+
+		--mol_theme_control: #297eff;
+		--mol_theme_current: #1db9a4;
+		--mol_theme_special: #ffb01f;
+	}
+}
