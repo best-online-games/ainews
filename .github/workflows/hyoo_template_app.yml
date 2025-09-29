@@ -1,9 +1,5 @@
-#FIXME change file name to actual app name
-#FIXME change to actual app name
-name: ainews
+name: $ainews
 
-#FIXME optional: change permissions if you don't want to allow everything
-# https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs#defining-access-for-the-github_token-permissions
 permissions: write-all
 
 on:
