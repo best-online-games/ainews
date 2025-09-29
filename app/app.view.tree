@@ -1,0 +1,10 @@
+$ainews_app $mol_page
+	head /
+		<= Logo $mol_image
+			uri \bog/horrorgamelanding/logo/logo.jpg
+		<= Lights $mol_lights_toggle
+		<= Date $mol_date
+			enabled <= enabled true
+			value_moment? <=> time? $mol_time_moment
+	plugins /
+		<= Theme $bog_theme_auto
