@@ -17,9 +17,11 @@ jobs:
     steps:
     
     - uses: hyoo-ru/mam_build@master2
+      env:
+        MAM_COME: '0'
       with:
-        package: 'ainews' #FIXME namespace of this package
-        modules: 'app' #FIXME which modules to build, remove line if only on module at the root
+        package: 'ainews'
+        modules: 'app' 
     
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
