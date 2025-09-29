@@ -12,13 +12,15 @@ on:
 jobs:
   build:
 
+    env:
+      MAM_COME: '0'
     runs-on: ubuntu-latest
     
     steps:
+    - name: Force-disable come for all later steps
+      run: echo "MAM_COME=0" >> $GITHUB_ENV  
     
     - uses: hyoo-ru/mam_build@master2
-      env:
-        MAM_COME: '0'
       with:
         package: 'ainews'
         modules: 'app' 
