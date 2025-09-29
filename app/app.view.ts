@@ -1,0 +1,74 @@
+namespace $.$$ {
+    const $ainews_app_proxy_url = "https://proxy.kinsle.ru/?link="
+
+    const $ainews_app_links = {
+        "tech": [
+            "https://devblogs.microsoft.com/landingpage/",
+            "https://blogs.unity3d.com/feed/",
+            "https://www.opennet.ru/opennews/opennews_all.rss",
+            "https://devblogs.microsoft.com/ifdef-windows/feed/",
+            "https://www.zdnet.com/news/rss.xml",
+            "https://habr.com/ru/rss/all/all/?fl=ru",
+            "https://habr.com/ru/rss/news/"
+        ],
+        "shared": [
+            "https://critter.blog/rss",
+            "https://news.ycombinator.com/rss"
+        ],
+    }
+
+    export class $ainews_app extends $.$ainews_app {
+        parse_rss( xml_doc: Document ) {
+            return Array.from( xml_doc.querySelectorAll( "item" ) ).map( ( item: Element ) => {
+                return {
+                    "title": item.querySelector( "title" )?.textContent,
+                    "pubDate": item.querySelector( "pubDate" )?.textContent,
+                    "description": item.querySelector( "description" )?.textContent,
+                    "link": item.querySelector( "link" )?.textContent,
+                }
+            } )
+        }
+
+        make_proxy( url: string ) {
+            return $ainews_app_proxy_url + url
+        }
+
+        articles(category: string) {
+			const selected_sources = this.sources(category).map(url_id => ($ainews_app_links as any)[category][ url_id ])
+			return selected_sources.map(rss_link => this.get_articles_from_sources(rss_link)).flat()
+        }
+
+		@$mol_mem_key
+		get_articles_from_sources(source_url: string) {
+            const xml_doc = $mol_fetch.xml( this.make_proxy( source_url ) )
+            const articles_list = this.parse_rss(xml_doc)
+            // console.log( articles_list )
+			return articles_list.map(article => this.Article(article))
+		}
+
+		// articles fields
+        article_title(article: any) {
+            return article.title
+        }
+		article_description(article: any) {
+            return article.description
+        }
+		article_link(article: any) {
+            return article.link
+        }
+
+		// sources fileds
+		suggestions(category: any) {
+			return ($ainews_app_links as any)[category]
+        }
+
+
+		// tabs fields
+		Categories() {
+			return Object.keys($ainews_app_links).map(category => this.Category_page(category))
+		}
+		category_title(category: any) {
+            return category
+        }
+    }
+}

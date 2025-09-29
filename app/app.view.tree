@@ -1,10 +1,28 @@
 $ainews_app $mol_page
-	head /
-		<= Logo $mol_image
-			uri \ainews/horrorgamelanding/logo/logo.jpg
+	title \VibeNews - твои новости
+	Logo $mol_icon_newspaper
+	tools /
 		<= Lights $mol_lights_toggle
 		<= Date $mol_date
 			enabled <= enabled true
 			value_moment? <=> time? $mol_time_moment
 	plugins /
 		<= Theme $ainews_theme_auto
+	body /
+		<= Tabs $mol_deck items <= Categories /
+	Category_page* $mol_list
+		title <= category_title* \blank category title
+		rows /
+			<= Sources* $mol_select_list
+				value? <=> sources*? /
+				dictionary <= suggestions* *string
+			<= Items* $mol_list rows <= articles* /
+	Article* $mol_row
+		sub /
+			<= Article_title* $mol_paragraph
+				title <= article_title* \
+			<= Article_description* $mol_paragraph
+				title <= article_description* \
+			<= Article_link* $mol_link
+				title \Open link
+				uri <= article_link* \
