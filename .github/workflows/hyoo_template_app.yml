@@ -1,4 +1,4 @@
-name: $ainews
+name: $ainews_app
 
 permissions: write-all
 
@@ -12,20 +12,16 @@ on:
 jobs:
   build:
 
-    env:
-      MAM_COME: '0'
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Force-disable come for all later steps
-      run: echo "MAM_COME=0" >> $GITHUB_ENV  
-    
+
     - uses: hyoo-ru/mam_build@master2
       with:
         package: 'ainews'
-        modules: 'app' 
-    
+        modules: 'app'
+
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:
-        folder: 'ainews/app/-' #FIXME path to build app
+        folder: 'ainews/app/-'
