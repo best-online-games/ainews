@@ -15,7 +15,7 @@ $ainews_app $mol_page
 		rows /
 			<= Sources* $mol_select_list
 				value? <=> sources*? /
-				dictionary <= suggestions* *string
+				dictionary <= suggestions* *$ainews_app_links
 			<= Items* $mol_list rows <= articles* /
 	Article* $mol_row
 		sub /

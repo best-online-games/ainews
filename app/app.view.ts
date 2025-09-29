@@ -40,6 +40,8 @@ namespace $.$$ {
 
 		@$mol_mem_key
 		get_articles_from_sources(source_url: string) {
+			$mol_wire_solid()
+
             const xml_doc = $mol_fetch.xml( this.make_proxy( source_url ) )
             const articles_list = this.parse_rss(xml_doc)
             // console.log( articles_list )
@@ -58,8 +60,8 @@ namespace $.$$ {
         }
 
 		// sources fileds
-		suggestions(category: any) {
-			return ($ainews_app_links as any)[category]
+		suggestions(category: keyof typeof $ainews_app_links) {
+			return $ainews_app_links[category]
         }
 
 
