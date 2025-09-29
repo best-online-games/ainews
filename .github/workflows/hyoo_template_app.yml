@@ -25,14 +25,6 @@ jobs:
         package: 'ainews' #FIXME namespace of this package
         modules: 'app' #FIXME which modules to build, remove line if only on module at the root
     
-    #FIXME remove one of the following
-    
-    - uses: JS-DevTools/npm-publish@v1
-      if: github.ref == 'refs/heads/master'
-      with:
-        token: ${{ secrets.NPM_AUTH_TOKEN }}
-        package: ./mol/template/app/-/package.json #FIXME path to build module
-        
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:
