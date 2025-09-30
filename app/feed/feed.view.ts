@@ -34,8 +34,8 @@ namespace $.$$ {
         }
 
         articles(category: string) {
-			const selected_sources = this.sources(category).map(url_id => ($ainews_app_feed_links as any)[category][ url_id ])
-			return selected_sources.map(rss_link => this.get_articles_from_sources(rss_link)).flat()
+			const selected_sources = this.sources(category).map((url_id: string) => ($ainews_app_feed_links as any)[category][ url_id ])
+			return selected_sources.map((rss_link: string) => this.get_articles_from_sources(rss_link)).flat()
         }
 
 		@$mol_mem_key
