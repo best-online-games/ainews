@@ -2978,6 +2978,7 @@ declare namespace $.$$ {
         articles(category: string): any;
         get_articles_from_sources(source_url: string): $mol_row[];
         is_enable_auto_translate(): {};
+        is_need_translate(text: string): boolean;
         article_title(article: any): any;
         article_description(article: any): any;
         article_link(article: any): any;

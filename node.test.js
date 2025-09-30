@@ -8898,14 +8898,21 @@ var $;
             is_enable_auto_translate() {
                 return $mol_state_local.value("is_enable_auto_translate") ?? true;
             }
+            is_need_translate(text) {
+                const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u;
+                const russian_chars = Array.from(text).filter(char => cyrillic_pattern.test(char)).length;
+                const length = text.length;
+                const persent_of_cyrilic_in_text = (russian_chars / length) * 100;
+                return persent_of_cyrilic_in_text < 55;
+            }
             article_title(article) {
-                if (this.is_enable_auto_translate())
+                if (this.is_enable_auto_translate() && this.is_need_translate(article.title))
                     return this.translate_text(article.title);
                 else
                     return article.title;
             }
             article_description(article) {
-                if (this.is_enable_auto_translate())
+                if (this.is_enable_auto_translate() && this.is_need_translate(article.description))
                     return this.translate_text(article.description);
                 else
                     return article.description;
