@@ -8923,7 +8923,7 @@ var $;
                 return article.link;
             }
             article_translated_link(article) {
-                return `https://translate.google.com/translate?sl=auto&tl=ru&hl=ru&u=${article.link}&client=webapp`;
+                return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
             }
             suggestions(category) {
                 return $$.$ainews_app_feed_links[category];
