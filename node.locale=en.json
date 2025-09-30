@@ -3,5 +3,12 @@
 	"$mol_date_Today_hint": "Today",
 	"$mol_date_next_hint": "Next month",
 	"$mol_date_prev_hint": "Previous month",
-	"$mol_lights_toggle_hint": "Toggle lights"
+	"$mol_lights_toggle_hint": "Toggle lights",
+	"$mol_search_Clear_hint": "Clear",
+	"$mol_search_hint": "Search...",
+	"$mol_select_filter_hint": "Filter..",
+	"$mol_select_hint": "Pick..",
+	"$mol_select_list_badge_hint": "Drop",
+	"$mol_select_list_pick_hint": "Add..",
+	"$mol_select_no_options_message": "No options"
 }
