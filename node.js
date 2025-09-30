@@ -8913,7 +8913,7 @@ var $;
                 }
                 const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u;
                 let text_without_numbers = text.replace(/[\p{P}\d]+/gu, '');
-                text_without_numbers = remove_from_string(["linux", "bsd", "router", "project", "Android", "Chrome", "Postgre", "elementary", "Ubuntu", " "], text_without_numbers);
+                text_without_numbers = remove_from_string(["KDE", "Plasma", "linux", "bsd", "router", "project", "Android", "Chrome", "Postgre", "elementary", "Ubuntu", " "], text_without_numbers);
                 const russian_chars = Array.from(text_without_numbers).filter(char => cyrillic_pattern.test(char)).length;
                 const length = text_without_numbers.length;
                 const persent_of_cyrilic_in_text = (russian_chars / length) * 100;
