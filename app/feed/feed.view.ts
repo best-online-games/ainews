@@ -63,11 +63,17 @@ namespace $.$$ {
 		}
 
 
+		
 		// calculate persent of cyrilic text on text
 		is_need_translate( text: string ) {
+			function remove_from_string(words: string[], str: string) {
+				return words.reduce((result, word) => result.replace(new RegExp(word, 'gi'), ''), str)
+			}
+
 			const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u
 
-			const text_without_numbers = text.replace(/[\p{P}\d]+/gu, '')
+			let text_without_numbers = text.replace(/[\p{P}\d]+/gu, '')
+			text_without_numbers = remove_from_string(["linux", "bsd", "router", "project", "Android", "Chrome", "Postgre", "elementary", "Ubuntu", " "], text_without_numbers)
 			const russian_chars = Array.from( text_without_numbers ).filter( char => cyrillic_pattern.test( char ) ).length
 			const length = text_without_numbers.length
 
