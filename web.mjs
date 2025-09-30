@@ -8262,10 +8262,9 @@ var $;
                 return $$.$ainews_app_feed_links[category];
             }
             sources(id, next) {
-                console.log({ id, next });
                 if (next !== undefined)
                     return $mol_state_local.value(id, next);
-                return $mol_state_local.value(id);
+                return $mol_state_local.value(id) ?? [];
             }
             Categories() {
                 return Object.keys($$.$ainews_app_feed_links).map(category => this.Category_page(category));
@@ -8890,10 +8889,9 @@ var $;
                 return $ainews_app_feed_links[category];
             }
             sources(id, next) {
-                console.log({ id, next });
                 if (next !== undefined)
                     return $mol_state_local.value(id, next);
-                return $mol_state_local.value(id);
+                return $mol_state_local.value(id) ?? [];
             }
         }
         $$.$ainews_app_settings = $ainews_app_settings;
