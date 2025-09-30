@@ -8621,6 +8621,15 @@ var $;
 			(obj.uri) = () => ((this.article_link(id)));
 			return obj;
 		}
+		article_translated_link(id){
+			return "";
+		}
+		Article_translated_link(id){
+			const obj = new this.$.$mol_link();
+			(obj.title) = () => ("Open translated link");
+			(obj.uri) = () => ((this.article_translated_link(id)));
+			return obj;
+		}
 		title(){
 			return "Лента";
 		}
@@ -8642,7 +8651,8 @@ var $;
 			(obj.sub) = () => ([
 				(this.Article_title(id)), 
 				(this.Article_description(id)), 
-				(this.Article_link(id))
+				(this.Article_link(id)), 
+				(this.Article_translated_link(id))
 			]);
 			return obj;
 		}
@@ -8652,6 +8662,7 @@ var $;
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_title"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_description"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_link"));
+	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_translated_link"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Logo"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_page"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article"));
@@ -8901,6 +8912,9 @@ var $;
             }
             article_link(article) {
                 return article.link;
+            }
+            article_translated_link(article) {
+                return `https://translate.google.com/translate?sl=auto&tl=ru&hl=ru&u=${article.link}&client=webapp`;
             }
             suggestions(category) {
                 return $$.$ainews_app_feed_links[category];

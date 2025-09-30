@@ -3063,17 +3063,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_list__title_ainews_app_feed_7 = $mol_type_enforce<
+	type $mol_link__title_ainews_app_feed_7 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__uri_ainews_app_feed_8 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_translated_link'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_list__title_ainews_app_feed_9 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_feed_8 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_ainews_app_feed_9 = $mol_type_enforce<
+	type $mol_row__sub_ainews_app_feed_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -3090,6 +3100,8 @@ declare namespace $ {
 		Article_description( id: any): $mol_paragraph
 		article_link( id: any): string
 		Article_link( id: any): $mol_link
+		article_translated_link( id: any): string
+		Article_translated_link( id: any): $mol_link
 		title( ): string
 		Logo( ): $mol_icon_script_text
 		body( ): readonly(any)[]
@@ -3123,6 +3135,7 @@ declare namespace $.$$ {
         article_title(article: any): any;
         article_description(article: any): any;
         article_link(article: any): any;
+        article_translated_link(article: any): string;
         suggestions(category: any): string[];
         sources(id: string, next?: any): any;
         Categories(): $.$mol_list[];
