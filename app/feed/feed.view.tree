@@ -19,3 +19,6 @@ $ainews_app_feed $mol_page
 			<= Article_link* $mol_link
 				title \Open link
 				uri <= article_link* \
+			<= Article_translated_link* $mol_link
+				title \Open translated link
+				uri <= article_translated_link* \

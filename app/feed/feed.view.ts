@@ -79,6 +79,10 @@ namespace $.$$ {
             return article.link
         }
 
+		article_translated_link(article: any) {
+            return `https://translate.google.com/translate?sl=auto&tl=ru&hl=ru&u=${article.link}&client=webapp`
+        }
+
 		// sources fileds
 		suggestions(category: any)  {
 			return $ainews_app_feed_links[category as keyof typeof $ainews_app_feed_links]
