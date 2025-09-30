@@ -122,6 +122,51 @@ $mol_lights_toggle $mol_check_icon
 	hint @ \Toggle lights
 	checked? <=> lights? false
 
+$mol_theme_auto $mol_plugin
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
+
+$ainews_theme_auto $mol_theme_auto
+	light \$mol_theme_light
+	dark \$mol_theme_dark
+
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0
+	sub <= rows /$mol_view
+	Empty $mol_view
+	Gap_before $mol_view style * paddingTop <= gap_before 0
+	Gap_after $mol_view style * paddingTop <= gap_after 0
+	item_height_min* 1
+	item_width_min* 1
+	view_window /
+		0
+		0
+
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
+$mol_deck $mol_list
+	items /$mol_view
+	rows /$mol_view
+		<= Switch $mol_switch
+			value? <=> current? \0
+			options <= switch_options *
+		<= Content $mol_view
+
 $mol_pop $mol_view
 	showed? false
 	align_vert \
@@ -160,9 +205,44 @@ $mol_pick $mol_pop
 			<= title
 		hint <= hint \
 
-$mol_icon_calendar $mol_icon path \M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
 
-$mol_icon_calendar_today $mol_icon path \M7,10H12V15H7M19,19H5V8H19M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z
+$mol_dimmer $mol_paragraph
+	haystack \
+	needle \
+	sub <= parts /$mol_view_content
+	Low* $mol_paragraph
+		sub /
+			<= string* \
+	High* $mol_paragraph
+		sub /
+			<= string* \
+
+$mol_nav $mol_plugin
+	cycle? false
+	-
+	mod_ctrl false
+	mod_shift false
+	mod_alt false
+	-
+	keys_x? /
+	keys_y? /
+	-
+	current_x? null
+	current_y? null
+	-
+	event_up?event null
+	event_down?event null
+	event_left?event null
+	event_right?event null
+	event *
+		^
+		keydown?event <=> event_key?event null
 
 $mol_hotkey $mol_plugin
 	event *
@@ -206,204 +286,6 @@ $mol_string $mol_view
 		<= Submit $mol_hotkey
 			mod_ctrl <= submit_with_ctrl false
 			key * enter?event <=> submit?event null
-
-$mol_format $mol_string
-	allow \0123456789
-	hint <= mask*0 \
-	keyboard \numeric
-
-$mol_icon_trash_can $mol_icon path \M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z
-
-$mol_icon_trash_can_outline $mol_icon path \M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z
-
-$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
-
-$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
-
-$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
-
-$mol_list $mol_view
-	render_visible_only true
-	render_over 0
-	sub <= rows /$mol_view
-	Empty $mol_view
-	Gap_before $mol_view style * paddingTop <= gap_before 0
-	Gap_after $mol_view style * paddingTop <= gap_after 0
-	item_height_min* 1
-	item_width_min* 1
-	view_window /
-		0
-		0
-
-$mol_hor $mol_view
-
-$mol_calendar $mol_list
-	sub /
-		<= Head $mol_view
-			sub <= head /
-				<= Title $mol_view
-					minimal_height 24
-					sub /
-						<= title \
-		<= Weekdays $mol_hor
-			sub <= weekdays /$mol_view
-	weeks /$mol_view
-	weeks_count 6
-	-
-	Weekday* $mol_calendar_day
-		holiday <= weekend* false
-		sub /
-			<= weekday* \
-	-
-	Week* $mol_hor
-		sub <= week_days* /$mol_view
-	-
-	Day* $mol_calendar_day
-		ghost <= day_ghost* false
-		holiday <= day_holiday* false
-		selected <= day_selected* false
-		today <= day_today* false
-		theme <= day_theme* null
-		sub <= day_content* /
-			<= day_text* \
-	-
-	month_string \
-	month_moment $mol_time_moment
-
-$mol_calendar_day $mol_view
-	minimal_height 24
-	minimal_width 36
-	attr *
-		mol_calendar_holiday <= holiday false
-		mol_calendar_ghost <= ghost false
-		mol_calendar_selected <= selected false
-		mol_calendar_today <= today false
-		mol_theme <= theme null
-
-$mol_date $mol_pick
-	Icon $mol_icon_calendar
-	-
-	bubble_content /
-		<= Input_row $mol_view sub <= input_content /
-			<= Today $mol_button_minor
-				hint @ \Today
-				enabled <= enabled true
-				click?event <=> today_click?event null
-				sub /
-					<= Today_icon $mol_icon_calendar_today
-			<= Input $mol_format
-				value? <=> value? \
-				value_changed? => value_changed?
-				mask* <= input_mask* \
-				enabled <= enabled true
-			<= Clear $mol_button_minor
-				hint @ \Clear
-				enabled <= enabled true
-				click?event <=> clear?event null
-				sub /
-					<= Clear_icon $mol_icon_trash_can_outline
-		<= Calendar $mol_date_calendar
-			enabled <= enabled true
-			month_moment <= month_moment <= value_moment
-			day_selected* <= day_selected* false
-			day_click*?event <=> day_click*?event null
-			Title => Calendar_title
-			head /
-				<= Calendar_tools $mol_view
-					sub /
-						<= Prev $mol_button_minor
-							hint <= prev_hint @ \Previous month
-							click?event <=> prev?event null
-							sub /
-								<= Prev_icon $mol_icon_chevron_left
-						<= Calendar_title
-						<= Next $mol_button_minor
-							hint <= next_hint @ \Next month
-							click?event <=> next?event null
-							sub /
-								<= Next_icon $mol_icon_chevron_right
-	-
-	value_number? +NaN
-	value_moment? $mol_time_moment
-
-$mol_date_calendar $mol_calendar
-	day_content* /
-		<= Day_button* $mol_button_minor
-			title <= day_text*
-			event_click?event <=> day_click*?event null
-			minimal_height 24
-			enabled <= enabled true
-
-$mol_theme_auto $mol_plugin
-	light \$mol_theme_light
-	attr * mol_theme <= theme <= dark \$mol_theme_dark
-
-$ainews_theme_auto $mol_theme_auto
-	light \$mol_theme_light
-	dark \$mol_theme_dark
-
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$mol_deck $mol_list
-	items /$mol_view
-	rows /$mol_view
-		<= Switch $mol_switch
-			value? <=> current? \0
-			options <= switch_options *
-		<= Content $mol_view
-
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
-
-$mol_dimmer $mol_paragraph
-	haystack \
-	needle \
-	sub <= parts /$mol_view_content
-	Low* $mol_paragraph
-		sub /
-			<= string* \
-	High* $mol_paragraph
-		sub /
-			<= string* \
-
-$mol_nav $mol_plugin
-	cycle? false
-	-
-	mod_ctrl false
-	mod_shift false
-	mod_alt false
-	-
-	keys_x? /
-	keys_y? /
-	-
-	current_x? null
-	current_y? null
-	-
-	event_up?event null
-	event_down?event null
-	event_left?event null
-	event_right?event null
-	event *
-		^
-		keydown?event <=> event_key?event null
 
 $mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
@@ -538,7 +420,7 @@ $ainews_app $mol_page
 	Logo $mol_icon_newspaper
 	tools /
 		<= Lights $mol_lights_toggle
-		<= Date $mol_date
+		- <= Date $mol_date
 			enabled <= enabled true
 			value_moment? <=> time? $mol_time_moment
 	plugins /
