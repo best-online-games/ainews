@@ -60,8 +60,8 @@ namespace $.$$ {
         }
 
 		// sources fileds
-		suggestions(category: keyof typeof $ainews_app_links) {
-			return $ainews_app_links[category]
+		suggestions(category: any)  {
+			return $ainews_app_links[category as keyof typeof $ainews_app_links]
         }
 
 
