@@ -71,7 +71,7 @@ namespace $.$$ {
         }
 		article_description(article: any) {
 			if(this.is_enable_auto_translate())
-				return this.translate_text( article.title )
+				return this.translate_text( article.description )
 			else
             	return article.description
         }
