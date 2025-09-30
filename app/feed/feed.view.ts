@@ -48,12 +48,23 @@ namespace $.$$ {
 			return articles_list.map(article => this.Article(article))
 		}
 
+		@$mol_mem
+		is_enable_auto_translate(){
+			return $mol_state_local.value("is_enable_auto_translate") ?? true
+		}
+
 		// articles fields
         article_title(article: any) {
-            return article.title
+			if(this.is_enable_auto_translate())
+				return this.$.$hyoo_lingua_translate( 'ru', article.title )
+			else
+            	return article.title
         }
 		article_description(article: any) {
-            return article.description
+			if(this.is_enable_auto_translate())
+				return this.$.$hyoo_lingua_translate( 'ru', article.title )
+			else
+            	return article.description
         }
 		article_link(article: any) {
             return article.link
