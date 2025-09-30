@@ -1,10 +1,12 @@
-$ainews_app $mol_page
-	head /
-		<= Logo $mol_image
-			uri \ainews/horrorgamelanding/logo/logo.jpg
+$ainews_app $mol_book2_catalog
+	Menu_logo $mol_icon_newspaper
+	menu_title \VibeNews - твои интересности
+	menu_tools /
 		<= Lights $mol_lights_toggle
-		<= Date $mol_date
-			enabled <= enabled true
-			value_moment? <=> time? $mol_time_moment
 	plugins /
 		<= Theme $ainews_theme_auto
+	spreads *
+		\
+			<= FAQ $ainews_app_faq
+		feed <= Feed $ainews_app_feed
+		settings <= Settings $ainews_app_settings

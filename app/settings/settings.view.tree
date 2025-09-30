@@ -1,0 +1,12 @@
+$ainews_app_settings $mol_page
+	title \Источники
+	Logo $mol_icon_open_source_initiative
+	body /
+		<= Tabs $mol_deck items <= Categories /
+	Category_page* $mol_list
+		title <= category_title* \blank category title
+		rows /
+			<= Sources* $mol_select_list
+				value? <=> sources*? /
+				dictionary <= suggestions* /
+			<= Items* $mol_list rows <= articles* /

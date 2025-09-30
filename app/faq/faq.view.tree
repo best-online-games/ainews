@@ -1,0 +1,10 @@
+$ainews_app_faq $mol_page
+	title \FAQ
+	Logo $mol_icon_frequently_asked_questions
+	body /
+		<= SomeWelcome $mol_paragraph
+			title \Ну это ну давайте
+		<= SomeWelcome2 $mol_paragraph
+			title \Лента - изолента :D
+		<= SomeWelcome3 $mol_paragraph
+			title \Источники - рссс 🐱

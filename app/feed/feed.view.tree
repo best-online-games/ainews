@@ -1,0 +1,21 @@
+$ainews_app_feed $mol_page
+	title \Лента
+	Logo $mol_icon_script_text
+	body /
+		<= Tabs $mol_deck items <= Categories /
+	Category_page* $mol_list
+		title <= category_title* \blank category title
+		rows /
+			- <= Sources* $mol_select_list
+				value? <=> sources*? /
+				dictionary <= suggestions* /
+			<= Items* $mol_list rows <= articles* /
+	Article* $mol_row
+		sub /
+			<= Article_title* $mol_paragraph
+				title <= article_title* \
+			<= Article_description* $mol_paragraph
+				title <= article_description* \
+			<= Article_link* $mol_link
+				title \Open link
+				uri <= article_link* \
