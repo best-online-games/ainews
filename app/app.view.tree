@@ -3,7 +3,7 @@ $ainews_app $mol_page
 	Logo $mol_icon_newspaper
 	tools /
 		<= Lights $mol_lights_toggle
-		<= Date $mol_date
+		- <= Date $mol_date
 			enabled <= enabled true
 			value_moment? <=> time? $mol_time_moment
 	plugins /
