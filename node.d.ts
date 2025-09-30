@@ -3523,6 +3523,9 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
 
 	export class $mol_icon_newspaper extends $mol_icon {
 		path( ): string
@@ -3563,6 +3566,9 @@ declare namespace $ {
 declare namespace $.$$ {
     class $ainews_app extends $.$ainews_app {
     }
+}
+
+declare namespace $ {
 }
 
 export = $;
