@@ -431,6 +431,21 @@ $ainews_app_feed $mol_page
 				title \Open link
 				uri <= article_link* \
 
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
+$mol_labeler $mol_list
+	rows /
+		<= Label $mol_view
+			minimal_height 32
+			sub <= label /$mol_view_content
+				<= title
+		<= Content $mol_view
+			minimal_height 24
+			sub <= content /
+
 $mol_pick $mol_pop
 	event *
 		^
@@ -512,7 +527,13 @@ $ainews_app_settings $mol_page
 	title \Источники
 	Logo $mol_icon_open_source_initiative
 	body /
-		<= Tabs $mol_deck items <= Categories /
+		<= Auto_translate $mol_check_box
+			title \Автоперевод новости на русский язык
+			checked? <=> is_enable_auto_translate? true
+		<= Sources_labeler $mol_labeler
+			title \Настройки источников
+			content /
+				<= Tabs $mol_deck items <= Categories /
 	Category_page* $mol_list
 		title <= category_title* \blank category title
 		rows /

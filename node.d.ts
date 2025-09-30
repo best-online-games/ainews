@@ -3032,6 +3032,409 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    type $mol_data_value<Input = any, Output = any> = (val: Input) => Output;
+}
+
+declare namespace $ {
+    type $mol_type_partial_undefined<Val> = $mol_type_merge<$mol_type_override<Partial<Val>, Pick<Val, {
+        [Field in keyof Val]: undefined extends Val[Field] ? never : Field;
+    }[keyof Val]>>>;
+}
+
+declare namespace $ {
+    function $mol_data_setup<Value extends $mol_data_value, Config = never>(value: Value, config: Config): Value & {
+        config: Config;
+        Value: ReturnType<Value>;
+    };
+}
+
+declare namespace $ {
+    function $mol_data_record<Sub extends Record<string, $mol_data_value>>(sub: Sub): ((val: $mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }>, Pick<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }, { [Field in keyof { [key in keyof Sub]: Parameters<Sub[key]>[0]; }]: undefined extends { [key in keyof Sub]: Parameters<Sub[key]>[0]; }[Field] ? never : Field; }[keyof Sub]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }>, Pick<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }, { [Field_1 in keyof { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }]: undefined extends { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }[Field_1] ? never : Field_1; }[keyof Sub]>>>>) & {
+        config: Sub;
+        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: ReturnType<Sub[key]>; }>, Pick<{ [key in keyof Sub]: ReturnType<Sub[key]>; }, { [Field in keyof { [key in keyof Sub]: ReturnType<Sub[key]>; }]: undefined extends { [key in keyof Sub]: ReturnType<Sub[key]>; }[Field] ? never : Field; }[keyof Sub]>>>>;
+    };
+}
+
+declare namespace $ {
+    class $mol_data_error extends $mol_error_mix {
+    }
+}
+
+declare namespace $ {
+    function $mol_data_const<const Val>(ref: Val): ((val: Val) => Val) & {
+        config: Val;
+        Value: Val;
+    };
+}
+
+declare namespace $ {
+    let $mol_data_string: (val: string) => string;
+}
+
+declare namespace $ {
+    function $mol_data_nullable<Sub extends $mol_data_value>(sub: Sub): ((val: Parameters<Sub>[0] | null) => ReturnType<Sub> | null) & {
+        config: Sub;
+        Value: ReturnType<Sub> | null;
+    };
+}
+
+declare namespace $ {
+    function $mol_data_optional<Sub extends $mol_data_value, Fallback extends undefined | (() => ReturnType<Sub>)>(sub: Sub, fallback?: Fallback): ((val: Parameters<Sub>[0] | undefined) => ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>)) & {
+        config: {
+            sub: Sub;
+            fallback: Fallback | undefined;
+        };
+        Value: ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>);
+    };
+}
+
+declare namespace $ {
+    function $mol_data_array<Sub extends $mol_data_value>(sub: Sub): ((val: readonly Parameters<Sub>[0][]) => readonly ReturnType<Sub>[]) & {
+        config: Sub;
+        Value: readonly ReturnType<Sub>[];
+    };
+}
+
+declare namespace $ {
+    function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
+        config: Sub;
+        Value: ReturnType<Sub[number]>;
+    };
+}
+
+declare namespace $ {
+    function $mol_array_shuffle<Item>(array: readonly Item[]): any[];
+}
+
+declare namespace $ {
+    let $mol_array_shuffle_sync: typeof $mol_array_shuffle;
+}
+
+declare namespace $ {
+    export const $mol_github_model_keys: string[];
+    export const $mol_github_model_polyglots: string[];
+    const Message: ((val: {
+        tool_calls?: readonly {
+            function: {
+                name: string;
+                arguments: string;
+            };
+            id: string;
+            type: "function";
+        }[] | undefined;
+        role: "assistant";
+        content: string | null;
+    } | {
+        role: "user";
+        content: string;
+    } | {
+        role: "tool";
+        content: string;
+        tool_call_id: string;
+    }) => Readonly<{
+        tool_calls?: readonly Readonly<{
+            function: Readonly<{
+                name: string;
+                arguments: string;
+            }>;
+            id: string;
+            type: "function";
+        }>[] | undefined;
+        role: "assistant";
+        content: string | null;
+    }> | Readonly<{
+        role: "user";
+        content: string;
+    }> | Readonly<{
+        role: "tool";
+        content: string;
+        tool_call_id: string;
+    }>) & {
+        config: [((val: {
+            tool_calls?: readonly {
+                function: {
+                    name: string;
+                    arguments: string;
+                };
+                id: string;
+                type: "function";
+            }[] | undefined;
+            role: "assistant";
+            content: string | null;
+        }) => Readonly<{
+            tool_calls?: readonly Readonly<{
+                function: Readonly<{
+                    name: string;
+                    arguments: string;
+                }>;
+                id: string;
+                type: "function";
+            }>[] | undefined;
+            role: "assistant";
+            content: string | null;
+        }>) & {
+            config: {
+                role: ((val: "assistant") => "assistant") & {
+                    config: "assistant";
+                    Value: "assistant";
+                };
+                content: ((val: string | null) => string | null) & {
+                    config: (val: string) => string;
+                    Value: string | null;
+                };
+                tool_calls: ((val: readonly {
+                    function: {
+                        name: string;
+                        arguments: string;
+                    };
+                    id: string;
+                    type: "function";
+                }[] | undefined) => readonly Readonly<{
+                    function: Readonly<{
+                        name: string;
+                        arguments: string;
+                    }>;
+                    id: string;
+                    type: "function";
+                }>[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly {
+                            function: {
+                                name: string;
+                                arguments: string;
+                            };
+                            id: string;
+                            type: "function";
+                        }[]) => readonly Readonly<{
+                            function: Readonly<{
+                                name: string;
+                                arguments: string;
+                            }>;
+                            id: string;
+                            type: "function";
+                        }>[]) & {
+                            config: ((val: {
+                                function: {
+                                    name: string;
+                                    arguments: string;
+                                };
+                                id: string;
+                                type: "function";
+                            }) => Readonly<{
+                                function: Readonly<{
+                                    name: string;
+                                    arguments: string;
+                                }>;
+                                id: string;
+                                type: "function";
+                            }>) & {
+                                config: {
+                                    type: ((val: "function") => "function") & {
+                                        config: "function";
+                                        Value: "function";
+                                    };
+                                    id: (val: string) => string;
+                                    function: ((val: {
+                                        name: string;
+                                        arguments: string;
+                                    }) => Readonly<{
+                                        name: string;
+                                        arguments: string;
+                                    }>) & {
+                                        config: {
+                                            name: (val: string) => string;
+                                            arguments: (val: string) => string;
+                                        };
+                                        Value: Readonly<{
+                                            name: string;
+                                            arguments: string;
+                                        }>;
+                                    };
+                                };
+                                Value: Readonly<{
+                                    function: Readonly<{
+                                        name: string;
+                                        arguments: string;
+                                    }>;
+                                    id: string;
+                                    type: "function";
+                                }>;
+                            };
+                            Value: readonly Readonly<{
+                                function: Readonly<{
+                                    name: string;
+                                    arguments: string;
+                                }>;
+                                id: string;
+                                type: "function";
+                            }>[];
+                        };
+                        fallback: (() => readonly Readonly<{
+                            function: Readonly<{
+                                name: string;
+                                arguments: string;
+                            }>;
+                            id: string;
+                            type: "function";
+                        }>[]) | undefined;
+                    };
+                    Value: readonly Readonly<{
+                        function: Readonly<{
+                            name: string;
+                            arguments: string;
+                        }>;
+                        id: string;
+                        type: "function";
+                    }>[] | undefined;
+                };
+            };
+            Value: Readonly<{
+                tool_calls?: readonly Readonly<{
+                    function: Readonly<{
+                        name: string;
+                        arguments: string;
+                    }>;
+                    id: string;
+                    type: "function";
+                }>[] | undefined;
+                role: "assistant";
+                content: string | null;
+            }>;
+        }, ((val: {
+            role: "user";
+            content: string;
+        }) => Readonly<{
+            role: "user";
+            content: string;
+        }>) & {
+            config: {
+                role: ((val: "user") => "user") & {
+                    config: "user";
+                    Value: "user";
+                };
+                content: (val: string) => string;
+            };
+            Value: Readonly<{
+                role: "user";
+                content: string;
+            }>;
+        }, ((val: {
+            role: "tool";
+            content: string;
+            tool_call_id: string;
+        }) => Readonly<{
+            role: "tool";
+            content: string;
+            tool_call_id: string;
+        }>) & {
+            config: {
+                role: ((val: "tool") => "tool") & {
+                    config: "tool";
+                    Value: "tool";
+                };
+                tool_call_id: (val: string) => string;
+                content: (val: string) => string;
+            };
+            Value: Readonly<{
+                role: "tool";
+                content: string;
+                tool_call_id: string;
+            }>;
+        }];
+        Value: Readonly<{
+            tool_calls?: readonly Readonly<{
+                function: Readonly<{
+                    name: string;
+                    arguments: string;
+                }>;
+                id: string;
+                type: "function";
+            }>[] | undefined;
+            role: "assistant";
+            content: string | null;
+        }> | Readonly<{
+            role: "user";
+            content: string;
+        }> | Readonly<{
+            role: "tool";
+            content: string;
+            tool_call_id: string;
+        }>;
+    };
+    type Primitive<Type extends 'string' | 'number' | 'integer' | 'boolean'> = Readonly<{
+        type: Type;
+        enum?: Type[];
+    }>;
+    type Obj<Params extends Record<string, Type>> = Readonly<{
+        type: 'object';
+        parameters: Params;
+        required: keyof Params;
+    }>;
+    type List<Item extends Type> = Readonly<{
+        type: 'array';
+        items: Item;
+    }>;
+    type Type = Obj<any> | List<any> | Primitive<any>;
+    export class $mol_github_model extends $mol_object {
+        names(): string[];
+        rules(): string;
+        tools(): Map<string, {
+            descr: string;
+            params: Obj<any>;
+            func: Function;
+        }>;
+        params(next?: {}): {};
+        history(next?: typeof Message.Value[]): (Readonly<{
+            tool_calls?: readonly Readonly<{
+                function: Readonly<{
+                    name: string;
+                    arguments: string;
+                }>;
+                id: string;
+                type: "function";
+            }>[] | undefined;
+            role: "assistant";
+            content: string | null;
+        }> | Readonly<{
+            role: "user";
+            content: string;
+        }> | Readonly<{
+            role: "tool";
+            content: string;
+            tool_call_id: string;
+        }>)[];
+        fork(): $mol_github_model;
+        shot(prompt: any, context?: any, params?: {}): any;
+        ask(text: any): this;
+        tell(text: any): this;
+        answer(id: string, data: any): this;
+        request_body(model: string): string;
+        request(model: string, key: string): Readonly<{
+            choices: readonly Readonly<{
+                message: Readonly<{
+                    tool_calls?: readonly Readonly<{
+                        function: Readonly<{
+                            name: string;
+                            arguments: string;
+                        }>;
+                        id: string;
+                        type: "function";
+                    }>[] | undefined;
+                    role: "assistant";
+                    content: string | null;
+                }>;
+            }>[];
+        }>;
+        response(): any;
+    }
+    export {};
+}
+
+declare namespace $ {
+    function $hyoo_lingua_translate(this: $, lang: string, text: string): any;
+}
+
+declare namespace $ {
 
 	type $mol_deck__items_ainews_app_feed_1 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['Categories'] >
@@ -3116,6 +3519,7 @@ declare namespace $.$$ {
         make_proxy(url: string): string;
         articles(category: string): any;
         get_articles_from_sources(source_url: string): $mol_row[];
+        is_enable_auto_translate(): {};
         article_title(article: any): any;
         article_description(article: any): any;
         article_link(article: any): any;
@@ -3126,6 +3530,63 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $ {
+
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__minimal_height_mol_labeler_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_2 = $mol_type_enforce<
+		ReturnType< $mol_labeler['label'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_labeler_3 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_labeler_4 = $mol_type_enforce<
+		ReturnType< $mol_labeler['content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_labeler extends $mol_list {
+		label( ): readonly($mol_view_content)[]
+		Label( ): $mol_view
+		content( ): readonly(any)[]
+		Content( ): $mol_view
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=labeler.view.tree.d.ts.map
 declare namespace $ {
 
 	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
@@ -3465,39 +3926,62 @@ declare namespace $ {
 //# sourceMappingURL=initiative.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_deck__items_ainews_app_settings_1 = $mol_type_enforce<
+	type $mol_check_box__title_ainews_app_settings_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_ainews_app_settings_2 = $mol_type_enforce<
+		ReturnType< $ainews_app_settings['is_enable_auto_translate'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_deck__items_ainews_app_settings_3 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['Categories'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_select_list__value_ainews_app_settings_2 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_settings_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_settings_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_select_list__value_ainews_app_settings_6 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['sources'] >
 		,
 		ReturnType< $mol_select_list['value'] >
 	>
-	type $mol_select_list__dictionary_ainews_app_settings_3 = $mol_type_enforce<
+	type $mol_select_list__dictionary_ainews_app_settings_7 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['suggestions'] >
 		,
 		ReturnType< $mol_select_list['dictionary'] >
 	>
-	type $mol_list__rows_ainews_app_settings_4 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_settings_8 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['articles'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__title_ainews_app_settings_5 = $mol_type_enforce<
+	type $mol_list__title_ainews_app_settings_9 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_settings_6 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_settings_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
 	export class $ainews_app_settings extends $mol_page {
+		is_enable_auto_translate( next?: boolean ): boolean
+		Auto_translate( ): $mol_check_box
 		Categories( ): readonly(any)[]
 		Tabs( ): $mol_deck
+		Sources_labeler( ): $mol_labeler
 		category_title( id: any): string
 		sources( id: any, next?: readonly(any)[] ): readonly(any)[]
 		suggestions( id: any): readonly(any)[]
@@ -3519,6 +4003,7 @@ declare namespace $.$$ {
         category_title(category: any): any;
         suggestions(category: any): string[];
         sources(id: string, next?: any): any;
+        is_enable_auto_translate(next?: any): any;
     }
 }
 
