@@ -80,7 +80,7 @@ namespace $.$$ {
         }
 
 		article_translated_link(article: any) {
-            return `https://translate.google.com/translate?sl=auto&tl=ru&hl=ru&u=${article.link}&client=webapp`
+			return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`
         }
 
 		// sources fileds
