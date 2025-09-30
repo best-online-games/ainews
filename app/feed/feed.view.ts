@@ -1,5 +1,6 @@
 namespace $.$$ {
     export const $ainews_app_feed_proxy_url = "https://proxy.kinsle.ru/?link="
+    export const $ainews_app_feed_translate_url = "https://proxy.kinsle.ru/?translate="
 
     export const $ainews_app_feed_links = {
         "tech": [
@@ -18,6 +19,11 @@ namespace $.$$ {
     }
 
     export class $ainews_app_feed extends $.$ainews_app_feed {
+
+		translate_text(text:string) {
+			return $mol_fetch.text( this.make_translate( text ) )
+		}
+
         parse_rss( xml_doc: Document ) {
             return Array.from( xml_doc.querySelectorAll( "item" ) ).map( ( item: Element ) => {
                 return {
@@ -31,6 +37,9 @@ namespace $.$$ {
 
         make_proxy( url: string ) {
             return $ainews_app_feed_proxy_url + url
+        }
+		make_translate( text: string ) {
+            return $ainews_app_feed_translate_url + text
         }
 
         articles(category: string) {
@@ -56,13 +65,13 @@ namespace $.$$ {
 		// articles fields
         article_title(article: any) {
 			if(this.is_enable_auto_translate())
-				return this.$.$hyoo_lingua_translate( 'ru', article.title )
+				return this.translate_text( article.title )
 			else
             	return article.title
         }
 		article_description(article: any) {
 			if(this.is_enable_auto_translate())
-				return this.$.$hyoo_lingua_translate( 'ru', article.title )
+				return this.translate_text( article.title )
 			else
             	return article.description
         }
