@@ -1,6 +1,6 @@
 $ainews_app $mol_book2_catalog
 	Menu_logo $mol_icon_newspaper
-	menu_title \VibeNews - твои интересности
+	menu_title @ \VibeNews - your favorites 
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	plugins /
