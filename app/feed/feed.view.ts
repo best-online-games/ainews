@@ -67,8 +67,9 @@ namespace $.$$ {
 		is_need_translate( text: string ) {
 			const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u
 
-			const russian_chars = Array.from( text ).filter( char => cyrillic_pattern.test( char ) ).length
-			const length = text.length
+			const text_without_numbers = text.replace(/[\p{P}\d]+/gu, '')
+			const russian_chars = Array.from( text_without_numbers ).filter( char => cyrillic_pattern.test( char ) ).length
+			const length = text_without_numbers.length
 
 			const persent_of_cyrilic_in_text = ( russian_chars / length ) * 100
 			return persent_of_cyrilic_in_text < 55
