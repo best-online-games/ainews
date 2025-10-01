@@ -20,5 +20,8 @@ $ainews_app_feed $ainews_app_page
 				title \Open link
 				uri <= article_link* \
 			<= Article_translated_link* $mol_link
-				title \Open translated link
+				title @ \Open translated link
 				uri <= article_translated_link* \
+			<= Article_translate_text* $mol_link
+				title @ \translate text
+				url \

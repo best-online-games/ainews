@@ -1,15 +1,15 @@
 $ainews_app_settings $ainews_app_page
-	title \Настройки
+	title @ \Настройки
 	Logo $mol_icon_settings
 	body /
 		<= Localization_labeler $mol_labeler
-			title \Локализация новостей
+			title @ \Локализация новостей
 			content /
 				<= Auto_translate $mol_check_box
-					title \Автоперевод новости на русский язык
+					title @ \Автоперевод новости на русский язык
 					checked? <=> is_enable_auto_translate? true
 		<= Description_count_limiter_labeler $mol_labeler
-			title \Ограничение длины описания новости
+			title @ \Ограничение длины описания новости
 			content /
 				<= Description_count_limiter $mol_number
 					value? <=> description_count_limiter_value? 256
