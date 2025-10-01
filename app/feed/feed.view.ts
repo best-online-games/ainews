@@ -1045,20 +1045,38 @@ namespace $.$$ {
 	}
 
 	export class $ainews_app_feed extends $.$ainews_app_feed {
+		article_image_src( article: any ) {
+			// если парсер положил image — берём его
+			if (article?.image) return article.image
+
+			// фолбэк: попробуем достать из description первый <img src=...>
+			const html = article?.description ?? ''
+			const m = html.match(/<img[^>]+src=["']([^"']+)["']/i)
+			return m?.[1] ?? ''
+		}
+
 		translate_text(text: string) {
 			return $mol_fetch.text(this.make_translate(text))
 		}
 
-		parse_rss(xml_doc: Document) {
-			return Array.from(xml_doc.querySelectorAll('item')).map((item: Element) => {
+		parse_rss(xml: Document) {
+			const t = (e: Element | null) => e?.textContent?.trim() ?? ''
+			return Array.from(xml.querySelectorAll('item')).map(item => {
+				const media = (item.querySelector('media\\:thumbnail') as Element | null)?.getAttribute('url') ?? ''
+				const enc = item.querySelector('content\\:encoded')?.textContent ?? ''
+				const fromContent = enc ? (enc.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1] ?? '') : ''
+				const enclosure = (item.querySelector('enclosure[type^="image/"]') as Element | null)?.getAttribute('url') ?? ''
+				const image = media || enclosure || fromContent || ''
+
 				return {
-					title: item.querySelector('title')?.textContent,
-					pubDate: item.querySelector('pubDate')?.textContent,
-					description: item.querySelector('description')?.textContent,
-					link: item.querySelector('link')?.textContent,
+					title: t(item.querySelector('title')),
+					pubDate: t(item.querySelector('pubDate')),
+					description: t(item.querySelector('description')),
+					link: t(item.querySelector('link')),
+					image,
 				}
-			})
-		}
+		})
+}
 
 		make_proxy(url: string) {
 			return $ainews_app_feed_proxy_url + url
@@ -1193,16 +1211,6 @@ namespace $.$$ {
 				this.force_translate(article, true)
 			}
 			return next
-		}
-
-		// sources fileds
-		suggestions(category: any) {
-			return $ainews_app_feed_links[category as keyof typeof $ainews_app_feed_links]
-		}
-		@$mol_mem_key
-		sources(id: string, next?: any) {
-			if (next !== undefined) return $mol_state_local.value(id, next)
-			return $mol_state_local.value(id) ?? []
 		}
 
 		// tabs fields
