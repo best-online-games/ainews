@@ -1144,20 +1144,36 @@ namespace $.$$ {
 			return persent_of_cyrilic_in_text < 55
 		}
 
+		@$mol_mem_key
+		force_translate(article: any, next?: boolean) {
+			if (next !== undefined) return next
+			return false
+		}
+
 		// articles fields
 		article_title(article: any) {
-			if (this.is_enable_auto_translate() && this.is_need_translate(article.title))
+			const should_translate =
+				(this.is_enable_auto_translate() && this.is_need_translate(article.title)) ||
+				this.force_translate(article)
+			if (should_translate) {
 				return this.translate_text(article.title)
-			else return article.title
+			}
+			return article.title
 		}
+
 		article_description(article: any) {
 			const description_count_limiter_value = $mol_state_local.value('description_count_limiter_value') ?? 256
 			article.description = article.description.substring(0, description_count_limiter_value)
 
-			if (this.is_enable_auto_translate() && this.is_need_translate(article.description))
+			const should_translate =
+				(this.is_enable_auto_translate() && this.is_need_translate(article.description)) ||
+				this.force_translate(article)
+			if (should_translate) {
 				return this.translate_text(article.description)
-			else return article.description
+			}
+			return article.description
 		}
+
 		article_link(article: any) {
 			return article.link
 		}
@@ -1170,8 +1186,11 @@ namespace $.$$ {
 			return !this.is_enable_auto_translate()
 		}
 
-		translate_click(article: any) {
-			return this.translate_text(article.title) && this.translate_text(article.description)
+		translate_click(article: any, next?: Event) {
+			if (next) {
+				this.force_translate(article, true)
+			}
+			return next
 		}
 
 		// sources fileds
