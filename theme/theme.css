@@ -25,19 +25,19 @@
 	--mol_theme_spirit: #000000bf;
 
 	/* ВАЖНО: mol_* — именно их читает демка */
-	--mol_theme_back: #121317;
-	--mol_theme_card: #1d202540; /* 25% */
-	--mol_theme_field: #181b2040; /* 25% */
-	--mol_theme_hover: #8080801a; /* 10% */
+	--mol_theme_back: #3d3d3d; /* paper dark */
+	--mol_theme_card: #4a4a4a40; /* paper-2 dark 25% */
+	--mol_theme_field: #4c4c4c40; /* chip dark 25% */
+	--mol_theme_hover: #5a5a5a1a; /* edge dark 10% */
 
-	--mol_theme_text: #e5e7eb;
-	--mol_theme_shade: #9ca3b0;
-	--mol_theme_line: #737b8c40; /* 25% */
-	--mol_theme_focus: #4da3ff;
+	--mol_theme_text: #bcbcbc; /* ink dark */
+	--mol_theme_shade: #909090; /* ink-muted dark */
+	--mol_theme_line: #5a5a5a40; /* edge dark 25% */
+	--mol_theme_focus: #a8bcff; /* accent dark */
 
-	--mol_theme_control: #4da3ff;
-	--mol_theme_current: #20d3ee;
-	--mol_theme_special: #f59f0a;
+	--mol_theme_control: #a8bcff; /* accent dark */
+	--mol_theme_current: #c7b18c; /* accent-2 dark */
+	--mol_theme_special: #d4bf9d; /* accent-2 lighter */
 }
 
 /* можно оставить дубликат в @supports — тоже mol_* */
@@ -45,19 +45,19 @@
 	:root,
 	[mol_theme='$mol_theme_dark'],
 	:where([mol_theme='$mol_theme_dark']) [mol_theme] {
-		--mol_theme_back: #121317;
-		--mol_theme_card: #1d202540;
-		--mol_theme_field: #181b2040;
-		--mol_theme_hover: #8080801a;
+		--mol_theme_back: #3d3d3d;
+		--mol_theme_card: #4a4a4a40;
+		--mol_theme_field: #4c4c4c40;
+		--mol_theme_hover: #5a5a5a1a;
 
-		--mol_theme_text: #e5e7eb;
-		--mol_theme_shade: #9ca3b0;
-		--mol_theme_line: #737b8c40;
-		--mol_theme_focus: #4da3ff;
+		--mol_theme_text: #bcbcbc;
+		--mol_theme_shade: #909090;
+		--mol_theme_line: #5a5a5a40;
+		--mol_theme_focus: #a8bcff;
 
-		--mol_theme_control: #4da3ff;
-		--mol_theme_current: #20d3ee;
-		--mol_theme_special: #f59f0a;
+		--mol_theme_control: #a8bcff;
+		--mol_theme_current: #c7b18c;
+		--mol_theme_special: #d4bf9d;
 	}
 }
 
@@ -67,38 +67,38 @@
 :where([mol_theme='$mol_theme_light']) [mol_theme] {
 	--mol_theme_luma: 1;
 	--mol_theme_image: none;
-	--mol_theme_spirit: #ffffffbf; /* 75% */
+	--mol_theme_spirit: #fbf8f1bf; /* 75% */
 
-	--mol_theme_back: #f6f7f9; /* #F5F6F8 близко */
-	--mol_theme_card: #ffffff80; /* 50% */
-	--mol_theme_field: #ffffffbf; /* 75% */
-	--mol_theme_hover: #8080801a; /* 10% */
+	--mol_theme_back: #f7f3e9; /* paper */
+	--mol_theme_card: #fbf8f180; /* paper-2 50% */
+	--mol_theme_field: #efe8d8bf; /* chip 75% */
+	--mol_theme_hover: #ded7c81a; /* edge 10% */
 
-	--mol_theme_text: #1a1a1a;
-	--mol_theme_shade: #666666;
-	--mol_theme_line: #80808040; /* 25% */
-	--mol_theme_focus: #297eff; /* ≈ #2A7FFF */
+	--mol_theme_text: #22211f; /* ink */
+	--mol_theme_shade: #6e6a62; /* ink-muted */
+	--mol_theme_line: #ded7c840; /* edge 25% */
+	--mol_theme_focus: #3b5aad; /* accent */
 
-	--mol_theme_control: #297eff;
-	--mol_theme_current: #1db9a4;
-	--mol_theme_special: #ffb01f;
+	--mol_theme_control: #3b5aad; /* accent */
+	--mol_theme_current: #92734b; /* accent-2 */
+	--mol_theme_special: #c7b18c; /* accent-2 lighter */
 }
 
 @supports (color: oklch(0% 0 0deg)) {
 	[mol_theme='$mol_theme_light'],
 	:where([mol_theme='$mol_theme_light']) [mol_theme] {
-		--mol_theme_back: #f6f7f9;
-		--mol_theme_card: #ffffff80;
-		--mol_theme_field: #ffffffbf;
-		--mol_theme_hover: #8080801a;
+		--mol_theme_back: #f7f3e9;
+		--mol_theme_card: #fbf8f180;
+		--mol_theme_field: #efe8d8bf;
+		--mol_theme_hover: #ded7c81a;
 
-		--mol_theme_text: #1a1a1a;
-		--mol_theme_shade: #666666;
-		--mol_theme_line: #80808040;
-		--mol_theme_focus: #297eff;
+		--mol_theme_text: #22211f;
+		--mol_theme_shade: #6e6a62;
+		--mol_theme_line: #ded7c840;
+		--mol_theme_focus: #3b5aad;
 
-		--mol_theme_control: #297eff;
-		--mol_theme_current: #1db9a4;
-		--mol_theme_special: #ffb01f;
+		--mol_theme_control: #3b5aad;
+		--mol_theme_current: #92734b;
+		--mol_theme_special: #c7b18c;
 	}
 }
