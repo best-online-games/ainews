@@ -1184,7 +1184,7 @@ namespace $.$$ {
 			return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`
 		}
 
-		article_translate_enable(article: any) {
+		article_translate_enable() {
 			return !this.is_enable_auto_translate()
 		}
 
