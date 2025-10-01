@@ -1162,20 +1162,38 @@ namespace $.$$ {
 			return persent_of_cyrilic_in_text < 55
 		}
 
-		// articles fields
-		article_title(article: any) {
-			if (this.is_enable_auto_translate() && this.is_need_translate(article.title))
-				return this.translate_text(article.title)
-			else return article.title
+		@$mol_mem_key
+		force_translate(article: any, next?: boolean) {
+			if (next !== undefined) return next
+			return false
 		}
+
+		// articles fields
+		@$mol_mem_key
+		article_title(article: any) {
+			const should_translate =
+				(this.is_enable_auto_translate() && this.is_need_translate(article.title)) ||
+				this.force_translate(article)
+			if (should_translate) {
+				return this.translate_text(article.title)
+			}
+			return article.title
+		}
+
+		@$mol_mem_key
 		article_description(article: any) {
 			const description_count_limiter_value = $mol_state_local.value('description_count_limiter_value') ?? 256
-			article.description = article.description.substring(0, description_count_limiter_value)
+			const description = article.description.substring(0, description_count_limiter_value)
 
-			if (this.is_enable_auto_translate() && this.is_need_translate(article.description))
-				return this.translate_text(article.description)
-			else return article.description
+			const should_translate =
+				(this.is_enable_auto_translate() && this.is_need_translate(description)) ||
+				this.force_translate(article)
+			if (should_translate) {
+				return this.translate_text(description)
+			}
+			return description
 		}
+
 		article_link(article: any) {
 			return article.link
 		}
@@ -1184,14 +1202,15 @@ namespace $.$$ {
 			return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`
 		}
 
-		// sources fileds
-		suggestions(category: any) {
-			return $ainews_app_feed_links[category as keyof typeof $ainews_app_feed_links]
+		article_translate_enable() {
+			return !this.is_enable_auto_translate()
 		}
-		@$mol_mem_key
-		sources(id: string, next?: any) {
-			if (next !== undefined) return $mol_state_local.value(id, next)
-			return $mol_state_local.value(id) ?? []
+
+		translate_click(article: any, next?: Event) {
+			if (next) {
+				this.force_translate(article, true)
+			}
+			return next
 		}
 
 		// tabs fields

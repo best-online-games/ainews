@@ -22,10 +22,9 @@
 :where([mol_theme='$mol_theme_dark']) [mol_theme] {
 	--mol_theme_luma: -1;
 	--mol_theme_image: invert(1) hue-rotate(180deg);
-	--mol_theme_spirit: #000000bf;
 
 	/* ВАЖНО: mol_* — именно их читает демка */
-	--mol_theme_back: #3d3d3d; /* paper dark */
+	--mol_theme_back: #3e3e3e; /* paper dark */
 	--mol_theme_card: #4a4a4a40; /* paper-2 dark 25% */
 	--mol_theme_field: #4c4c4c40; /* chip dark 25% */
 	--mol_theme_hover: #5a5a5a1a; /* edge dark 10% */
@@ -45,7 +44,7 @@
 	:root,
 	[mol_theme='$mol_theme_dark'],
 	:where([mol_theme='$mol_theme_dark']) [mol_theme] {
-		--mol_theme_back: #3d3d3d;
+		--mol_theme_back: #3e3e3e;
 		--mol_theme_card: #4a4a4a40;
 		--mol_theme_field: #4c4c4c40;
 		--mol_theme_hover: #5a5a5a1a;

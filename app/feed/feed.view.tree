@@ -23,7 +23,11 @@ $ainews_app_feed $ainews_app_page
 				title <= article_description* \
 			<= Article_link* $mol_link
 				title \Open link
-				uri <= article_link* \
+				uri_toggle <= article_link* \
 			<= Article_translated_link* $mol_link
-				title \Open translated link
-				uri <= article_translated_link* \
+				title @ \Open translated link
+				uri_toggle <= article_translated_link* \
+			<= Article_translate_text* $mol_button_minor
+				title @ \Translate
+				enabled <= article_translate_enable true
+				click? <=> translate_click*? null
