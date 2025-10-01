@@ -1145,6 +1145,9 @@ namespace $.$$ {
             	return article.title
         }
 		article_description(article: any) {
+			const description_count_limiter_value = $mol_state_local.value("description_count_limiter_value") ?? 256
+			article.description = article.description.substring(0, description_count_limiter_value)
+
 			if(this.is_enable_auto_translate() && this.is_need_translate(article.description))
 				return this.translate_text( article.description )
 			else
