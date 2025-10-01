@@ -1190,7 +1190,6 @@ namespace $.$$ {
 
 		translate_click(article: any, next?: Event) {
 			if (next) {
-				console.log('tran')
 				this.force_translate(article, true)
 			}
 			return next
