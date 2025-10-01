@@ -2688,6 +2688,17 @@ declare namespace $ {
 
 //# sourceMappingURL=auto.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $ainews_app_page extends $mol_page {
+	}
+	
+}
+
+//# sourceMappingURL=page.view.tree.d.ts.map
+declare namespace $ {
 
 	export class $mol_icon_frequently_asked_questions extends $mol_icon {
 		path( ): string
@@ -2713,7 +2724,7 @@ declare namespace $ {
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	export class $ainews_app_faq extends $mol_page {
+	export class $ainews_app_faq extends $ainews_app_page {
 		SomeWelcome( ): $mol_paragraph
 		SomeWelcome2( ): $mol_paragraph
 		SomeWelcome3( ): $mol_paragraph
@@ -2934,7 +2945,7 @@ declare namespace $ {
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	export class $ainews_app_feed extends $mol_page {
+	export class $ainews_app_feed extends $ainews_app_page {
 		Categories( ): readonly(any)[]
 		Tabs( ): $mol_deck
 		category_title( id: any): string
@@ -2964,6 +2975,31 @@ declare namespace $.$$ {
     const $ainews_app_feed_links: {
         tech: string[];
         shared: string[];
+        russia: string[];
+        AI: string[];
+        Asia: string[];
+        Autos: string[];
+        Bay: string[];
+        Books: string[];
+        Business: string[];
+        "Celebs and Movies": string[];
+        Culture: string[];
+        Design: string[];
+        Food: string[];
+        "Freedom From Accounts": string[];
+        Gaming: string[];
+        Guns: string[];
+        Linux: string[];
+        "Middle East": string[];
+        Music: string[];
+        Podcasts: string[];
+        Science: string[];
+        Sports: string[];
+        Technology: string[];
+        Travel: string[];
+        USA: string[];
+        "Web Comics": string[];
+        World: string[];
     };
     class $ainews_app_feed extends $.$ainews_app_feed {
         translate_text(text: string): string;
@@ -2976,7 +3012,14 @@ declare namespace $.$$ {
         make_proxy(url: string): string;
         make_translate(text: string): string;
         articles(category: string): any;
-        get_articles_from_sources(source_url: string): $mol_row[];
+        request_articles_from_sources(source_url: string): {
+            title: string | undefined;
+            pubDate: string | undefined;
+            description: string | undefined;
+            link: string | undefined;
+        }[];
+        get_articles_from_sources(source_url: string): any;
+        filter_articles(articles_list: any): any;
         is_enable_auto_translate(): {};
         is_need_translate(text: string): boolean;
         article_title(article: any): any;
@@ -2990,27 +3033,6 @@ declare namespace $.$$ {
     }
 }
 
-declare namespace $ {
-
-	export class $mol_icon_tick extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=tick.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_check_box extends $mol_check {
-		Icon( ): $mol_icon_tick
-	}
-	
-}
-
-//# sourceMappingURL=box.view.tree.d.ts.map
 declare namespace $ {
 }
 
@@ -3386,61 +3408,49 @@ declare namespace $ {
 //# sourceMappingURL=initiative.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_check_box__title_ainews_app_settings_1 = $mol_type_enforce<
-		string
+	type $mol_list__rows_ainews_app_sources_1 = $mol_type_enforce<
+		ReturnType< $ainews_app_sources['Categories'] >
 		,
-		ReturnType< $mol_check_box['title'] >
+		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_check_box__checked_ainews_app_settings_2 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['is_enable_auto_translate'] >
-		,
-		ReturnType< $mol_check_box['checked'] >
-	>
-	type $mol_deck__items_ainews_app_settings_3 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['Categories'] >
-		,
-		ReturnType< $mol_deck['items'] >
-	>
-	type $mol_labeler__title_ainews_app_settings_4 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_sources_2 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_ainews_app_settings_5 = $mol_type_enforce<
+	type $mol_labeler__content_ainews_app_sources_3 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_select_list__value_ainews_app_settings_6 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['sources'] >
+	type $mol_select_list__value_ainews_app_sources_4 = $mol_type_enforce<
+		ReturnType< $ainews_app_sources['sources'] >
 		,
 		ReturnType< $mol_select_list['value'] >
 	>
-	type $mol_select_list__dictionary_ainews_app_settings_7 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['suggestions'] >
+	type $mol_select_list__dictionary_ainews_app_sources_5 = $mol_type_enforce<
+		ReturnType< $ainews_app_sources['suggestions'] >
 		,
 		ReturnType< $mol_select_list['dictionary'] >
 	>
-	type $mol_list__rows_ainews_app_settings_8 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['articles'] >
+	type $mol_list__rows_ainews_app_sources_6 = $mol_type_enforce<
+		ReturnType< $ainews_app_sources['articles'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_list__title_ainews_app_settings_9 = $mol_type_enforce<
-		ReturnType< $ainews_app_settings['category_title'] >
+	type $mol_labeler__title_ainews_app_sources_7 = $mol_type_enforce<
+		ReturnType< $ainews_app_sources['category_title'] >
 		,
-		ReturnType< $mol_list['title'] >
+		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_list__rows_ainews_app_settings_10 = $mol_type_enforce<
+	type $mol_labeler__content_ainews_app_sources_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_list['rows'] >
+		ReturnType< $mol_labeler['content'] >
 	>
-	export class $ainews_app_settings extends $mol_page {
-		is_enable_auto_translate( next?: boolean ): boolean
-		Auto_translate( ): $mol_check_box
+	export class $ainews_app_sources extends $ainews_app_page {
 		Categories( ): readonly(any)[]
-		Tabs( ): $mol_deck
+		Tabs( ): $mol_list
 		Sources_labeler( ): $mol_labeler
 		category_title( id: any): string
 		sources( id: any, next?: readonly(any)[] ): readonly(any)[]
@@ -3451,7 +3461,150 @@ declare namespace $ {
 		title( ): string
 		Logo( ): $mol_icon_open_source_initiative
 		body( ): readonly(any)[]
-		Category_page( id: any): $mol_list
+		Category_page( id: any): $mol_labeler
+	}
+	
+}
+
+//# sourceMappingURL=sources.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $ainews_app_sources extends $.$ainews_app_sources {
+        Categories(): $mol_labeler[];
+        category_title(category: any): any;
+        suggestions(category: any): string[];
+        sources(id: string, next?: any): any;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_string__value_ainews_app_filters_1 = $mol_type_enforce<
+		ReturnType< $ainews_app_filters['include_string_value'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_button_minor__click_ainews_app_filters_2 = $mol_type_enforce<
+		ReturnType< $ainews_app_filters['include_string_clear_click'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_ainews_app_filters_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_labeler__title_ainews_app_filters_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_filters_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_string__value_ainews_app_filters_6 = $mol_type_enforce<
+		ReturnType< $ainews_app_filters['exclude_string_value'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_button_minor__click_ainews_app_filters_7 = $mol_type_enforce<
+		ReturnType< $ainews_app_filters['exclude_string_clear_click'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_ainews_app_filters_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_labeler__title_ainews_app_filters_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_filters_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	export class $ainews_app_filters extends $ainews_app_page {
+		include_string_value( next?: string ): string
+		Include_string( ): $mol_string
+		include_string_clear_click( next?: any ): any
+		Include_string_close_icon( ): $mol_icon_close
+		Include_string_clear_button( ): $mol_button_minor
+		Include_labeler( ): $mol_labeler
+		exclude_string_value( next?: string ): string
+		Exclude_string( ): $mol_string
+		exclude_string_clear_click( next?: any ): any
+		Exclude_string_close_icon( ): $mol_icon_close
+		Exclude_string_clear_button( ): $mol_button_minor
+		Excldue_labeler( ): $mol_labeler
+		title( ): string
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=filters.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $ainews_app_filters extends $.$ainews_app_filters {
+        include_string_value(next?: any): any;
+        exclude_string_value(next?: any): any;
+        include_string_clear_click(): void;
+        exclude_string_clear_click(): void;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_settings extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=settings.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_check_box__title_ainews_app_settings_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_ainews_app_settings_2 = $mol_type_enforce<
+		ReturnType< $ainews_app_settings['is_enable_auto_translate'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	export class $ainews_app_settings extends $ainews_app_page {
+		is_enable_auto_translate( next?: boolean ): boolean
+		Auto_translate( ): $mol_check_box
+		title( ): string
+		Logo( ): $mol_icon_settings
+		body( ): readonly(any)[]
 	}
 	
 }
@@ -3459,10 +3612,6 @@ declare namespace $ {
 //# sourceMappingURL=settings.view.tree.d.ts.map
 declare namespace $.$$ {
     class $ainews_app_settings extends $.$ainews_app_settings {
-        Categories(): $.$mol_list[];
-        category_title(category: any): any;
-        suggestions(category: any): string[];
-        sources(id: string, next?: any): any;
         is_enable_auto_translate(next?: any): any;
     }
 }
@@ -3497,7 +3646,10 @@ declare namespace $ {
 		Theme( ): $ainews_theme_auto
 		FAQ( ): $ainews_app_faq
 		Feed( ): $ainews_app_feed
+		Sources( ): $ainews_app_sources
+		Filters( ): $ainews_app_filters
 		Settings( ): $ainews_app_settings
+		Placeholder( ): any
 		Menu_logo( ): $mol_icon_newspaper
 		menu_title( ): string
 		menu_tools( ): readonly(any)[]
@@ -3505,6 +3657,8 @@ declare namespace $ {
 		spreads( ): ({ 
 			'': ReturnType< $ainews_app['FAQ'] >,
 			'feed': ReturnType< $ainews_app['Feed'] >,
+			'sources': ReturnType< $ainews_app['Sources'] >,
+			'filters': ReturnType< $ainews_app['Filters'] >,
 			'settings': ReturnType< $ainews_app['Settings'] >,
 		}) 
 	}
