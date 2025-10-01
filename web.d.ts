@@ -2915,32 +2915,47 @@ declare namespace $ {
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_ainews_app_feed_6 = $mol_type_enforce<
+	type $mol_link__uri_toggle_ainews_app_feed_6 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_link'] >
 		,
-		ReturnType< $mol_link['uri'] >
+		ReturnType< $mol_link['uri_toggle'] >
 	>
 	type $mol_link__title_ainews_app_feed_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_ainews_app_feed_8 = $mol_type_enforce<
+	type $mol_link__uri_toggle_ainews_app_feed_8 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_translated_link'] >
 		,
-		ReturnType< $mol_link['uri'] >
+		ReturnType< $mol_link['uri_toggle'] >
 	>
-	type $mol_list__title_ainews_app_feed_9 = $mol_type_enforce<
+	type $mol_button_minor__title_ainews_app_feed_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__enabled_ainews_app_feed_10 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_translate_enable'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_ainews_app_feed_11 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['translate_click'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_list__title_ainews_app_feed_12 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_feed_10 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_ainews_app_feed_11 = $mol_type_enforce<
+	type $mol_row__sub_ainews_app_feed_14 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -2959,6 +2974,9 @@ declare namespace $ {
 		Article_link( id: any): $mol_link
 		article_translated_link( id: any): string
 		Article_translated_link( id: any): $mol_link
+		article_translate_enable( ): boolean
+		translate_click( id: any, next?: any ): any
+		Article_translate_text( id: any): $mol_button_minor
 		title( ): string
 		Logo( ): $mol_icon_script_text
 		body( ): readonly(any)[]
@@ -2982,15 +3000,15 @@ declare namespace $.$$ {
         Bay: string[];
         Books: string[];
         Business: string[];
-        "Celebs and Movies": string[];
+        'Celebs and Movies': string[];
         Culture: string[];
         Design: string[];
         Food: string[];
-        "Freedom From Accounts": string[];
+        'Freedom From Accounts': string[];
         Gaming: string[];
         Guns: string[];
         Linux: string[];
-        "Middle East": string[];
+        'Middle East': string[];
         Music: string[];
         Podcasts: string[];
         Science: string[];
@@ -2998,7 +3016,7 @@ declare namespace $.$$ {
         Technology: string[];
         Travel: string[];
         USA: string[];
-        "Web Comics": string[];
+        'Web Comics': string[];
         World: string[];
     };
     class $ainews_app_feed extends $.$ainews_app_feed {
@@ -3022,10 +3040,13 @@ declare namespace $.$$ {
         filter_articles(articles_list: any): any;
         is_enable_auto_translate(): {};
         is_need_translate(text: string): boolean;
+        force_translate(article: any, next?: boolean): boolean;
         article_title(article: any): any;
         article_description(article: any): any;
         article_link(article: any): any;
         article_translated_link(article: any): string;
+        article_translate_enable(): boolean;
+        translate_click(article: any, next?: Event): Event | undefined;
         suggestions(category: any): string[];
         sources(id: string, next?: any): any;
         Categories(): $.$mol_list[];

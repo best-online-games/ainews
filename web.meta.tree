@@ -21,3 +21,4 @@
 	include \/mol/view/tree/test
 \/ainews/app
 	include \/mol/offline/install
+	deploy \/ainews/favicon.svg
