@@ -1,4 +1,5 @@
 $ainews_app $mol_book2_catalog
+	Placeholder null
 	Menu_logo $mol_icon_newspaper
 	menu_title @ \VibeNews - your favorites 
 	menu_tools /
@@ -9,4 +10,6 @@ $ainews_app $mol_book2_catalog
 		\
 			<= FAQ $ainews_app_faq
 		feed <= Feed $ainews_app_feed
+		sources <= Sources $ainews_app_sources
+		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings

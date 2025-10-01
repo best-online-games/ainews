@@ -1073,7 +1073,7 @@ namespace $.$$ {
             return $ainews_app_feed_proxy_url + url
         }
 		make_translate( text: string ) {
-            return $ainews_app_feed_translate_url + text
+            return $ainews_app_feed_translate_url + text.substring(0, 256)
         }
 
         articles(category: string) {
@@ -1082,13 +1082,35 @@ namespace $.$$ {
         }
 
 		@$mol_mem_key
-		get_articles_from_sources(source_url: string) {
+		request_articles_from_sources(source_url: string) {
 			$mol_wire_solid()
-
-            const xml_doc = $mol_fetch.xml( this.make_proxy( source_url ) )
+			const xml_doc = $mol_fetch.xml( this.make_proxy( source_url ) )
             const articles_list = this.parse_rss(xml_doc)
-            // console.log( articles_list )
-			return articles_list.map(article => this.Article(article))
+			return articles_list
+		}
+
+		@$mol_mem_key
+		get_articles_from_sources(source_url: string) {
+			const articles_list = this.request_articles_from_sources(source_url)
+			const filtered_list = this.filter_articles(articles_list)
+			return filtered_list.map((article:any) => this.Article(article))
+		}
+
+		filter_articles(articles_list: any) {
+			const include_string_value = $mol_state_local.value("include_string_value")
+			const exclude_string_value = $mol_state_local.value("exclude_string_value")
+
+			if( include_string_value !== null && include_string_value !== "" )
+			{
+				articles_list = articles_list.filter((article: any) => article.title.includes(include_string_value))
+			}
+
+			if( exclude_string_value !== null && exclude_string_value !== "" )
+			{
+				articles_list = articles_list.filter((article: any) => article.title.includes(exclude_string_value) == false)
+			}
+
+			return articles_list
 		}
 
 		@$mol_mem
@@ -1150,7 +1172,9 @@ namespace $.$$ {
 
 		// tabs fields
 		Categories() {
-			return Object.keys($ainews_app_feed_links).map(category => this.Category_page(category))
+			return Object.keys($ainews_app_feed_links)
+				.filter(category => $mol_state_local.value(category) != null)
+				.map(category => this.Category_page(category))
 		}
 		category_title(category: any) {
             return category

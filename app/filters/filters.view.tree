@@ -1,0 +1,21 @@
+$ainews_app_filters $ainews_app_page
+	title \Фильтры
+	body /
+		<= Include_labeler $mol_labeler
+			title \Новость _должна_ включать:
+			content /
+				<= Include_string $mol_string
+					value? <=> include_string_value? \
+				<= Include_string_clear_button $mol_button_minor
+					click? <=> include_string_clear_click? null 
+					sub /
+						<= Include_string_close_icon $mol_icon_close
+		<= Excldue_labeler $mol_labeler
+			title \Новость _не_должна_ включать:
+			content /
+				<= Exclude_string $mol_string
+					value? <=> exclude_string_value? \
+				<= Exclude_string_clear_button $mol_button_minor
+					click? <=> exclude_string_clear_click? null 
+					sub /
+						<= Exclude_string_close_icon $mol_icon_close
