@@ -8100,6 +8100,78 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$ainews_app_feed_img) = class $ainews_app_feed_img extends ($.$mol_view) {
+		src(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		alt(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		width(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		height(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+	};
+	($mol_mem(($.$ainews_app_feed_img.prototype), "src"));
+	($mol_mem(($.$ainews_app_feed_img.prototype), "alt"));
+	($mol_mem(($.$ainews_app_feed_img.prototype), "width"));
+	($mol_mem(($.$ainews_app_feed_img.prototype), "height"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $ainews_app_feed_img extends $.$ainews_app_feed_img {
+            dom_name() {
+                return 'img';
+            }
+            attr() {
+                const a = super.attr();
+                return {
+                    ...a,
+                    src: this.src() ?? '',
+                    alt: this.alt() ?? '',
+                    loading: 'lazy',
+                    referrerpolicy: 'no-referrer',
+                    width: this.width() ? String(this.width()) : undefined,
+                    height: this.height() ? String(this.height()) : undefined,
+                };
+            }
+            visible() {
+                const s = this.src();
+                return !!s && s.trim().length > 0;
+            }
+        }
+        $$.$ainews_app_feed_img = $ainews_app_feed_img;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const { rem } = $mol_style_unit;
+    $mol_style_define($.$$.$ainews_app_feed_img, {
+        display: 'block',
+        objectFit: 'cover',
+        borderRadius: rem(0.5),
+        boxShadow: '0 2px 8px rgba(0,0,0,.08)',
+    });
+})($ || ($ = {}));
+
+;
 	($.$mol_icon_script) = class $mol_icon_script extends ($.$mol_icon) {
 		path(){
 			return "M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z";
@@ -8154,6 +8226,17 @@ var $;
 		Items(id){
 			const obj = new this.$.$mol_list();
 			(obj.rows) = () => ((this.articles(id)));
+			return obj;
+		}
+		article_image_src(id){
+			return [];
+		}
+		Article_thumbnail(id){
+			const obj = new this.$.$ainews_app_feed_img();
+			(obj.src) = () => ((this.article_image_src(id)));
+			(obj.alt) = () => ((this.article_title(id)));
+			(obj.width) = () => (192);
+			(obj.height) = () => (108);
 			return obj;
 		}
 		article_title(id){
@@ -8223,6 +8306,7 @@ var $;
 		Article(id){
 			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([
+				(this.Article_thumbnail(id)), 
 				(this.Article_title(id)), 
 				(this.Article_description(id)), 
 				(this.Article_link(id)), 
@@ -8234,6 +8318,7 @@ var $;
 	};
 	($mol_mem(($.$ainews_app_feed.prototype), "Tabs"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Items"));
+	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_thumbnail"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_title"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_description"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_link"));
@@ -9303,11 +9388,19 @@ var $;
             }
             parse_rss(xml_doc) {
                 return Array.from(xml_doc.querySelectorAll('item')).map((item) => {
+                    const enclosure = item.querySelector('enclosure');
+                    const mediaContent = item.querySelector('media\\:content, content');
+                    const mediaThumbnail = item.querySelector('media\\:thumbnail, thumbnail');
+                    let image_src = enclosure?.getAttribute('url') ||
+                        mediaContent?.getAttribute('url') ||
+                        mediaThumbnail?.getAttribute('url') ||
+                        '';
                     return {
                         title: item.querySelector('title')?.textContent,
                         pubDate: item.querySelector('pubDate')?.textContent,
                         description: item.querySelector('description')?.textContent,
                         link: item.querySelector('link')?.textContent,
+                        image_src: image_src,
                     };
                 });
             }
@@ -9397,6 +9490,9 @@ var $;
             article_link(article) {
                 return article.link;
             }
+            article_image_src(article) {
+                return article.image_src || '';
+            }
             article_translated_link(article) {
                 return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
             }
@@ -9450,6 +9546,88 @@ var $;
         ], $ainews_app_feed.prototype, "sources", null);
         $$.$ainews_app_feed = $ainews_app_feed;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const { rem } = $mol_style_unit;
+    $mol_style_define($ainews_app_feed, {
+        Body: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+        },
+        Body_content: {
+            maxWidth: rem(50),
+            width: '100%',
+            margin: 0,
+            padding: rem(1.5),
+        },
+        Article: {
+            background: {
+                color: $mol_theme.card,
+            },
+            border: {
+                radius: rem(0.75),
+            },
+            padding: rem(1.5),
+            margin: {
+                bottom: rem(1),
+            },
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            ':hover': {
+                boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+                transform: 'translateY(-2px)',
+                transition: 'all 0.2s ease',
+            },
+        },
+        Article_title: {
+            font: {
+                size: rem(1.125),
+                weight: 600,
+            },
+            lineHeight: '1.4',
+            margin: {
+                bottom: rem(0.5),
+            },
+            color: $mol_theme.text,
+        },
+        Article_description: {
+            font: {
+                size: rem(0.875),
+            },
+            lineHeight: '1.5',
+            color: $mol_theme.shade,
+            margin: {
+                bottom: rem(1),
+            },
+        },
+        Article_link: {
+            font: {
+                size: rem(0.75),
+            },
+            color: $mol_theme.control,
+            textDecoration: 'none',
+            ':hover': {
+                textDecoration: 'underline',
+            },
+        },
+        Article_translated_link: {
+            font: {
+                size: rem(0.75),
+            },
+            color: $mol_theme.control,
+            textDecoration: 'none',
+            margin: {
+                left: rem(1),
+            },
+            ':hover': {
+                textDecoration: 'underline',
+            },
+        },
+    });
 })($ || ($ = {}));
 
 ;
