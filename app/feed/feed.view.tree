@@ -12,6 +12,11 @@ $ainews_app_feed $ainews_app_page
 			<= Items* $mol_list rows <= articles* /
 	Article* $mol_row
 		sub /
+			<= Article_thumbnail* $ainews_app_feed_img
+				src <= article_image_src*
+				alt <= article_title*
+				width 192
+				height 108
 			<= Article_title* $mol_paragraph
 				title <= article_title* \
 			<= Article_description* $mol_paragraph
