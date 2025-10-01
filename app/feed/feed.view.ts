@@ -1073,7 +1073,7 @@ namespace $.$$ {
             return $ainews_app_feed_proxy_url + url
         }
 		make_translate( text: string ) {
-            return $ainews_app_feed_translate_url + text.substring(0, 256)
+            return $ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256))
         }
 
         articles(category: string) {
