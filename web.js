@@ -9303,7 +9303,7 @@ var $;
                 return $$.$ainews_app_feed_proxy_url + url;
             }
             make_translate(text) {
-                return $$.$ainews_app_feed_translate_url + text.substring(0, 256);
+                return $$.$ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256));
             }
             articles(category) {
                 const selected_sources = this.sources(category).map((url_id) => $$.$ainews_app_feed_links[category][url_id]);
