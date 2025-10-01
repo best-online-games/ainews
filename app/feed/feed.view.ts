@@ -1173,7 +1173,7 @@ namespace $.$$ {
 		// tabs fields
 		Categories() {
 			return Object.keys($ainews_app_feed_links)
-				.filter(category => $mol_state_local.value(category) != null)
+				.filter(category => $mol_state_local.value(category) != null && ($mol_state_local.value(category) as string[]).length > 0)
 				.map(category => this.Category_page(category))
 		}
 		category_title(category: any) {
