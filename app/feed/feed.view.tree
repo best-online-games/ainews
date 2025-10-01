@@ -13,7 +13,7 @@ $ainews_app_feed $ainews_app_page
 	Article* $mol_row
 		sub /
 			<= Article_thumbnail* $ainews_app_feed_img
-				src <= article_image_src*
+				src <= article_image_src* /
 				alt <= article_title*
 				width 192
 				height 108
