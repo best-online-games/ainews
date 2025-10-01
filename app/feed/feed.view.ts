@@ -1166,14 +1166,12 @@ namespace $.$$ {
 			return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`
 		}
 
-		// sources fileds
-		suggestions(category: any) {
-			return $ainews_app_feed_links[category as keyof typeof $ainews_app_feed_links]
+		article_translate_enable() {
+			return !this.is_enable_auto_translate()
 		}
-		@$mol_mem_key
-		sources(id: string, next?: any) {
-			if (next !== undefined) return $mol_state_local.value(id, next)
-			return $mol_state_local.value(id) ?? []
+
+		translate_click(article: any) {
+			return this.translate_text(article.title) && this.translate_text(article.description)
 		}
 
 		// sources fileds
