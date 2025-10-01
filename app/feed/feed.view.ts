@@ -1151,6 +1151,7 @@ namespace $.$$ {
 		}
 
 		// articles fields
+		@$mol_mem_key
 		article_title(article: any) {
 			const should_translate =
 				(this.is_enable_auto_translate() && this.is_need_translate(article.title)) ||
@@ -1161,17 +1162,18 @@ namespace $.$$ {
 			return article.title
 		}
 
+		@$mol_mem_key
 		article_description(article: any) {
 			const description_count_limiter_value = $mol_state_local.value('description_count_limiter_value') ?? 256
-			article.description = article.description.substring(0, description_count_limiter_value)
+			const description = article.description.substring(0, description_count_limiter_value)
 
 			const should_translate =
-				(this.is_enable_auto_translate() && this.is_need_translate(article.description)) ||
+				(this.is_enable_auto_translate() && this.is_need_translate(description)) ||
 				this.force_translate(article)
 			if (should_translate) {
-				return this.translate_text(article.description)
+				return this.translate_text(description)
 			}
-			return article.description
+			return description
 		}
 
 		article_link(article: any) {
@@ -1182,12 +1184,13 @@ namespace $.$$ {
 			return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`
 		}
 
-		article_translate_enable() {
+		article_translate_enable(article: any) {
 			return !this.is_enable_auto_translate()
 		}
 
 		translate_click(article: any, next?: Event) {
 			if (next) {
+				console.log('tran')
 				this.force_translate(article, true)
 			}
 			return next

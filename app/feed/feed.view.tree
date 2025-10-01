@@ -24,5 +24,5 @@ $ainews_app_feed $ainews_app_page
 				uri <= article_translated_link* \
 			<= Article_translate_text* $mol_button_minor
 				title @ \Translate
-				enabled <= article_translate_enable
-				click? <=> translate_click? null
+				enabled <= article_translate_enable*
+				click? <=> translate_click*? null
