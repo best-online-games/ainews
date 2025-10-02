@@ -1,6 +1,7 @@
 namespace $.$$ {
-	export const $ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/?link='
-	export const $ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/?translate='
+	export const $ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy'
+	export const $ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate'
+	export const $ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary'
 
 	export const $ainews_app_feed_links = {
 		tech: [
@@ -1045,8 +1046,20 @@ namespace $.$$ {
 	}
 
 	export class $ainews_app_feed extends $.$ainews_app_feed {
-		translate_text(text: string) {
-			return $mol_fetch.text(this.make_translate(text))
+		@$mol_mem_key
+		translate_text(text: string, to_lang: string = "russian") {
+			const payload = new URLSearchParams({
+				text: text.substring(0, 512),
+				to_lang
+			});
+			return $mol_fetch.text($ainews_app_feed_translate_url+"?"+payload.toString())
+		}
+		summary_text(text: string, to_lang: string = "russian") {
+			const payload = new URLSearchParams({
+				text: text.substring(0, 1024),
+				to_lang
+			});
+			return $mol_fetch.text($ainews_app_feed_summary_url+"?"+payload.toString())
 		}
 
 		parse_rss(xml_doc: Document) {
@@ -1088,7 +1101,10 @@ namespace $.$$ {
 		@$mol_mem_key
 		request_articles_from_sources(source_url: string) {
 			$mol_wire_solid()
-			const xml_doc = $mol_fetch.xml(this.make_proxy(source_url))
+			const payload = new URLSearchParams({
+				link: source_url,
+			});
+			const xml_doc = $mol_fetch.xml($ainews_app_feed_proxy_url+"?"+payload.toString())
 			const articles_list = this.parse_rss(xml_doc)
 			return articles_list
 		}
