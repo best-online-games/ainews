@@ -1077,9 +1077,18 @@ namespace $.$$ {
 
 				// Если нет картинки в RSS тегах, ищем в description HTML
 				if (!image_src && description) {
+					// Ищем <img src="...">
 					const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/i)
 					if (imgMatch) {
 						image_src = imgMatch[1]
+					}
+				}
+
+				// Если всё ещё нет картинки, ищем ссылки на картинки в <a href="...">
+				if (!image_src && description) {
+					const linkMatch = description.match(/<a[^>]+href=["']([^"']+\.(jpg|jpeg|png|gif|webp))["']/i)
+					if (linkMatch) {
+						image_src = linkMatch[1]
 					}
 				}
 
@@ -1217,7 +1226,8 @@ namespace $.$$ {
 		}
 
 		article_image_src(article: any) {
-			return article.image_src || ''
+			const src = article.image_src || ''
+			return src.trim().length > 0 ? src : null
 		}
 
 		article_translated_link(article: any) {
