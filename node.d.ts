@@ -2989,15 +2989,8 @@ declare namespace $ {
 declare namespace $.$$ {
     class $ainews_app_feed_img extends $.$ainews_app_feed_img {
         dom_name(): "img";
-        attr(): {
-            src: any;
-            alt: any;
-            loading: string;
-            referrerpolicy: string;
-            width: string | undefined;
-            height: string | undefined;
-        };
-        visible(): boolean;
+        attr(): any;
+        render(): void | null;
     }
 }
 

@@ -8139,9 +8139,12 @@ var $;
             }
             attr() {
                 const a = super.attr();
+                const src = this.src();
+                if (!src)
+                    return {};
                 return {
                     ...a,
-                    src: this.src() ?? '',
+                    src: src,
                     alt: this.alt() ?? '',
                     loading: 'lazy',
                     referrerpolicy: 'no-referrer',
@@ -8149,9 +8152,11 @@ var $;
                     height: this.height() ? String(this.height()) : undefined,
                 };
             }
-            visible() {
-                const s = this.src();
-                return !!s && s.trim().length > 0;
+            render() {
+                const src = this.src();
+                if (!src)
+                    return null;
+                return super.render();
             }
         }
         $$.$ainews_app_feed_img = $ainews_app_feed_img;
@@ -9414,6 +9419,12 @@ var $;
                             image_src = imgMatch[1];
                         }
                     }
+                    if (!image_src && description) {
+                        const linkMatch = description.match(/<a[^>]+href=["']([^"']+\.(jpg|jpeg|png|gif|webp))["']/i);
+                        if (linkMatch) {
+                            image_src = linkMatch[1];
+                        }
+                    }
                     return {
                         title: item.querySelector('title')?.textContent,
                         pubDate: item.querySelector('pubDate')?.textContent,
@@ -9513,7 +9524,8 @@ var $;
                 return article.link;
             }
             article_image_src(article) {
-                return article.image_src || '';
+                const src = article.image_src || '';
+                return src.trim().length > 0 ? src : null;
             }
             article_translated_link(article) {
                 return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
