@@ -3232,7 +3232,7 @@ declare namespace $.$$ {
         parse_rss(xml_doc: Document): {
             title: string | undefined;
             pubDate: string | undefined;
-            description: string | undefined;
+            description: string;
             link: string | undefined;
             image_src: string;
         }[];
@@ -3242,7 +3242,7 @@ declare namespace $.$$ {
         request_articles_from_sources(source_url: string): {
             title: string | undefined;
             pubDate: string | undefined;
-            description: string | undefined;
+            description: string;
             link: string | undefined;
             image_src: string;
         }[];

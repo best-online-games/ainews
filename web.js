@@ -9384,33 +9384,40 @@ var $;
             ],
         };
         class $ainews_app_feed extends $.$ainews_app_feed {
-            translate_text(text, to_lang = "russian") {
+            translate_text(text, to_lang = 'russian') {
                 const payload = new URLSearchParams({
                     text: text.substring(0, 512),
-                    to_lang
+                    to_lang,
                 });
-                return $mol_fetch.text($$.$ainews_app_feed_translate_url + "?" + payload.toString());
+                return $mol_fetch.text($$.$ainews_app_feed_translate_url + '?' + payload.toString());
             }
-            summary_text(text, to_lang = "russian") {
+            summary_text(text, to_lang = 'russian') {
                 const payload = new URLSearchParams({
                     text: text.substring(0, 1024),
-                    to_lang
+                    to_lang,
                 });
-                return $mol_fetch.text($$.$ainews_app_feed_summary_url + "?" + payload.toString());
+                return $mol_fetch.text($$.$ainews_app_feed_summary_url + '?' + payload.toString());
             }
             parse_rss(xml_doc) {
                 return Array.from(xml_doc.querySelectorAll('item')).map((item) => {
                     const enclosure = item.querySelector('enclosure');
                     const mediaContent = item.querySelector('media\\:content, content');
                     const mediaThumbnail = item.querySelector('media\\:thumbnail, thumbnail');
+                    const description = item.querySelector('description')?.textContent || '';
                     let image_src = enclosure?.getAttribute('url') ||
                         mediaContent?.getAttribute('url') ||
                         mediaThumbnail?.getAttribute('url') ||
                         '';
+                    if (!image_src && description) {
+                        const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/i);
+                        if (imgMatch) {
+                            image_src = imgMatch[1];
+                        }
+                    }
                     return {
                         title: item.querySelector('title')?.textContent,
                         pubDate: item.querySelector('pubDate')?.textContent,
-                        description: item.querySelector('description')?.textContent,
+                        description: description,
                         link: item.querySelector('link')?.textContent,
                         image_src: image_src,
                     };
@@ -9431,7 +9438,7 @@ var $;
                 const payload = new URLSearchParams({
                     link: source_url,
                 });
-                const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + "?" + payload.toString());
+                const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
                 const articles_list = this.parse_rss(xml_doc);
                 return articles_list;
             }
