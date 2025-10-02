@@ -3040,8 +3040,9 @@ declare namespace $ {
 
 //# sourceMappingURL=feed.view.tree.d.ts.map
 declare namespace $.$$ {
-    const $ainews_app_feed_proxy_url = "https://proxy.kinsle.ru/?link=";
-    const $ainews_app_feed_translate_url = "https://proxy.kinsle.ru/?translate=";
+    const $ainews_app_feed_proxy_url = "https://proxy.kinsle.ru/proxy";
+    const $ainews_app_feed_translate_url = "https://proxy.kinsle.ru/translate";
+    const $ainews_app_feed_summary_url = "https://proxy.kinsle.ru/summary";
     const $ainews_app_feed_links: {
         tech: string[];
         shared: string[];
@@ -3072,7 +3073,8 @@ declare namespace $.$$ {
         World: string[];
     };
     class $ainews_app_feed extends $.$ainews_app_feed {
-        translate_text(text: string): string;
+        translate_text(text: string, to_lang?: string): string;
+        summary_text(text: string, to_lang?: string): string;
         parse_rss(xml_doc: Document): {
             title: string | undefined;
             pubDate: string | undefined;
