@@ -4,6 +4,9 @@ $ainews_app_feed $ainews_app_page
 	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
+		<= Hot_fix $mol_view sub /
+			<= Searcher $mol_search
+				query? <=> search_word? \
 		<= Tabs $mol_deck items <= Categories /
 	Category_page* $mol_list
 		title <= category_title* \blank category title

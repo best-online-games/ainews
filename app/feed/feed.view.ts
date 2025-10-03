@@ -1139,14 +1139,17 @@ namespace $.$$ {
 			const exclude_string_value = this.filters().exclude_string_value()
 
 			if (include_string_value !== null && include_string_value !== '') {
-				articles_list = articles_list.filter((article: any) => article.title.includes(include_string_value))
+				articles_list = articles_list.filter((article: any) => article.title?.match(new RegExp(include_string_value, "ig")))
 			}
 
 			if (exclude_string_value !== null && exclude_string_value !== '') {
 				articles_list = articles_list.filter(
-					(article: any) => article.title.includes(exclude_string_value) == false,
+					(article: any) => article.title?.match(new RegExp(exclude_string_value, "ig")) == false,
 				)
 			}
+
+			if(this.search_word().trim() !== "")
+				return articles_list.filter((item:any) => item.title?.match(new RegExp(this.search_word(), "ig")))
 
 			return articles_list
 		}
