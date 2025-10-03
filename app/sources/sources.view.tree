@@ -1,7 +1,16 @@
 $ainews_app_sources $ainews_app_page
+	runtime_links null
 	title @ \Source
 	Logo $mol_icon_open_source_initiative
 	body /
+		<= My_sources_labeler $mol_labeler
+			title @ \Add custom rss feeds:
+			content / <= My_sources_labeler_content $mol_list rows /
+				<= My $mol_list rows <= My_rss_feeds /
+				<= Add_feed_string $mol_string
+				<= Add_feed_button $mol_button_minor
+					title @ \Add
+					click? <=> add_custom_feed_click? null
 		<= Sources_labeler $mol_labeler
 			title @ \Select your interests:
 			content /
@@ -15,3 +24,10 @@ $ainews_app_sources $ainews_app_page
 				value? <=> sources*? /
 				dictionary <= suggestions* /
 			<= Items* $mol_list rows <= articles* /
+	My_rss_item* $mol_view
+		sub /
+			<= RSS_title* $mol_paragraph
+				title <= my_rss_title*
+			<= Delete_my_feed_button* $mol_button_major
+				sub / <= Delete_close_icon* $mol_icon_close
+				click? <=> delete_custom_feed_click*? null

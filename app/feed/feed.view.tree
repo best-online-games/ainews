@@ -1,6 +1,7 @@
 $ainews_app_feed $ainews_app_page
-	filters $ainews_app_filters
-	settings $ainews_app_settings
+	app_filters $ainews_app_filters
+	app_settings $ainews_app_settings
+	app_source $ainews_app_sources
 	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
@@ -11,9 +12,6 @@ $ainews_app_feed $ainews_app_page
 	Category_page* $mol_list
 		title <= category_title* \blank category title
 		rows /
-			- <= Sources* $mol_select_list
-				value? <=> sources*? /
-				dictionary <= suggestions* /
 			<= Items* $mol_list rows <= articles* /
 	Article* $mol_row
 		sub /
@@ -27,7 +25,7 @@ $ainews_app_feed $ainews_app_page
 			<= Article_description* $mol_paragraph
 				title <= article_description* \
 			<= Article_link* $mol_link
-				title \Open link
+				title @ \Open link
 				uri_toggle <= article_link* \
 			<= Article_translated_link* $mol_link
 				title @ \Open translated link

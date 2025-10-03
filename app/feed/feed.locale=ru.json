@@ -1,3 +1,6 @@
 {
-	"$ainews_app_feed_title": "Лента"
+	"$ainews_app_feed_title": "Лента",
+	"$ainews_app_feed_Article_translated_link_title": "Открыть перевод",
+	"$ainews_app_feed_Article_translate_text_title": "Перевести",
+	"$ainews_app_feed_Article_link_title": "Открыть"
 }

@@ -1,4 +1,6 @@
 {
 	"$ainews_app_sources_title": "Источники",
-	"$ainews_app_sources_Sources_labeler_title": "Настройки источников"
+	"$ainews_app_sources_Sources_labeler_title": "Настройки источников",
+	"$ainews_app_sources_My_sources_labeler_title": "Добавить свои ссылки на rss фиды:",
+	"$ainews_app_sources_Add_feed_button_title": "Добавить"
 }

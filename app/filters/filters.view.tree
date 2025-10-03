@@ -6,6 +6,7 @@ $ainews_app_filters $ainews_app_page
 			content /
 				<= Include_string $mol_string
 					value? <=> include_string_value? \
+					hint \Visual
 				<= Include_string_clear_button $mol_button_minor
 					click? <=> include_string_clear_click? null 
 					sub /
@@ -15,7 +16,12 @@ $ainews_app_filters $ainews_app_page
 			content /
 				<= Exclude_string $mol_string
 					value? <=> exclude_string_value? \
+					hint \AI,II
 				<= Exclude_string_clear_button $mol_button_minor
-					click? <=> exclude_string_clear_click? null 
+					click? <=> exclude_string_clear_click? null
 					sub /
 						<= Exclude_string_close_icon $mol_icon_close
+		<= Tip_labeler $mol_labeler
+			title @ \Tip:
+			content /
+				<= Tip $mol_paragraph title @ \You can use a comma for multiple word instructions: AI,AGI
