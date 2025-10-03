@@ -27,7 +27,7 @@ $ainews_app_sources $ainews_app_page
 	My_rss_item* $mol_view
 		sub /
 			<= RSS_title* $mol_paragraph
-				title <= my_rss_title*
+				title <= my_rss_title* \
 			<= Delete_my_feed_button* $mol_button_major
 				sub / <= Delete_close_icon* $mol_icon_close
 				click? <=> delete_custom_feed_click*? null
