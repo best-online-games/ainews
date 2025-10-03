@@ -1046,6 +1046,12 @@ namespace $.$$ {
 	}
 
 	export class $ainews_app_feed extends $.$ainews_app_feed {
+
+		all_links() {
+			const custom_rss = this.app_sources().my_custom_sources()
+			return {...$ainews_app_feed_links, my: custom_rss}
+		}
+
 		@$mol_mem_key
 		translate_text(text: string, to_lang: string = this.settings().current_language()) {
 			const payload = new URLSearchParams({
@@ -1109,10 +1115,18 @@ namespace $.$$ {
 			return $ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256))
 		}
 
+		@$mol_mem_key
 		articles(category: string) {
-			const selected_sources = this.sources(category).map(
-				(url_id: string) => ($ainews_app_feed_links as any)[category][url_id],
-			)
+			// const selected_sources = (this.all_links() as any)[category]
+			// console.log({selected_sources})
+			const selected_sources = (this.all_links() as any)[category]
+
+			// const selected_sources = this.sources(category).map(
+			// 	(url_id: string) => (this.all_links() as any)[category][url_id],
+			// )
+			// console.log({category})
+			// console.log({selected_sources})
+			// console.log({links: this.all_links()})
 			return selected_sources.map((rss_link: string) => this.get_articles_from_sources(rss_link)).flat()
 		}
 
@@ -1242,23 +1256,25 @@ namespace $.$$ {
 
 		// sources fileds
 		suggestions(category: any) {
-			return $ainews_app_feed_links[category as keyof typeof $ainews_app_feed_links]
+			return (this.all_links() as any)[category as keyof typeof $ainews_app_feed_links]
 		}
 		@$mol_mem_key
 		sources(id: string, next?: any) {
+console.log({id, next})
 			if (next !== undefined) return $mol_state_local.value(id, next)
 			return $mol_state_local.value(id) ?? []
 		}
 
 		// tabs fields
 		Categories() {
-			return Object.keys($ainews_app_feed_links)
+			const cats = Object.keys($ainews_app_feed_links)
 				.filter(
 					category =>
 						$mol_state_local.value(category) != null &&
 						($mol_state_local.value(category) as string[]).length > 0,
 				)
-				.map(category => this.Category_page(category))
+			const with_my_cats = ["my",...cats].map(category => this.Category_page(category))
+			return with_my_cats
 		}
 		category_title(category: any) {
 			return category
