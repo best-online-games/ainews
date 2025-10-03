@@ -3918,55 +3918,55 @@ declare namespace $ {
 //# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_deck__items_ainews_app_feed_1 = $mol_type_enforce<
+	type $mol_search__query_ainews_app_feed_1 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['search_word'] >
+		,
+		ReturnType< $mol_search['query'] >
+	>
+	type $mol_view__sub_ainews_app_feed_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_deck__items_ainews_app_feed_3 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['Categories'] >
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_list__rows_ainews_app_feed_2 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_4 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['articles'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $ainews_app_feed_img__src_ainews_app_feed_3 = $mol_type_enforce<
+	type $ainews_app_feed_img__src_ainews_app_feed_5 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_image_src'] >
 		,
 		ReturnType< $ainews_app_feed_img['src'] >
 	>
-	type $ainews_app_feed_img__alt_ainews_app_feed_4 = $mol_type_enforce<
+	type $ainews_app_feed_img__alt_ainews_app_feed_6 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_title'] >
 		,
 		ReturnType< $ainews_app_feed_img['alt'] >
 	>
-	type $ainews_app_feed_img__width_ainews_app_feed_5 = $mol_type_enforce<
+	type $ainews_app_feed_img__width_ainews_app_feed_7 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $ainews_app_feed_img['width'] >
 	>
-	type $ainews_app_feed_img__height_ainews_app_feed_6 = $mol_type_enforce<
+	type $ainews_app_feed_img__height_ainews_app_feed_8 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $ainews_app_feed_img['height'] >
 	>
-	type $mol_paragraph__title_ainews_app_feed_7 = $mol_type_enforce<
+	type $mol_paragraph__title_ainews_app_feed_9 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_ainews_app_feed_8 = $mol_type_enforce<
+	type $mol_paragraph__title_ainews_app_feed_10 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_description'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_link__title_ainews_app_feed_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_link['title'] >
-	>
-	type $mol_link__uri_toggle_ainews_app_feed_10 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_link'] >
-		,
-		ReturnType< $mol_link['uri_toggle'] >
 	>
 	type $mol_link__title_ainews_app_feed_11 = $mol_type_enforce<
 		string
@@ -3974,41 +3974,54 @@ declare namespace $ {
 		ReturnType< $mol_link['title'] >
 	>
 	type $mol_link__uri_toggle_ainews_app_feed_12 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_link'] >
+		,
+		ReturnType< $mol_link['uri_toggle'] >
+	>
+	type $mol_link__title_ainews_app_feed_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__uri_toggle_ainews_app_feed_14 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_translated_link'] >
 		,
 		ReturnType< $mol_link['uri_toggle'] >
 	>
-	type $mol_button_minor__title_ainews_app_feed_13 = $mol_type_enforce<
+	type $mol_button_minor__title_ainews_app_feed_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__enabled_ainews_app_feed_14 = $mol_type_enforce<
+	type $mol_button_minor__enabled_ainews_app_feed_16 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_translate_enable'] >
 		,
 		ReturnType< $mol_button_minor['enabled'] >
 	>
-	type $mol_button_minor__click_ainews_app_feed_15 = $mol_type_enforce<
+	type $mol_button_minor__click_ainews_app_feed_17 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['translate_click'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_list__title_ainews_app_feed_16 = $mol_type_enforce<
+	type $mol_list__title_ainews_app_feed_18 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_feed_17 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_ainews_app_feed_18 = $mol_type_enforce<
+	type $mol_row__sub_ainews_app_feed_20 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
 	export class $ainews_app_feed extends $ainews_app_page {
+		search_word( next?: string ): string
+		Searcher( ): $mol_search
+		Hot_fix( ): $mol_view
 		Categories( ): readonly(any)[]
 		Tabs( ): $mol_deck
 		category_title( id: any): string

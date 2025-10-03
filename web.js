@@ -9372,6 +9372,20 @@ var $;
 
 ;
 	($.$ainews_app_feed) = class $ainews_app_feed extends ($.$ainews_app_page) {
+		search_word(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Searcher(){
+			const obj = new this.$.$mol_search();
+			(obj.query) = (next) => ((this.search_word(next)));
+			return obj;
+		}
+		Hot_fix(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Searcher())]);
+			return obj;
+		}
 		Categories(){
 			return [];
 		}
@@ -9466,7 +9480,7 @@ var $;
 			return obj;
 		}
 		body(){
-			return [(this.Tabs())];
+			return [(this.Hot_fix()), (this.Tabs())];
 		}
 		Category_page(id){
 			const obj = new this.$.$mol_list();
@@ -9487,6 +9501,9 @@ var $;
 			return obj;
 		}
 	};
+	($mol_mem(($.$ainews_app_feed.prototype), "search_word"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Searcher"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Hot_fix"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Tabs"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Items"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_thumbnail"));
@@ -10630,11 +10647,13 @@ var $;
                 const include_string_value = this.filters().include_string_value();
                 const exclude_string_value = this.filters().exclude_string_value();
                 if (include_string_value !== null && include_string_value !== '') {
-                    articles_list = articles_list.filter((article) => article.title.includes(include_string_value));
+                    articles_list = articles_list.filter((article) => article.title?.match(new RegExp(include_string_value, "ig")));
                 }
                 if (exclude_string_value !== null && exclude_string_value !== '') {
-                    articles_list = articles_list.filter((article) => article.title.includes(exclude_string_value) == false);
+                    articles_list = articles_list.filter((article) => article.title?.match(new RegExp(exclude_string_value, "ig")) == false);
                 }
+                if (this.search_word().trim() !== "")
+                    return articles_list.filter((item) => item.title?.match(new RegExp(this.search_word(), "ig")));
                 return articles_list;
             }
             is_need_translate(text) {
