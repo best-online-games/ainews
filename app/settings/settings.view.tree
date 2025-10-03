@@ -1,7 +1,17 @@
 $ainews_app_settings $ainews_app_page
+	current_language \
+	langs_list *
+		ru \Russian
+		en \English
 	title @ \Настройки
 	Logo $mol_icon_settings
 	body /
+		<= Translate_to_labeler $mol_labeler
+			title @ \Переводить новость на
+			content /
+				<= Translate_to_select $mol_select
+					value? <=> current_language_code? \ru
+					dictionary <= langs_list
 		<= Localization_labeler $mol_labeler
 			title @ \Локализация новостей
 			content /

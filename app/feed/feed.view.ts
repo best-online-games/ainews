@@ -1047,14 +1047,14 @@ namespace $.$$ {
 
 	export class $ainews_app_feed extends $.$ainews_app_feed {
 		@$mol_mem_key
-		translate_text(text: string, to_lang: string = 'russian') {
+		translate_text(text: string, to_lang: string = this.settings().current_language()) {
 			const payload = new URLSearchParams({
 				text: text.substring(0, 512),
 				to_lang,
 			})
 			return $mol_fetch.text($ainews_app_feed_translate_url + '?' + payload.toString())
 		}
-		summary_text(text: string, to_lang: string = 'russian') {
+		summary_text(text: string, to_lang: string = this.settings().current_language()) {
 			const payload = new URLSearchParams({
 				text: text.substring(0, 1024),
 				to_lang,
@@ -1135,8 +1135,8 @@ namespace $.$$ {
 		}
 
 		filter_articles(articles_list: any) {
-			const include_string_value = $mol_state_local.value('include_string_value')
-			const exclude_string_value = $mol_state_local.value('exclude_string_value')
+			const include_string_value = this.filters().include_string_value()
+			const exclude_string_value = this.filters().exclude_string_value()
 
 			if (include_string_value !== null && include_string_value !== '') {
 				articles_list = articles_list.filter((article: any) => article.title.includes(include_string_value))
@@ -1149,11 +1149,6 @@ namespace $.$$ {
 			}
 
 			return articles_list
-		}
-
-		@$mol_mem
-		is_enable_auto_translate() {
-			return $mol_state_local.value('is_enable_auto_translate') ?? true
 		}
 
 		// calculate persent of cyrilic text on text
@@ -1199,7 +1194,7 @@ namespace $.$$ {
 		@$mol_mem_key
 		article_title(article: any) {
 			const should_translate =
-				(this.is_enable_auto_translate() && this.is_need_translate(article.title)) ||
+				(this.settings().is_enable_auto_translate() && this.is_need_translate(article.title)) ||
 				this.force_translate(article)
 			if (should_translate) {
 				return this.translate_text(article.title)
@@ -1209,11 +1204,11 @@ namespace $.$$ {
 
 		@$mol_mem_key
 		article_description(article: any) {
-			const description_count_limiter_value = $mol_state_local.value('description_count_limiter_value') ?? 256
+			const description_count_limiter_value = this.settings().description_count_limiter_value()
 			const description = article.description.substring(0, description_count_limiter_value)
 
 			const should_translate =
-				(this.is_enable_auto_translate() && this.is_need_translate(description)) ||
+				(this.settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
 				this.force_translate(article)
 			if (should_translate) {
 				return this.translate_text(description)
@@ -1235,7 +1230,7 @@ namespace $.$$ {
 		}
 
 		article_translate_enable() {
-			return !this.is_enable_auto_translate()
+			return !this.settings().is_enable_auto_translate()
 		}
 
 		translate_click(article: any, next?: Event) {
