@@ -8680,6 +8680,7 @@ var $;
 		Include_string(){
 			const obj = new this.$.$mol_string();
 			(obj.value) = (next) => ((this.include_string_value(next)));
+			(obj.hint) = () => ("Visual");
 			return obj;
 		}
 		include_string_clear_click(next){
@@ -8709,6 +8710,7 @@ var $;
 		Exclude_string(){
 			const obj = new this.$.$mol_string();
 			(obj.value) = (next) => ((this.exclude_string_value(next)));
+			(obj.hint) = () => ("AI,II");
 			return obj;
 		}
 		exclude_string_clear_click(next){
@@ -8731,11 +8733,26 @@ var $;
 			(obj.content) = () => ([(this.Exclude_string()), (this.Exclude_string_clear_button())]);
 			return obj;
 		}
+		Tip(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Tip_title")));
+			return obj;
+		}
+		Tip_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Tip_labeler_title")));
+			(obj.content) = () => ([(this.Tip())]);
+			return obj;
+		}
 		title(){
 			return (this.$.$mol_locale.text("$ainews_app_filters_title"));
 		}
 		body(){
-			return [(this.Include_labeler()), (this.Excldue_labeler())];
+			return [
+				(this.Include_labeler()), 
+				(this.Excldue_labeler()), 
+				(this.Tip_labeler())
+			];
 		}
 	};
 	($mol_mem(($.$ainews_app_filters.prototype), "include_string_value"));
@@ -8750,6 +8767,8 @@ var $;
 	($mol_mem(($.$ainews_app_filters.prototype), "Exclude_string_close_icon"));
 	($mol_mem(($.$ainews_app_filters.prototype), "Exclude_string_clear_button"));
 	($mol_mem(($.$ainews_app_filters.prototype), "Excldue_labeler"));
+	($mol_mem(($.$ainews_app_filters.prototype), "Tip"));
+	($mol_mem(($.$ainews_app_filters.prototype), "Tip_labeler"));
 
 
 ;
@@ -9894,7 +9913,7 @@ var $;
 		}
 		Article_link(id){
 			const obj = new this.$.$mol_link();
-			(obj.title) = () => ("Open link");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Article_link_title")));
 			(obj.uri_toggle) = () => ((this.article_link(id)));
 			return obj;
 		}
@@ -9921,12 +9940,16 @@ var $;
 			(obj.click) = (next) => ((this.translate_click(id, next)));
 			return obj;
 		}
-		filters(){
+		app_filters(){
 			const obj = new this.$.$ainews_app_filters();
 			return obj;
 		}
-		settings(){
+		app_settings(){
 			const obj = new this.$.$ainews_app_settings();
+			return obj;
+		}
+		app_source(){
+			const obj = new this.$.$ainews_app_sources();
 			return obj;
 		}
 		title(){
@@ -9970,8 +9993,9 @@ var $;
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_translated_link"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "translate_click"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_translate_text"));
-	($mol_mem(($.$ainews_app_feed.prototype), "filters"));
-	($mol_mem(($.$ainews_app_feed.prototype), "settings"));
+	($mol_mem(($.$ainews_app_feed.prototype), "app_filters"));
+	($mol_mem(($.$ainews_app_feed.prototype), "app_settings"));
+	($mol_mem(($.$ainews_app_feed.prototype), "app_source"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Logo"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_page"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article"));
@@ -10160,7 +10184,796 @@ var $;
         $$.$ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy';
         $$.$ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate';
         $$.$ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary';
-        $$.$ainews_app_feed_links = {
+        class $ainews_app_feed extends $.$ainews_app_feed {
+            translate_text(text, to_lang = this.app_settings().current_language()) {
+                const payload = new URLSearchParams({
+                    text: text.substring(0, 512),
+                    to_lang,
+                });
+                return $mol_fetch.text($$.$ainews_app_feed_translate_url + '?' + payload.toString());
+            }
+            summary_text(text, to_lang = this.app_settings().current_language()) {
+                const payload = new URLSearchParams({
+                    text: text.substring(0, 1024),
+                    to_lang,
+                });
+                return $mol_fetch.text($$.$ainews_app_feed_summary_url + '?' + payload.toString());
+            }
+            parse_rss(xml_doc) {
+                return Array.from(xml_doc.querySelectorAll('item')).map((item) => {
+                    const enclosure = item.querySelector('enclosure');
+                    const mediaContent = item.querySelector('media\\:content, content');
+                    const mediaThumbnail = item.querySelector('media\\:thumbnail, thumbnail');
+                    const description = item.querySelector('description')?.textContent || '';
+                    let image_src = enclosure?.getAttribute('url') ||
+                        mediaContent?.getAttribute('url') ||
+                        mediaThumbnail?.getAttribute('url') ||
+                        '';
+                    if (!image_src && description) {
+                        const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/i);
+                        if (imgMatch) {
+                            image_src = imgMatch[1];
+                        }
+                    }
+                    if (!image_src && description) {
+                        const linkMatch = description.match(/<a[^>]+href=["']([^"']+\.(jpg|jpeg|png|gif|webp))["']/i);
+                        if (linkMatch) {
+                            image_src = linkMatch[1];
+                        }
+                    }
+                    return {
+                        title: item.querySelector('title')?.textContent,
+                        pubDate: item.querySelector('pubDate')?.textContent,
+                        description: description,
+                        link: item.querySelector('link')?.textContent,
+                        image_src: image_src,
+                    };
+                });
+            }
+            make_proxy(url) {
+                return $$.$ainews_app_feed_proxy_url + url;
+            }
+            make_translate(text) {
+                return $$.$ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256));
+            }
+            articles(category) {
+                const selected_sources = this.sources(category).map((url_id) => this.app_source().runtime_links()[category][url_id] ?? url_id);
+                return selected_sources.map((rss_link) => this.get_articles_from_sources(rss_link)).flat();
+            }
+            request_articles_from_sources(source_url) {
+                $mol_wire_solid();
+                const payload = new URLSearchParams({
+                    link: source_url,
+                });
+                const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
+                const articles_list = this.parse_rss(xml_doc);
+                return articles_list;
+            }
+            get_articles_from_sources(source_url) {
+                const articles_list = this.request_articles_from_sources(source_url);
+                const filtered_list = this.filter_articles(articles_list);
+                return filtered_list.map((article) => this.Article(article));
+            }
+            filter_articles(articles_list) {
+                const include_string_value = this.app_filters().include_string_value();
+                const exclude_string_value = this.app_filters().exclude_string_value();
+                if (include_string_value !== null && include_string_value.trim() !== '') {
+                    const rules = include_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "");
+                    articles_list = articles_list.filter((article) => {
+                        return rules.some(rule => {
+                            return new RegExp(rule, "ig").test(article.title);
+                        });
+                    });
+                }
+                if (exclude_string_value !== null && exclude_string_value.trim() !== '') {
+                    const rules = exclude_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "");
+                    console.log({ rules, exclude_string_value });
+                    articles_list = articles_list.filter((article) => {
+                        return rules.some(rule => {
+                            console.log({ rule });
+                            return new RegExp(rule, "ig").test(article.title);
+                        }) == false;
+                    });
+                }
+                if (this.search_word().trim() !== "")
+                    return articles_list.filter((item) => new RegExp(this.search_word(), "ig").test(item.title));
+                return articles_list;
+            }
+            is_need_translate(text) {
+                function remove_from_string(words, str) {
+                    return words.reduce((result, word) => result.replace(new RegExp(word, 'gi'), ''), str);
+                }
+                const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u;
+                let text_without_numbers = text.replace(/[\p{P}\d]+/gu, '');
+                text_without_numbers = remove_from_string([
+                    'KDE',
+                    'Plasma',
+                    'linux',
+                    'bsd',
+                    'router',
+                    'project',
+                    'Android',
+                    'Chrome',
+                    'Postgre',
+                    'elementary',
+                    'Ubuntu',
+                    ' ',
+                ], text_without_numbers);
+                const russian_chars = Array.from(text_without_numbers).filter(char => cyrillic_pattern.test(char)).length;
+                const length = text_without_numbers.length;
+                const persent_of_cyrilic_in_text = (russian_chars / length) * 100;
+                return persent_of_cyrilic_in_text < 55;
+            }
+            force_translate(article, next) {
+                if (next !== undefined)
+                    return next;
+                return false;
+            }
+            article_title(article) {
+                const should_translate = (this.app_settings().is_enable_auto_translate() && this.is_need_translate(article.title)) ||
+                    this.force_translate(article);
+                if (should_translate) {
+                    return this.translate_text(article.title);
+                }
+                return article.title;
+            }
+            article_description(article) {
+                const description_count_limiter_value = this.app_settings().description_count_limiter_value();
+                const description = article.description.substring(0, description_count_limiter_value);
+                const should_translate = (this.app_settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
+                    this.force_translate(article);
+                if (should_translate) {
+                    return this.translate_text(description);
+                }
+                return description;
+            }
+            article_link(article) {
+                return article.link;
+            }
+            article_image_src(article) {
+                const src = article.image_src || '';
+                return src.trim().length > 0 ? src : null;
+            }
+            article_translated_link(article) {
+                return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
+            }
+            article_translate_enable() {
+                return !this.app_settings().is_enable_auto_translate();
+            }
+            translate_click(article, next) {
+                if (next) {
+                    this.force_translate(article, true);
+                }
+                return next;
+            }
+            sources(id, next) {
+                if (next !== undefined)
+                    return $mol_state_local.value(id, next);
+                return $mol_state_local.value(id) ?? [];
+            }
+            Categories() {
+                console.log({ aa: this.app_source().runtime_links() });
+                return Object.keys(this.app_source().runtime_links())
+                    .filter(category => $mol_state_local.value(category) != null &&
+                    $mol_state_local.value(category).length > 0)
+                    .map(category => this.Category_page(category));
+            }
+            category_title(category) {
+                return category;
+            }
+        }
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "translate_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "request_articles_from_sources", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "get_articles_from_sources", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "force_translate", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "article_title", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "article_description", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "sources", null);
+        $$.$ainews_app_feed = $ainews_app_feed;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const { rem } = $mol_style_unit;
+    $mol_style_define($ainews_app_feed, {
+        Body: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+        },
+        Body_content: {
+            maxWidth: rem(50),
+            width: '100%',
+            margin: 0,
+            padding: rem(1.5),
+        },
+        Article: {
+            background: {
+                color: $mol_theme.card,
+            },
+            border: {
+                radius: rem(0.75),
+            },
+            padding: rem(1.5),
+            margin: {
+                bottom: rem(1),
+            },
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            ':hover': {
+                boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+                transform: 'translateY(-2px)',
+                transition: 'all 0.2s ease',
+            },
+        },
+        Article_title: {
+            font: {
+                size: rem(1.125),
+                weight: 600,
+            },
+            lineHeight: '1.4',
+            margin: {
+                bottom: rem(0.5),
+            },
+            color: $mol_theme.text,
+        },
+        Article_description: {
+            font: {
+                size: rem(0.875),
+            },
+            lineHeight: '1.5',
+            color: $mol_theme.shade,
+            margin: {
+                bottom: rem(1),
+            },
+        },
+        Article_link: {
+            font: {
+                size: rem(0.75),
+            },
+            color: $mol_theme.control,
+            textDecoration: 'none',
+            ':hover': {
+                textDecoration: 'underline',
+            },
+        },
+        Article_translated_link: {
+            font: {
+                size: rem(0.75),
+            },
+            color: $mol_theme.control,
+            textDecoration: 'none',
+            margin: {
+                left: rem(1),
+            },
+            ':hover': {
+                textDecoration: 'underline',
+            },
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_newspaper) = class $mol_icon_newspaper extends ($.$mol_icon) {
+		path(){
+			return "M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$ainews_app) = class $ainews_app extends ($.$mol_book2_catalog) {
+		Lights(){
+			const obj = new this.$.$mol_lights_toggle();
+			return obj;
+		}
+		Theme(){
+			const obj = new this.$.$ainews_theme_auto();
+			return obj;
+		}
+		FAQ(){
+			const obj = new this.$.$ainews_app_faq();
+			return obj;
+		}
+		Feed(){
+			const obj = new this.$.$ainews_app_feed();
+			return obj;
+		}
+		Sources(){
+			const obj = new this.$.$ainews_app_sources();
+			return obj;
+		}
+		Filters(){
+			const obj = new this.$.$ainews_app_filters();
+			return obj;
+		}
+		Settings(){
+			const obj = new this.$.$ainews_app_settings();
+			return obj;
+		}
+		Placeholder(){
+			return null;
+		}
+		Menu_logo(){
+			const obj = new this.$.$mol_icon_newspaper();
+			return obj;
+		}
+		menu_title(){
+			return (this.$.$mol_locale.text("$ainews_app_menu_title"));
+		}
+		menu_tools(){
+			return [(this.Lights())];
+		}
+		plugins(){
+			return [(this.Theme())];
+		}
+		spreads(){
+			return {
+				"": (this.FAQ()), 
+				"feed": (this.Feed()), 
+				"sources": (this.Sources()), 
+				"filters": (this.Filters()), 
+				"settings": (this.Settings())
+			};
+		}
+	};
+	($mol_mem(($.$ainews_app.prototype), "Lights"));
+	($mol_mem(($.$ainews_app.prototype), "Theme"));
+	($mol_mem(($.$ainews_app.prototype), "FAQ"));
+	($mol_mem(($.$ainews_app.prototype), "Feed"));
+	($mol_mem(($.$ainews_app.prototype), "Sources"));
+	($mol_mem(($.$ainews_app.prototype), "Filters"));
+	($mol_mem(($.$ainews_app.prototype), "Settings"));
+	($mol_mem(($.$ainews_app.prototype), "Menu_logo"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_offline() { }
+    $.$mol_offline = $mol_offline;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    try {
+        $mol_offline();
+    }
+    catch (error) {
+        console.error(error);
+    }
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $ainews_app extends $.$ainews_app {
+        }
+        $$.$ainews_app = $ainews_app;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const { rem } = $mol_style_unit;
+    $mol_style_define($ainews_app, {});
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$mol_select_list) = class $mol_select_list extends ($.$mol_view) {
+		Badges(){
+			return [];
+		}
+		badge_title(id){
+			return "badge";
+		}
+		remove(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		badge_hint(){
+			return (this.$.$mol_locale.text("$mol_select_list_badge_hint"));
+		}
+		enabled(){
+			return true;
+		}
+		drop_enabled(){
+			return (this.enabled());
+		}
+		event_select(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		align_hor(){
+			return "right";
+		}
+		options(){
+			return [];
+		}
+		options_pickable(){
+			return (this.options());
+		}
+		pick(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		option_title(id){
+			return "";
+		}
+		pick_enabled(){
+			return (this.enabled());
+		}
+		pick_hint(){
+			return (this.$.$mol_locale.text("$mol_select_list_pick_hint"));
+		}
+		filter_pattern(next){
+			return (this.Pick().filter_pattern(next));
+		}
+		Pick_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Pick(){
+			const obj = new this.$.$mol_select();
+			(obj.event_select) = (id, next) => ((this.event_select(id, next)));
+			(obj.align_hor) = () => ((this.align_hor()));
+			(obj.options) = () => ((this.options_pickable()));
+			(obj.value) = (next) => ((this.pick(next)));
+			(obj.option_label) = (id) => ((this.option_title(id)));
+			(obj.trigger_enabled) = () => ((this.pick_enabled()));
+			(obj.hint) = () => ((this.pick_hint()));
+			(obj.Trigger_icon) = () => ((this.Pick_icon()));
+			return obj;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		badges_list(){
+			return (this.Badges());
+		}
+		Badge(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.badge_title(id)));
+			(obj.click) = (next) => ((this.remove(id, next)));
+			(obj.hint) = () => ((this.badge_hint()));
+			(obj.enabled) = () => ((this.drop_enabled()));
+			return obj;
+		}
+		sub(){
+			return [(this.Pick()), ...(this.badges_list())];
+		}
+	};
+	($mol_mem_key(($.$mol_select_list.prototype), "remove"));
+	($mol_mem_key(($.$mol_select_list.prototype), "event_select"));
+	($mol_mem(($.$mol_select_list.prototype), "pick"));
+	($mol_mem(($.$mol_select_list.prototype), "Pick_icon"));
+	($mol_mem(($.$mol_select_list.prototype), "Pick"));
+	($mol_mem(($.$mol_select_list.prototype), "value"));
+	($mol_mem_key(($.$mol_select_list.prototype), "Badge"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_select_list extends $.$mol_select_list {
+            value(val) {
+                return super.value(val);
+            }
+            pick(key) {
+                if (!key)
+                    return '';
+                this.value([...this.value(), key]);
+                return '';
+            }
+            event_select(id, event) {
+                event?.preventDefault();
+                this.pick(id);
+            }
+            options() {
+                return Object.keys(this.dictionary());
+            }
+            options_pickable() {
+                if (!this.enabled())
+                    return [];
+                const exists = new Set(this.value());
+                return this.options().filter(key => !exists.has(key));
+            }
+            option_title(key) {
+                const value = this.dictionary()[key];
+                return value == null ? key : value;
+            }
+            badge_title(key) {
+                return this.option_title(key);
+            }
+            pick_enabled() {
+                return this.options_pickable().length > 0;
+            }
+            Badges() {
+                return this.value()
+                    .map(id => this.Badge(id))
+                    .reverse();
+            }
+            title() {
+                return this.value().map(key => this.option_title(key)).join(' + ');
+            }
+            remove(key) {
+                this.value(this.value().filter(id => id !== key));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "pick", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "options", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "options_pickable", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "pick_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "title", null);
+        __decorate([
+            $mol_action
+        ], $mol_select_list.prototype, "remove", null);
+        $$.$mol_select_list = $mol_select_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($mol_select_list, {
+            flex: {
+                wrap: 'wrap',
+                shrink: 1,
+                grow: 1,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+	($.$mol_icon_open_source_initiative) = class $mol_icon_open_source_initiative extends ($.$mol_icon) {
+		path(){
+			return "M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$ainews_app_sources) = class $ainews_app_sources extends ($.$ainews_app_page) {
+		My_rss_feeds(){
+			return [];
+		}
+		My(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.My_rss_feeds()));
+			return obj;
+		}
+		Add_feed_string(){
+			const obj = new this.$.$mol_string();
+			return obj;
+		}
+		add_custom_feed_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Add_feed_button(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Add_feed_button_title")));
+			(obj.click) = (next) => ((this.add_custom_feed_click(next)));
+			return obj;
+		}
+		My_sources_labeler_content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.My()), 
+				(this.Add_feed_string()), 
+				(this.Add_feed_button())
+			]);
+			return obj;
+		}
+		My_sources_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_My_sources_labeler_title")));
+			(obj.content) = () => ([(this.My_sources_labeler_content())]);
+			return obj;
+		}
+		Categories(){
+			return [];
+		}
+		Tabs(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.Categories()));
+			return obj;
+		}
+		Sources_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Sources_labeler_title")));
+			(obj.content) = () => ([(this.Tabs())]);
+			return obj;
+		}
+		category_title(id){
+			return "blank category title";
+		}
+		sources(id, next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		suggestions(id){
+			return [];
+		}
+		Sources(id){
+			const obj = new this.$.$mol_select_list();
+			(obj.value) = (next) => ((this.sources(id, next)));
+			(obj.dictionary) = () => ((this.suggestions(id)));
+			return obj;
+		}
+		articles(id){
+			return [];
+		}
+		Items(id){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.articles(id)));
+			return obj;
+		}
+		my_rss_title(id){
+			return "";
+		}
+		RSS_title(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.my_rss_title(id)));
+			return obj;
+		}
+		Delete_close_icon(id){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		delete_custom_feed_click(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Delete_my_feed_button(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.sub) = () => ([(this.Delete_close_icon(id))]);
+			(obj.click) = (next) => ((this.delete_custom_feed_click(id, next)));
+			return obj;
+		}
+		runtime_links(){
+			return null;
+		}
+		title(){
+			return (this.$.$mol_locale.text("$ainews_app_sources_title"));
+		}
+		Logo(){
+			const obj = new this.$.$mol_icon_open_source_initiative();
+			return obj;
+		}
+		body(){
+			return [(this.My_sources_labeler()), (this.Sources_labeler())];
+		}
+		Category_page(id){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.category_title(id)));
+			(obj.content) = () => ([(this.Sources(id)), (this.Items(id))]);
+			return obj;
+		}
+		My_rss_item(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.RSS_title(id)), (this.Delete_my_feed_button(id))]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$ainews_app_sources.prototype), "My"));
+	($mol_mem(($.$ainews_app_sources.prototype), "Add_feed_string"));
+	($mol_mem(($.$ainews_app_sources.prototype), "add_custom_feed_click"));
+	($mol_mem(($.$ainews_app_sources.prototype), "Add_feed_button"));
+	($mol_mem(($.$ainews_app_sources.prototype), "My_sources_labeler_content"));
+	($mol_mem(($.$ainews_app_sources.prototype), "My_sources_labeler"));
+	($mol_mem(($.$ainews_app_sources.prototype), "Tabs"));
+	($mol_mem(($.$ainews_app_sources.prototype), "Sources_labeler"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "sources"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "Sources"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "Items"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "RSS_title"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "Delete_close_icon"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "delete_custom_feed_click"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "Delete_my_feed_button"));
+	($mol_mem(($.$ainews_app_sources.prototype), "Logo"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "Category_page"));
+	($mol_mem_key(($.$ainews_app_sources.prototype), "My_rss_item"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const $ainews_app_sources_custom_rss_feeds = "my";
+        const $ainews_app_source_links = {
             tech: [
                 'https://devblogs.microsoft.com/landingpage/',
                 'https://blogs.unity3d.com/feed/',
@@ -11201,706 +12014,68 @@ var $;
                 'https://www.youtube.com/feeds/videos.xml?channel_id=UCQfwfsi5VrQ8yKZ-UWmAEFg',
             ],
         };
-        class $ainews_app_feed extends $.$ainews_app_feed {
-            translate_text(text, to_lang = this.settings().current_language()) {
-                const payload = new URLSearchParams({
-                    text: text.substring(0, 512),
-                    to_lang,
-                });
-                return $mol_fetch.text($$.$ainews_app_feed_translate_url + '?' + payload.toString());
-            }
-            summary_text(text, to_lang = this.settings().current_language()) {
-                const payload = new URLSearchParams({
-                    text: text.substring(0, 1024),
-                    to_lang,
-                });
-                return $mol_fetch.text($$.$ainews_app_feed_summary_url + '?' + payload.toString());
-            }
-            parse_rss(xml_doc) {
-                return Array.from(xml_doc.querySelectorAll('item')).map((item) => {
-                    const enclosure = item.querySelector('enclosure');
-                    const mediaContent = item.querySelector('media\\:content, content');
-                    const mediaThumbnail = item.querySelector('media\\:thumbnail, thumbnail');
-                    const description = item.querySelector('description')?.textContent || '';
-                    let image_src = enclosure?.getAttribute('url') ||
-                        mediaContent?.getAttribute('url') ||
-                        mediaThumbnail?.getAttribute('url') ||
-                        '';
-                    if (!image_src && description) {
-                        const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/i);
-                        if (imgMatch) {
-                            image_src = imgMatch[1];
-                        }
-                    }
-                    if (!image_src && description) {
-                        const linkMatch = description.match(/<a[^>]+href=["']([^"']+\.(jpg|jpeg|png|gif|webp))["']/i);
-                        if (linkMatch) {
-                            image_src = linkMatch[1];
-                        }
-                    }
-                    return {
-                        title: item.querySelector('title')?.textContent,
-                        pubDate: item.querySelector('pubDate')?.textContent,
-                        description: description,
-                        link: item.querySelector('link')?.textContent,
-                        image_src: image_src,
-                    };
-                });
-            }
-            make_proxy(url) {
-                return $$.$ainews_app_feed_proxy_url + url;
-            }
-            make_translate(text) {
-                return $$.$ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256));
-            }
-            articles(category) {
-                const selected_sources = this.sources(category).map((url_id) => $$.$ainews_app_feed_links[category][url_id]);
-                return selected_sources.map((rss_link) => this.get_articles_from_sources(rss_link)).flat();
-            }
-            request_articles_from_sources(source_url) {
-                $mol_wire_solid();
-                const payload = new URLSearchParams({
-                    link: source_url,
-                });
-                const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
-                const articles_list = this.parse_rss(xml_doc);
-                return articles_list;
-            }
-            get_articles_from_sources(source_url) {
-                const articles_list = this.request_articles_from_sources(source_url);
-                const filtered_list = this.filter_articles(articles_list);
-                return filtered_list.map((article) => this.Article(article));
-            }
-            filter_articles(articles_list) {
-                const include_string_value = this.filters().include_string_value();
-                const exclude_string_value = this.filters().exclude_string_value();
-                if (include_string_value !== null && include_string_value !== '') {
-                    articles_list = articles_list.filter((article) => article.title?.match(new RegExp(include_string_value, "ig")));
-                }
-                if (exclude_string_value !== null && exclude_string_value !== '') {
-                    articles_list = articles_list.filter((article) => article.title?.match(new RegExp(exclude_string_value, "ig")) == false);
-                }
-                if (this.search_word().trim() !== "")
-                    return articles_list.filter((item) => item.title?.match(new RegExp(this.search_word(), "ig")));
-                return articles_list;
-            }
-            is_need_translate(text) {
-                function remove_from_string(words, str) {
-                    return words.reduce((result, word) => result.replace(new RegExp(word, 'gi'), ''), str);
-                }
-                const cyrillic_pattern = /^\p{Script=Cyrillic}+$/u;
-                let text_without_numbers = text.replace(/[\p{P}\d]+/gu, '');
-                text_without_numbers = remove_from_string([
-                    'KDE',
-                    'Plasma',
-                    'linux',
-                    'bsd',
-                    'router',
-                    'project',
-                    'Android',
-                    'Chrome',
-                    'Postgre',
-                    'elementary',
-                    'Ubuntu',
-                    ' ',
-                ], text_without_numbers);
-                const russian_chars = Array.from(text_without_numbers).filter(char => cyrillic_pattern.test(char)).length;
-                const length = text_without_numbers.length;
-                const persent_of_cyrilic_in_text = (russian_chars / length) * 100;
-                return persent_of_cyrilic_in_text < 55;
-            }
-            force_translate(article, next) {
-                if (next !== undefined)
-                    return next;
-                return false;
-            }
-            article_title(article) {
-                const should_translate = (this.settings().is_enable_auto_translate() && this.is_need_translate(article.title)) ||
-                    this.force_translate(article);
-                if (should_translate) {
-                    return this.translate_text(article.title);
-                }
-                return article.title;
-            }
-            article_description(article) {
-                const description_count_limiter_value = this.settings().description_count_limiter_value();
-                const description = article.description.substring(0, description_count_limiter_value);
-                const should_translate = (this.settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
-                    this.force_translate(article);
-                if (should_translate) {
-                    return this.translate_text(description);
-                }
-                return description;
-            }
-            article_link(article) {
-                return article.link;
-            }
-            article_image_src(article) {
-                const src = article.image_src || '';
-                return src.trim().length > 0 ? src : null;
-            }
-            article_translated_link(article) {
-                return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
-            }
-            article_translate_enable() {
-                return !this.settings().is_enable_auto_translate();
-            }
-            translate_click(article, next) {
-                if (next) {
-                    this.force_translate(article, true);
-                }
-                return next;
-            }
-            suggestions(category) {
-                return $$.$ainews_app_feed_links[category];
-            }
-            sources(id, next) {
-                if (next !== undefined)
-                    return $mol_state_local.value(id, next);
-                return $mol_state_local.value(id) ?? [];
-            }
-            Categories() {
-                return Object.keys($$.$ainews_app_feed_links)
-                    .filter(category => $mol_state_local.value(category) != null &&
-                    $mol_state_local.value(category).length > 0)
-                    .map(category => this.Category_page(category));
-            }
-            category_title(category) {
-                return category;
-            }
-        }
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "translate_text", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "request_articles_from_sources", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "get_articles_from_sources", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "force_translate", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "article_title", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "article_description", null);
-        __decorate([
-            $mol_mem_key
-        ], $ainews_app_feed.prototype, "sources", null);
-        $$.$ainews_app_feed = $ainews_app_feed;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    const { rem } = $mol_style_unit;
-    $mol_style_define($ainews_app_feed, {
-        Body: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-        },
-        Body_content: {
-            maxWidth: rem(50),
-            width: '100%',
-            margin: 0,
-            padding: rem(1.5),
-        },
-        Article: {
-            background: {
-                color: $mol_theme.card,
-            },
-            border: {
-                radius: rem(0.75),
-            },
-            padding: rem(1.5),
-            margin: {
-                bottom: rem(1),
-            },
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            ':hover': {
-                boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
-                transform: 'translateY(-2px)',
-                transition: 'all 0.2s ease',
-            },
-        },
-        Article_title: {
-            font: {
-                size: rem(1.125),
-                weight: 600,
-            },
-            lineHeight: '1.4',
-            margin: {
-                bottom: rem(0.5),
-            },
-            color: $mol_theme.text,
-        },
-        Article_description: {
-            font: {
-                size: rem(0.875),
-            },
-            lineHeight: '1.5',
-            color: $mol_theme.shade,
-            margin: {
-                bottom: rem(1),
-            },
-        },
-        Article_link: {
-            font: {
-                size: rem(0.75),
-            },
-            color: $mol_theme.control,
-            textDecoration: 'none',
-            ':hover': {
-                textDecoration: 'underline',
-            },
-        },
-        Article_translated_link: {
-            font: {
-                size: rem(0.75),
-            },
-            color: $mol_theme.control,
-            textDecoration: 'none',
-            margin: {
-                left: rem(1),
-            },
-            ':hover': {
-                textDecoration: 'underline',
-            },
-        },
-    });
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
-		path(){
-			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$mol_select_list) = class $mol_select_list extends ($.$mol_view) {
-		Badges(){
-			return [];
-		}
-		badge_title(id){
-			return "badge";
-		}
-		remove(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		badge_hint(){
-			return (this.$.$mol_locale.text("$mol_select_list_badge_hint"));
-		}
-		enabled(){
-			return true;
-		}
-		drop_enabled(){
-			return (this.enabled());
-		}
-		event_select(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		align_hor(){
-			return "right";
-		}
-		options(){
-			return [];
-		}
-		options_pickable(){
-			return (this.options());
-		}
-		pick(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		option_title(id){
-			return "";
-		}
-		pick_enabled(){
-			return (this.enabled());
-		}
-		pick_hint(){
-			return (this.$.$mol_locale.text("$mol_select_list_pick_hint"));
-		}
-		filter_pattern(next){
-			return (this.Pick().filter_pattern(next));
-		}
-		Pick_icon(){
-			const obj = new this.$.$mol_icon_plus();
-			return obj;
-		}
-		Pick(){
-			const obj = new this.$.$mol_select();
-			(obj.event_select) = (id, next) => ((this.event_select(id, next)));
-			(obj.align_hor) = () => ((this.align_hor()));
-			(obj.options) = () => ((this.options_pickable()));
-			(obj.value) = (next) => ((this.pick(next)));
-			(obj.option_label) = (id) => ((this.option_title(id)));
-			(obj.trigger_enabled) = () => ((this.pick_enabled()));
-			(obj.hint) = () => ((this.pick_hint()));
-			(obj.Trigger_icon) = () => ((this.Pick_icon()));
-			return obj;
-		}
-		value(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		dictionary(){
-			return {};
-		}
-		badges_list(){
-			return (this.Badges());
-		}
-		Badge(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.badge_title(id)));
-			(obj.click) = (next) => ((this.remove(id, next)));
-			(obj.hint) = () => ((this.badge_hint()));
-			(obj.enabled) = () => ((this.drop_enabled()));
-			return obj;
-		}
-		sub(){
-			return [(this.Pick()), ...(this.badges_list())];
-		}
-	};
-	($mol_mem_key(($.$mol_select_list.prototype), "remove"));
-	($mol_mem_key(($.$mol_select_list.prototype), "event_select"));
-	($mol_mem(($.$mol_select_list.prototype), "pick"));
-	($mol_mem(($.$mol_select_list.prototype), "Pick_icon"));
-	($mol_mem(($.$mol_select_list.prototype), "Pick"));
-	($mol_mem(($.$mol_select_list.prototype), "value"));
-	($mol_mem_key(($.$mol_select_list.prototype), "Badge"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_select_list extends $.$mol_select_list {
-            value(val) {
-                return super.value(val);
-            }
-            pick(key) {
-                if (!key)
-                    return '';
-                this.value([...this.value(), key]);
-                return '';
-            }
-            event_select(id, event) {
-                event?.preventDefault();
-                this.pick(id);
-            }
-            options() {
-                return Object.keys(this.dictionary());
-            }
-            options_pickable() {
-                if (!this.enabled())
-                    return [];
-                const exists = new Set(this.value());
-                return this.options().filter(key => !exists.has(key));
-            }
-            option_title(key) {
-                const value = this.dictionary()[key];
-                return value == null ? key : value;
-            }
-            badge_title(key) {
-                return this.option_title(key);
-            }
-            pick_enabled() {
-                return this.options_pickable().length > 0;
-            }
-            Badges() {
-                return this.value()
-                    .map(id => this.Badge(id))
-                    .reverse();
-            }
-            title() {
-                return this.value().map(key => this.option_title(key)).join(' + ');
-            }
-            remove(key) {
-                this.value(this.value().filter(id => id !== key));
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_select_list.prototype, "pick", null);
-        __decorate([
-            $mol_mem
-        ], $mol_select_list.prototype, "options", null);
-        __decorate([
-            $mol_mem
-        ], $mol_select_list.prototype, "options_pickable", null);
-        __decorate([
-            $mol_mem
-        ], $mol_select_list.prototype, "pick_enabled", null);
-        __decorate([
-            $mol_mem
-        ], $mol_select_list.prototype, "title", null);
-        __decorate([
-            $mol_action
-        ], $mol_select_list.prototype, "remove", null);
-        $$.$mol_select_list = $mol_select_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        const { rem } = $mol_style_unit;
-        $mol_style_define($mol_select_list, {
-            flex: {
-                wrap: 'wrap',
-                shrink: 1,
-                grow: 1,
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_open_source_initiative) = class $mol_icon_open_source_initiative extends ($.$mol_icon) {
-		path(){
-			return "M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$ainews_app_sources) = class $ainews_app_sources extends ($.$ainews_app_page) {
-		Categories(){
-			return [];
-		}
-		Tabs(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.Categories()));
-			return obj;
-		}
-		Sources_labeler(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Sources_labeler_title")));
-			(obj.content) = () => ([(this.Tabs())]);
-			return obj;
-		}
-		category_title(id){
-			return "blank category title";
-		}
-		sources(id, next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		suggestions(id){
-			return [];
-		}
-		Sources(id){
-			const obj = new this.$.$mol_select_list();
-			(obj.value) = (next) => ((this.sources(id, next)));
-			(obj.dictionary) = () => ((this.suggestions(id)));
-			return obj;
-		}
-		articles(id){
-			return [];
-		}
-		Items(id){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.articles(id)));
-			return obj;
-		}
-		title(){
-			return (this.$.$mol_locale.text("$ainews_app_sources_title"));
-		}
-		Logo(){
-			const obj = new this.$.$mol_icon_open_source_initiative();
-			return obj;
-		}
-		body(){
-			return [(this.Sources_labeler())];
-		}
-		Category_page(id){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.category_title(id)));
-			(obj.content) = () => ([(this.Sources(id)), (this.Items(id))]);
-			return obj;
-		}
-	};
-	($mol_mem(($.$ainews_app_sources.prototype), "Tabs"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Sources_labeler"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "sources"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Sources"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Items"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Logo"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Category_page"));
-
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
         class $ainews_app_sources extends $.$ainews_app_sources {
+            runtime_links() {
+                const custom_rss = this.custom_sources($ainews_app_sources_custom_rss_feeds);
+                return { ...$ainews_app_source_links, my: custom_rss };
+            }
             Categories() {
-                return Object.keys($ainews_app_feed_links).map(category => this.Category_page(category));
+                return Object.keys($ainews_app_source_links).map(category => this.Category_page(category));
             }
             category_title(category) {
                 return category;
             }
             suggestions(category) {
-                return $ainews_app_feed_links[category];
+                return $ainews_app_source_links[category];
             }
             sources(id, next) {
                 if (next !== undefined)
                     return $mol_state_local.value(id, next);
                 return $mol_state_local.value(id) ?? [];
             }
+            custom_sources(id, next) {
+                if (next !== undefined)
+                    return $mol_state_local.value(id, next);
+                return $mol_state_local.value(id) ?? [];
+            }
+            My_rss_feeds() {
+                const my_rss = $mol_state_local.value($ainews_app_sources_custom_rss_feeds) ?? [];
+                return my_rss.map((category) => this.My_rss_item(category));
+            }
+            add_custom_feed_click() {
+                const new_url = this.Add_feed_string().value();
+                const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds);
+                if (current_list.includes(new_url)) {
+                    return;
+                }
+                if (new_url !== null && new_url.trim() !== "") {
+                    if (new_url.includes("https://") == false && new_url.includes("http://") == false) {
+                        throw "Need valid http url!";
+                    }
+                }
+                const new_list = [...current_list, new_url];
+                this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list);
+                $mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list);
+                this.Add_feed_string().value("");
+            }
+            my_rss_title(id) {
+                return id;
+            }
+            delete_custom_feed_click(id) {
+                const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds);
+                const new_list = current_list.filter((item) => item != id);
+                this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list);
+                $mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list);
+            }
         }
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_sources.prototype, "custom_sources", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_sources.prototype, "my_rss_title", null);
         $$.$ainews_app_sources = $ainews_app_sources;
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_newspaper) = class $mol_icon_newspaper extends ($.$mol_icon) {
-		path(){
-			return "M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$ainews_app) = class $ainews_app extends ($.$mol_book2_catalog) {
-		Lights(){
-			const obj = new this.$.$mol_lights_toggle();
-			return obj;
-		}
-		Theme(){
-			const obj = new this.$.$ainews_theme_auto();
-			return obj;
-		}
-		FAQ(){
-			const obj = new this.$.$ainews_app_faq();
-			return obj;
-		}
-		Feed(){
-			const obj = new this.$.$ainews_app_feed();
-			return obj;
-		}
-		Sources(){
-			const obj = new this.$.$ainews_app_sources();
-			return obj;
-		}
-		Filters(){
-			const obj = new this.$.$ainews_app_filters();
-			return obj;
-		}
-		Settings(){
-			const obj = new this.$.$ainews_app_settings();
-			return obj;
-		}
-		Placeholder(){
-			return null;
-		}
-		Menu_logo(){
-			const obj = new this.$.$mol_icon_newspaper();
-			return obj;
-		}
-		menu_title(){
-			return (this.$.$mol_locale.text("$ainews_app_menu_title"));
-		}
-		menu_tools(){
-			return [(this.Lights())];
-		}
-		plugins(){
-			return [(this.Theme())];
-		}
-		spreads(){
-			return {
-				"": (this.FAQ()), 
-				"feed": (this.Feed()), 
-				"sources": (this.Sources()), 
-				"filters": (this.Filters()), 
-				"settings": (this.Settings())
-			};
-		}
-	};
-	($mol_mem(($.$ainews_app.prototype), "Lights"));
-	($mol_mem(($.$ainews_app.prototype), "Theme"));
-	($mol_mem(($.$ainews_app.prototype), "FAQ"));
-	($mol_mem(($.$ainews_app.prototype), "Feed"));
-	($mol_mem(($.$ainews_app.prototype), "Sources"));
-	($mol_mem(($.$ainews_app.prototype), "Filters"));
-	($mol_mem(($.$ainews_app.prototype), "Settings"));
-	($mol_mem(($.$ainews_app.prototype), "Menu_logo"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $mol_offline() { }
-    $.$mol_offline = $mol_offline;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    try {
-        $mol_offline();
-    }
-    catch (error) {
-        console.error(error);
-    }
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $ainews_app extends $.$ainews_app {
-        }
-        $$.$ainews_app = $ainews_app;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    const { rem } = $mol_style_unit;
-    $mol_style_define($ainews_app, {});
 })($ || ($ = {}));
 
 ;

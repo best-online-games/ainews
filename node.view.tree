@@ -429,6 +429,7 @@ $ainews_app_filters $ainews_app_page
 			content /
 				<= Include_string $mol_string
 					value? <=> include_string_value? \
+					hint \Visual
 				<= Include_string_clear_button $mol_button_minor
 					click? <=> include_string_clear_click? null 
 					sub /
@@ -438,10 +439,15 @@ $ainews_app_filters $ainews_app_page
 			content /
 				<= Exclude_string $mol_string
 					value? <=> exclude_string_value? \
+					hint \AI,II
 				<= Exclude_string_clear_button $mol_button_minor
-					click? <=> exclude_string_clear_click? null 
+					click? <=> exclude_string_clear_click? null
 					sub /
 						<= Exclude_string_close_icon $mol_icon_close
+		<= Tip_labeler $mol_labeler
+			title @ \Tip:
+			content /
+				<= Tip $mol_paragraph title @ \You can use a comma for multiple word instructions: AI,AGI
 
 $mol_pick $mol_pop
 	event *
@@ -585,8 +591,9 @@ $mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 
 $mol_row $mol_view
 
 $ainews_app_feed $ainews_app_page
-	filters $ainews_app_filters
-	settings $ainews_app_settings
+	app_filters $ainews_app_filters
+	app_settings $ainews_app_settings
+	app_source $ainews_app_sources
 	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
@@ -597,9 +604,6 @@ $ainews_app_feed $ainews_app_page
 	Category_page* $mol_list
 		title <= category_title* \blank category title
 		rows /
-			- <= Sources* $mol_select_list
-				value? <=> sources*? /
-				dictionary <= suggestions* /
 			<= Items* $mol_list rows <= articles* /
 	Article* $mol_row
 		sub /
@@ -613,7 +617,7 @@ $ainews_app_feed $ainews_app_page
 			<= Article_description* $mol_paragraph
 				title <= article_description* \
 			<= Article_link* $mol_link
-				title \Open link
+				title @ \Open link
 				uri_toggle <= article_link* \
 			<= Article_translated_link* $mol_link
 				title @ \Open translated link
@@ -622,6 +626,24 @@ $ainews_app_feed $ainews_app_page
 				title @ \Translate
 				enabled <= article_translate_enable true
 				click? <=> translate_click*? null
+
+$mol_icon_newspaper $mol_icon path \M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z
+
+$ainews_app $mol_book2_catalog
+	Placeholder null
+	Menu_logo $mol_icon_newspaper
+	menu_title @ \VibeNews - your favorites 
+	menu_tools /
+		<= Lights $mol_lights_toggle
+	plugins /
+		<= Theme $ainews_theme_auto
+	spreads *
+		\
+			<= FAQ $ainews_app_faq
+		feed <= Feed $ainews_app_feed
+		sources <= Sources $ainews_app_sources
+		filters <= Filters $ainews_app_filters
+		settings <= Settings $ainews_app_settings
 
 $mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 
@@ -647,12 +669,24 @@ $mol_select_list $mol_view
 			Trigger_icon <= Pick_icon $mol_icon_plus
 		^ badges_list
 
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
 $mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z
 
 $ainews_app_sources $ainews_app_page
+	runtime_links null
 	title @ \Source
 	Logo $mol_icon_open_source_initiative
 	body /
+		<= My_sources_labeler $mol_labeler
+			title @ \Add custom rss feeds:
+			content / <= My_sources_labeler_content $mol_list rows /
+				<= My $mol_list rows <= My_rss_feeds /
+				<= Add_feed_string $mol_string
+				<= Add_feed_button $mol_button_minor
+					title @ \Add
+					click? <=> add_custom_feed_click? null
 		<= Sources_labeler $mol_labeler
 			title @ \Select your interests:
 			content /
@@ -666,21 +700,10 @@ $ainews_app_sources $ainews_app_page
 				value? <=> sources*? /
 				dictionary <= suggestions* /
 			<= Items* $mol_list rows <= articles* /
-
-$mol_icon_newspaper $mol_icon path \M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z
-
-$ainews_app $mol_book2_catalog
-	Placeholder null
-	Menu_logo $mol_icon_newspaper
-	menu_title @ \VibeNews - your favorites 
-	menu_tools /
-		<= Lights $mol_lights_toggle
-	plugins /
-		<= Theme $ainews_theme_auto
-	spreads *
-		\
-			<= FAQ $ainews_app_faq
-		feed <= Feed $ainews_app_feed
-		sources <= Sources $ainews_app_sources
-		filters <= Filters $ainews_app_filters
-		settings <= Settings $ainews_app_settings
+	My_rss_item* $mol_view
+		sub /
+			<= RSS_title* $mol_paragraph
+				title <= my_rss_title* \
+			<= Delete_my_feed_button* $mol_button_major
+				sub / <= Delete_close_icon* $mol_icon_close
+				click? <=> delete_custom_feed_click*? null
