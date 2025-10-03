@@ -3,23 +3,30 @@ $ainews_app_settings $ainews_app_page
 	langs_list *
 		ru \Russian
 		en \English
-	title @ \Настройки
+	title @ \Settings
 	Logo $mol_icon_settings
 	body /
+		<= Interface_language_labeler $mol_labeler
+			title @ \Interface language
+			content /
+				<= Interface_language_select $mol_locale_select
+					dictionary *
+						ru \Russian
+						en \English
 		<= Translate_to_labeler $mol_labeler
-			title @ \Переводить новость на
+			title @ \Translate post to
 			content /
 				<= Translate_to_select $mol_select
 					value? <=> current_language_code? \ru
 					dictionary <= langs_list
 		<= Localization_labeler $mol_labeler
-			title @ \Локализация новостей
+			title @ \Localization
 			content /
 				<= Auto_translate $mol_check_box
-					title @ \Автоперевод новости на русский язык
+					title @ \Auto translate post to selected language
 					checked? <=> is_enable_auto_translate? true
 		<= Description_count_limiter_labeler $mol_labeler
-			title @ \Ограничение длины описания новости
+			title @ \Limit description lenght
 			content /
 				<= Description_count_limiter $mol_number
 					value? <=> description_count_limiter_value? 256

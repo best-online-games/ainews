@@ -1,8 +1,8 @@
 $ainews_app_filters $ainews_app_page
-	title \Фильтры
+	title @ \Filters
 	body /
 		<= Include_labeler $mol_labeler
-			title \Новость _должна_ включать:
+			title @ \Post must include  text:
 			content /
 				<= Include_string $mol_string
 					value? <=> include_string_value? \
@@ -11,7 +11,7 @@ $ainews_app_filters $ainews_app_page
 					sub /
 						<= Include_string_close_icon $mol_icon_close
 		<= Excldue_labeler $mol_labeler
-			title \Новость _не_должна_ включать:
+			title @ \Post must exclude  text:
 			content /
 				<= Exclude_string $mol_string
 					value? <=> exclude_string_value? \
