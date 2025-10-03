@@ -3200,6 +3200,393 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    const $mol_lang_iso639: {
+        ab: string;
+        aa: string;
+        af: string;
+        ak: string;
+        sq: string;
+        am: string;
+        ar: string;
+        an: string;
+        hy: string;
+        as: string;
+        av: string;
+        ae: string;
+        ay: string;
+        az: string;
+        bm: string;
+        ba: string;
+        eu: string;
+        be: string;
+        bn: string;
+        bi: string;
+        nb: string;
+        bs: string;
+        br: string;
+        bg: string;
+        my: string;
+        ca: string;
+        ch: string;
+        ce: string;
+        zh: string;
+        cu: string;
+        cv: string;
+        kw: string;
+        co: string;
+        cr: string;
+        hr: string;
+        cs: string;
+        da: string;
+        dv: string;
+        nl: string;
+        dz: string;
+        en: string;
+        eo: string;
+        et: string;
+        ee: string;
+        fo: string;
+        fj: string;
+        fi: string;
+        fr: string;
+        fy: string;
+        ff: string;
+        gd: string;
+        gl: string;
+        lg: string;
+        ka: string;
+        de: string;
+        el: string;
+        gn: string;
+        gu: string;
+        ht: string;
+        ha: string;
+        he: string;
+        hz: string;
+        hi: string;
+        ho: string;
+        hu: string;
+        is: string;
+        io: string;
+        ig: string;
+        id: string;
+        ia: string;
+        ie: string;
+        iu: string;
+        ik: string;
+        ga: string;
+        it: string;
+        ja: string;
+        jv: string;
+        kl: string;
+        kn: string;
+        kr: string;
+        ks: string;
+        kk: string;
+        km: string;
+        ki: string;
+        rw: string;
+        ky: string;
+        kv: string;
+        kg: string;
+        ko: string;
+        kj: string;
+        ku: string;
+        lo: string;
+        la: string;
+        lv: string;
+        li: string;
+        ln: string;
+        lt: string;
+        lu: string;
+        lb: string;
+        mk: string;
+        mg: string;
+        ms: string;
+        ml: string;
+        mt: string;
+        gv: string;
+        mi: string;
+        mr: string;
+        mh: string;
+        mn: string;
+        na: string;
+        nv: string;
+        nd: string;
+        ng: string;
+        ne: string;
+        no: string;
+        ny: string;
+        nn: string;
+        oc: string;
+        oj: string;
+        or: string;
+        om: string;
+        os: string;
+        pi: string;
+        ps: string;
+        fa: string;
+        pl: string;
+        pt: string;
+        pa: string;
+        qu: string;
+        ro: string;
+        rm: string;
+        rn: string;
+        ru: string;
+        se: string;
+        sm: string;
+        sg: string;
+        sa: string;
+        sc: string;
+        sr: string;
+        sn: string;
+        ii: string;
+        sd: string;
+        si: string;
+        sk: string;
+        sl: string;
+        so: string;
+        st: string;
+        nr: string;
+        es: string;
+        su: string;
+        sw: string;
+        ss: string;
+        sv: string;
+        tl: string;
+        ty: string;
+        tg: string;
+        ta: string;
+        tt: string;
+        te: string;
+        th: string;
+        bo: string;
+        ti: string;
+        to: string;
+        ts: string;
+        tn: string;
+        tr: string;
+        tk: string;
+        tw: string;
+        ug: string;
+        uk: string;
+        ur: string;
+        uz: string;
+        ve: string;
+        vi: string;
+        vo: string;
+        wa: string;
+        cy: string;
+        wo: string;
+        xh: string;
+        yi: string;
+        yo: string;
+        za: string;
+        zu: string;
+    };
+}
+
+declare namespace $ {
+
+	export class $mol_locale_select extends $mol_select {
+	}
+	
+}
+
+//# sourceMappingURL=select.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_locale_select extends $.$mol_locale_select {
+        value(next?: string): string;
+        dictionary(): {
+            ab: string;
+            aa: string;
+            af: string;
+            ak: string;
+            sq: string;
+            am: string;
+            ar: string;
+            an: string;
+            hy: string;
+            as: string;
+            av: string;
+            ae: string;
+            ay: string;
+            az: string;
+            bm: string;
+            ba: string;
+            eu: string;
+            be: string;
+            bn: string;
+            bi: string;
+            nb: string;
+            bs: string;
+            br: string;
+            bg: string;
+            my: string;
+            ca: string;
+            ch: string;
+            ce: string;
+            zh: string;
+            cu: string;
+            cv: string;
+            kw: string;
+            co: string;
+            cr: string;
+            hr: string;
+            cs: string;
+            da: string;
+            dv: string;
+            nl: string;
+            dz: string;
+            en: string;
+            eo: string;
+            et: string;
+            ee: string;
+            fo: string;
+            fj: string;
+            fi: string;
+            fr: string;
+            fy: string;
+            ff: string;
+            gd: string;
+            gl: string;
+            lg: string;
+            ka: string;
+            de: string;
+            el: string;
+            gn: string;
+            gu: string;
+            ht: string;
+            ha: string;
+            he: string;
+            hz: string;
+            hi: string;
+            ho: string;
+            hu: string;
+            is: string;
+            io: string;
+            ig: string;
+            id: string;
+            ia: string;
+            ie: string;
+            iu: string;
+            ik: string;
+            ga: string;
+            it: string;
+            ja: string;
+            jv: string;
+            kl: string;
+            kn: string;
+            kr: string;
+            ks: string;
+            kk: string;
+            km: string;
+            ki: string;
+            rw: string;
+            ky: string;
+            kv: string;
+            kg: string;
+            ko: string;
+            kj: string;
+            ku: string;
+            lo: string;
+            la: string;
+            lv: string;
+            li: string;
+            ln: string;
+            lt: string;
+            lu: string;
+            lb: string;
+            mk: string;
+            mg: string;
+            ms: string;
+            ml: string;
+            mt: string;
+            gv: string;
+            mi: string;
+            mr: string;
+            mh: string;
+            mn: string;
+            na: string;
+            nv: string;
+            nd: string;
+            ng: string;
+            ne: string;
+            no: string;
+            ny: string;
+            nn: string;
+            oc: string;
+            oj: string;
+            or: string;
+            om: string;
+            os: string;
+            pi: string;
+            ps: string;
+            fa: string;
+            pl: string;
+            pt: string;
+            pa: string;
+            qu: string;
+            ro: string;
+            rm: string;
+            rn: string;
+            ru: string;
+            se: string;
+            sm: string;
+            sg: string;
+            sa: string;
+            sc: string;
+            sr: string;
+            sn: string;
+            ii: string;
+            sd: string;
+            si: string;
+            sk: string;
+            sl: string;
+            so: string;
+            st: string;
+            nr: string;
+            es: string;
+            su: string;
+            sw: string;
+            ss: string;
+            sv: string;
+            tl: string;
+            ty: string;
+            tg: string;
+            ta: string;
+            tt: string;
+            te: string;
+            th: string;
+            bo: string;
+            ti: string;
+            to: string;
+            ts: string;
+            tn: string;
+            tr: string;
+            tk: string;
+            tw: string;
+            ug: string;
+            uk: string;
+            ur: string;
+            uz: string;
+            ve: string;
+            vi: string;
+            vo: string;
+            wa: string;
+            cy: string;
+            wo: string;
+            xh: string;
+            yi: string;
+            yo: string;
+            za: string;
+            zu: string;
+        };
+    }
+}
+
+declare namespace $ {
 
 	export class $mol_icon_tick extends $mol_icon {
 		path( ): string
@@ -3380,72 +3767,92 @@ declare namespace $ {
 //# sourceMappingURL=settings.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_select__value_ainews_app_settings_1 = $mol_type_enforce<
+	type $mol_locale_select__dictionary_ainews_app_settings_1 = $mol_type_enforce<
+		({ 
+			'ru': string,
+			'en': string,
+		}) 
+		,
+		ReturnType< $mol_locale_select['dictionary'] >
+	>
+	type $mol_labeler__title_ainews_app_settings_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_settings_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
+	type $mol_select__value_ainews_app_settings_4 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['current_language_code'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select__dictionary_ainews_app_settings_2 = $mol_type_enforce<
+	type $mol_select__dictionary_ainews_app_settings_5 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['langs_list'] >
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_labeler__title_ainews_app_settings_3 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_settings_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_ainews_app_settings_4 = $mol_type_enforce<
+	type $mol_labeler__content_ainews_app_settings_7 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_check_box__title_ainews_app_settings_5 = $mol_type_enforce<
+	type $mol_check_box__title_ainews_app_settings_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_check_box['title'] >
 	>
-	type $mol_check_box__checked_ainews_app_settings_6 = $mol_type_enforce<
+	type $mol_check_box__checked_ainews_app_settings_9 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['is_enable_auto_translate'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_labeler__title_ainews_app_settings_7 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_settings_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_ainews_app_settings_8 = $mol_type_enforce<
+	type $mol_labeler__content_ainews_app_settings_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
-	type $mol_number__value_ainews_app_settings_9 = $mol_type_enforce<
+	type $mol_number__value_ainews_app_settings_12 = $mol_type_enforce<
 		ReturnType< $ainews_app_settings['description_count_limiter_value'] >
 		,
 		ReturnType< $mol_number['value'] >
 	>
-	type $mol_number__precision_change_ainews_app_settings_10 = $mol_type_enforce<
+	type $mol_number__precision_change_ainews_app_settings_13 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_number['precision_change'] >
 	>
-	type $mol_number__value_min_ainews_app_settings_11 = $mol_type_enforce<
+	type $mol_number__value_min_ainews_app_settings_14 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $mol_number['value_min'] >
 	>
-	type $mol_labeler__title_ainews_app_settings_12 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_settings_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_labeler['title'] >
 	>
-	type $mol_labeler__content_ainews_app_settings_13 = $mol_type_enforce<
+	type $mol_labeler__content_ainews_app_settings_16 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
 	export class $ainews_app_settings extends $ainews_app_page {
+		Interface_language_select( ): $mol_locale_select
+		Interface_language_labeler( ): $mol_labeler
 		current_language_code( next?: string ): string
 		Translate_to_select( ): $mol_select
 		Translate_to_labeler( ): $mol_labeler

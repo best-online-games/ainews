@@ -8278,17 +8278,17 @@ var $;
 	($.$ainews_app_faq) = class $ainews_app_faq extends ($.$ainews_app_page) {
 		SomeWelcome(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("Ну это ну давайте");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome_title")));
 			return obj;
 		}
 		SomeWelcome2(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("Лента - изолента :D");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome2_title")));
 			return obj;
 		}
 		SomeWelcome3(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("Источники - рссс 🐱");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome3_title")));
 			return obj;
 		}
 		title(){
@@ -8707,7 +8707,7 @@ var $;
 		}
 		Include_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Новость _должна_ включать:");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Include_labeler_title")));
 			(obj.content) = () => ([(this.Include_string()), (this.Include_string_clear_button())]);
 			return obj;
 		}
@@ -8736,12 +8736,12 @@ var $;
 		}
 		Excldue_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Новость _не_должна_ включать:");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Excldue_labeler_title")));
 			(obj.content) = () => ([(this.Exclude_string()), (this.Exclude_string_clear_button())]);
 			return obj;
 		}
 		title(){
-			return "Фильтры";
+			return (this.$.$mol_locale.text("$ainews_app_filters_title"));
 		}
 		body(){
 			return [(this.Include_labeler()), (this.Excldue_labeler())];
@@ -9114,6 +9114,222 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_locale_select) = class $mol_locale_select extends ($.$mol_select) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_lang_iso639 = {
+        ab: "Abkhazian",
+        aa: "Afar",
+        af: "Afrikaans",
+        ak: "Akan",
+        sq: "Albanian",
+        am: "Amharic",
+        ar: "Arabic",
+        an: "Aragonese",
+        hy: "Armenian",
+        as: "Assamese",
+        av: "Avaric",
+        ae: "Avestan",
+        ay: "Aymara",
+        az: "Azerbaijani",
+        bm: "Bambara",
+        ba: "Bashkir",
+        eu: "Basque",
+        be: "Belarusian",
+        bn: "Bengali",
+        bi: "Bislama",
+        nb: "Bokmål",
+        bs: "Bosnian",
+        br: "Breton",
+        bg: "Bulgarian",
+        my: "Burmese",
+        ca: "Catalan",
+        ch: "Chamorro",
+        ce: "Chechen",
+        zh: "Chinese",
+        cu: "Church Slavonic",
+        cv: "Chuvash",
+        kw: "Cornish",
+        co: "Corsican",
+        cr: "Cree",
+        hr: "Croatian",
+        cs: "Czech",
+        da: "Danish",
+        dv: "Divehi",
+        nl: "Dutch",
+        dz: "Dzongkha",
+        en: "English",
+        eo: "Esperanto",
+        et: "Estonian",
+        ee: "Ewe",
+        fo: "Faroese",
+        fj: "Fijian",
+        fi: "Finnish",
+        fr: "French",
+        fy: "Frisian",
+        ff: "Fulah",
+        gd: "Gaelic",
+        gl: "Galician",
+        lg: "Ganda",
+        ka: "Georgian",
+        de: "German",
+        el: "Greek",
+        gn: "Guarani",
+        gu: "Gujarati",
+        ht: "Haitian",
+        ha: "Hausa",
+        he: "Hebrew",
+        hz: "Herero",
+        hi: "Hindi",
+        ho: "Hiri Motu",
+        hu: "Hungarian",
+        is: "Icelandic",
+        io: "Ido",
+        ig: "Igbo",
+        id: "Indonesian",
+        ia: "InterlinguA",
+        ie: "InterlinguE",
+        iu: "Inuktitut",
+        ik: "Inupiaq",
+        ga: "Irish",
+        it: "Italian",
+        ja: "Japanese",
+        jv: "Javanese",
+        kl: "Kalaallisut",
+        kn: "Kannada",
+        kr: "Kanuri",
+        ks: "Kashmiri",
+        kk: "Kazakh",
+        km: "Khmer",
+        ki: "Kikuyu",
+        rw: "Kinyarwanda",
+        ky: "Kyrgyz",
+        kv: "Komi",
+        kg: "Kongo",
+        ko: "Korean",
+        kj: "Kwanyama",
+        ku: "Kurdish",
+        lo: "Lao",
+        la: "Latin",
+        lv: "Latvian",
+        li: "Limburgan",
+        ln: "Lingala",
+        lt: "Lithuanian",
+        lu: "Luba-Katanga",
+        lb: "Luxembourgish",
+        mk: "Macedonian",
+        mg: "Malagasy",
+        ms: "Malay",
+        ml: "Malayalam",
+        mt: "Maltese",
+        gv: "Manx",
+        mi: "Maori",
+        mr: "Marathi",
+        mh: "Marshallese",
+        mn: "Mongolian",
+        na: "Nauru",
+        nv: "Navaho",
+        nd: "North Ndebele",
+        ng: "Ndonga",
+        ne: "Nepali",
+        no: "Norwegian",
+        ny: "Nyanja",
+        nn: "Nynorsk",
+        oc: "Occitan",
+        oj: "Ojibwa",
+        or: "Oriya",
+        om: "Oromo",
+        os: "Ossetian",
+        pi: "Pali",
+        ps: "Pushto",
+        fa: "Persian",
+        pl: "Polish",
+        pt: "Portuguese",
+        pa: "Panjabi",
+        qu: "Quechua",
+        ro: "Romanian",
+        rm: "Romansh",
+        rn: "Rundi",
+        ru: "Russian",
+        se: "Sami",
+        sm: "Samoan",
+        sg: "Sango",
+        sa: "Sanskrit",
+        sc: "Sardinian",
+        sr: "Serbian",
+        sn: "Shona",
+        ii: "Sichuan Yi",
+        sd: "Sindhi",
+        si: "Sinhala",
+        sk: "Slovak",
+        sl: "Slovenian",
+        so: "Somali",
+        st: "Sotho",
+        nr: "South Ndebele",
+        es: "Spanish",
+        su: "Sundanese",
+        sw: "Swahili",
+        ss: "Swati",
+        sv: "Swedish",
+        tl: "Tagalog",
+        ty: "Tahitian",
+        tg: "Tajik",
+        ta: "Tamil",
+        tt: "Tatar",
+        te: "Telugu",
+        th: "Thai",
+        bo: "Tibetan",
+        ti: "Tigrinya",
+        to: "Tonga",
+        ts: "Tsonga",
+        tn: "Tswana",
+        tr: "Turkish",
+        tk: "Turkmen",
+        tw: "Twi",
+        ug: "Uyghur",
+        uk: "Ukrainian",
+        ur: "Urdu",
+        uz: "Uzbek",
+        ve: "Venda",
+        vi: "Vietnamese",
+        vo: "Volapük",
+        wa: "Walloon",
+        cy: "Welsh",
+        wo: "Wolof",
+        xh: "Xhosa",
+        yi: "Yiddish",
+        yo: "Yoruba",
+        za: "Zhuang",
+        zu: "Zulu",
+    };
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_locale_select extends $.$mol_locale_select {
+            value(next) {
+                return this.$.$mol_locale.lang(next);
+            }
+            dictionary() {
+                return this.$.$mol_lang_iso639;
+            }
+        }
+        $$.$mol_locale_select = $mol_locale_select;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
 		path(){
 			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
@@ -9435,6 +9651,17 @@ var $;
 
 ;
 	($.$ainews_app_settings) = class $ainews_app_settings extends ($.$ainews_app_page) {
+		Interface_language_select(){
+			const obj = new this.$.$mol_locale_select();
+			(obj.dictionary) = () => ({"ru": "Russian", "en": "English"});
+			return obj;
+		}
+		Interface_language_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Interface_language_labeler_title")));
+			(obj.content) = () => ([(this.Interface_language_select())]);
+			return obj;
+		}
 		current_language_code(next){
 			if(next !== undefined) return next;
 			return "ru";
@@ -9499,12 +9726,15 @@ var $;
 		}
 		body(){
 			return [
+				(this.Interface_language_labeler()), 
 				(this.Translate_to_labeler()), 
 				(this.Localization_labeler()), 
 				(this.Description_count_limiter_labeler())
 			];
 		}
 	};
+	($mol_mem(($.$ainews_app_settings.prototype), "Interface_language_select"));
+	($mol_mem(($.$ainews_app_settings.prototype), "Interface_language_labeler"));
 	($mol_mem(($.$ainews_app_settings.prototype), "current_language_code"));
 	($mol_mem(($.$ainews_app_settings.prototype), "Translate_to_select"));
 	($mol_mem(($.$ainews_app_settings.prototype), "Translate_to_labeler"));
@@ -9695,7 +9925,7 @@ var $;
 			return obj;
 		}
 		title(){
-			return "Лента";
+			return (this.$.$mol_locale.text("$ainews_app_feed_title"));
 		}
 		Logo(){
 			const obj = new this.$.$mol_icon_script_text();
@@ -11460,7 +11690,7 @@ var $;
 		}
 		Sources_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Настройки источников");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Sources_labeler_title")));
 			(obj.content) = () => ([(this.Tabs())]);
 			return obj;
 		}
@@ -11489,7 +11719,7 @@ var $;
 			return obj;
 		}
 		title(){
-			return "Источники";
+			return (this.$.$mol_locale.text("$ainews_app_sources_title"));
 		}
 		Logo(){
 			const obj = new this.$.$mol_icon_open_source_initiative();

@@ -375,11 +375,11 @@ $ainews_app_faq $ainews_app_page
 	Logo $mol_icon_frequently_asked_questions
 	body /
 		<= SomeWelcome $mol_paragraph
-			title \Ну это ну давайте
+			title @ \SomeWelcome
 		<= SomeWelcome2 $mol_paragraph
-			title \Лента - изолента :D
+			title @ \Lenta - izolenta :D
 		<= SomeWelcome3 $mol_paragraph
-			title \Источники - рссс 🐱
+			title @ \Rss feeds agregatoor - rss 🐱
 
 $mol_check_list $mol_view
 	dictionary *
@@ -422,10 +422,10 @@ $mol_labeler $mol_list
 			sub <= content /
 
 $ainews_app_filters $ainews_app_page
-	title \Фильтры
+	title @ \Filters
 	body /
 		<= Include_labeler $mol_labeler
-			title \Новость _должна_ включать:
+			title @ \Post must include  text:
 			content /
 				<= Include_string $mol_string
 					value? <=> include_string_value? \
@@ -434,7 +434,7 @@ $ainews_app_filters $ainews_app_page
 					sub /
 						<= Include_string_close_icon $mol_icon_close
 		<= Excldue_labeler $mol_labeler
-			title \Новость _не_должна_ включать:
+			title @ \Post must exclude  text:
 			content /
 				<= Exclude_string $mol_string
 					value? <=> exclude_string_value? \
@@ -494,6 +494,8 @@ $mol_select $mol_pick
 		enabled <= enabled true
 	Trigger_icon $mol_icon_dots_vertical
 
+$mol_locale_select $mol_select
+
 $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 
 $mol_check_box $mol_check
@@ -546,23 +548,30 @@ $ainews_app_settings $ainews_app_page
 	langs_list *
 		ru \Russian
 		en \English
-	title @ \Настройки
+	title @ \Settings
 	Logo $mol_icon_settings
 	body /
+		<= Interface_language_labeler $mol_labeler
+			title @ \Interface language
+			content /
+				<= Interface_language_select $mol_locale_select
+					dictionary *
+						ru \Russian
+						en \English
 		<= Translate_to_labeler $mol_labeler
-			title @ \Переводить новость на
+			title @ \Translate post to
 			content /
 				<= Translate_to_select $mol_select
 					value? <=> current_language_code? \ru
 					dictionary <= langs_list
 		<= Localization_labeler $mol_labeler
-			title @ \Локализация новостей
+			title @ \Localization
 			content /
 				<= Auto_translate $mol_check_box
-					title @ \Автоперевод новости на русский язык
+					title @ \Auto translate post to selected language
 					checked? <=> is_enable_auto_translate? true
 		<= Description_count_limiter_labeler $mol_labeler
-			title @ \Ограничение длины описания новости
+			title @ \Limit description lenght
 			content /
 				<= Description_count_limiter $mol_number
 					value? <=> description_count_limiter_value? 256
@@ -578,7 +587,7 @@ $mol_row $mol_view
 $ainews_app_feed $ainews_app_page
 	filters $ainews_app_filters
 	settings $ainews_app_settings
-	title \Лента
+	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
 		<= Tabs $mol_deck items <= Categories /
@@ -638,11 +647,11 @@ $mol_select_list $mol_view
 $mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z
 
 $ainews_app_sources $ainews_app_page
-	title \Источники
+	title @ \Source
 	Logo $mol_icon_open_source_initiative
 	body /
 		<= Sources_labeler $mol_labeler
-			title \Настройки источников
+			title @ \Select your interests:
 			content /
 				<= Tabs $mol_list rows <= Categories /
 				- <= Tabs $mol_deck items <= Categories /
