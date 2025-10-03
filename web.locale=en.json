@@ -5,6 +5,7 @@
 	"$ainews_app_settings_Auto_translate_title": "Автоперевод новости на русский язык",
 	"$ainews_app_settings_Description_count_limiter_labeler_title": "Ограничение длины описания новости",
 	"$ainews_app_settings_Localization_labeler_title": "Локализация новостей",
+	"$ainews_app_settings_Translate_to_labeler_title": "Переводить новость на",
 	"$ainews_app_settings_title": "Настройки",
 	"$mol_book2_catalog_Spread_close_hint": "Close page",
 	"$mol_lights_toggle_hint": "Toggle lights",

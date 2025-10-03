@@ -411,46 +411,6 @@ $ainews_app_feed_img $mol_view
 	width? null
 	height? null
 
-$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
-
-$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
-
-$mol_row $mol_view
-
-$ainews_app_feed $ainews_app_page
-	title \Лента
-	Logo $mol_icon_script_text
-	body /
-		<= Tabs $mol_deck items <= Categories /
-	Category_page* $mol_list
-		title <= category_title* \blank category title
-		rows /
-			- <= Sources* $mol_select_list
-				value? <=> sources*? /
-				dictionary <= suggestions* /
-			<= Items* $mol_list rows <= articles* /
-	Article* $mol_row
-		sub /
-			<= Article_thumbnail* $ainews_app_feed_img
-				src <= article_image_src* /
-				alt <= article_title*
-				width 192
-				height 108
-			<= Article_title* $mol_paragraph
-				title <= article_title* \
-			<= Article_description* $mol_paragraph
-				title <= article_description* \
-			<= Article_link* $mol_link
-				title \Open link
-				uri_toggle <= article_link* \
-			<= Article_translated_link* $mol_link
-				title @ \Open translated link
-				uri_toggle <= article_translated_link* \
-			<= Article_translate_text* $mol_button_minor
-				title @ \Translate
-				enabled <= article_translate_enable true
-				click? <=> translate_click*? null
-
 $mol_labeler $mol_list
 	rows /
 		<= Label $mol_view
@@ -460,6 +420,28 @@ $mol_labeler $mol_list
 		<= Content $mol_view
 			minimal_height 24
 			sub <= content /
+
+$ainews_app_filters $ainews_app_page
+	title \Фильтры
+	body /
+		<= Include_labeler $mol_labeler
+			title \Новость _должна_ включать:
+			content /
+				<= Include_string $mol_string
+					value? <=> include_string_value? \
+				<= Include_string_clear_button $mol_button_minor
+					click? <=> include_string_clear_click? null 
+					sub /
+						<= Include_string_close_icon $mol_icon_close
+		<= Excldue_labeler $mol_labeler
+			title \Новость _не_должна_ включать:
+			content /
+				<= Exclude_string $mol_string
+					value? <=> exclude_string_value? \
+				<= Exclude_string_clear_button $mol_button_minor
+					click? <=> exclude_string_clear_click? null 
+					sub /
+						<= Exclude_string_close_icon $mol_icon_close
 
 $mol_pick $mol_pop
 	event *
@@ -512,72 +494,6 @@ $mol_select $mol_pick
 		enabled <= enabled true
 	Trigger_icon $mol_icon_dots_vertical
 
-$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
-
-$mol_select_list $mol_view
-	value? /string
-	dictionary *
-	badges_list <= Badges /$mol_view
-	Badge* $mol_button_minor
-		title <= badge_title* \badge
-		click?event <=> remove*?event null
-		hint <= badge_hint @ \Drop
-		enabled <= drop_enabled <= enabled true
-	sub /$mol_view
-		<= Pick $mol_select
-			event_select*? <=> event_select*? null
-			align_hor <= align_hor \right
-			options <= options_pickable <= options /string
-			value? <=> pick? \
-			option_label* <= option_title* \
-			trigger_enabled <= pick_enabled <= enabled true
-			hint <= pick_hint @ \Add..
-			filter_pattern? => filter_pattern?
-			Trigger_icon <= Pick_icon $mol_icon_plus
-		^ badges_list
-
-$mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z
-
-$ainews_app_sources $ainews_app_page
-	title \Источники
-	Logo $mol_icon_open_source_initiative
-	body /
-		<= Sources_labeler $mol_labeler
-			title \Настройки источников
-			content /
-				<= Tabs $mol_list rows <= Categories /
-				- <= Tabs $mol_deck items <= Categories /
-	- Category_page* $mol_list
-	Category_page* $mol_labeler
-		title <= category_title* \blank category title
-		content /
-			<= Sources* $mol_select_list
-				value? <=> sources*? /
-				dictionary <= suggestions* /
-			<= Items* $mol_list rows <= articles* /
-
-$ainews_app_filters $ainews_app_page
-	title \Фильтры
-	body /
-		<= Include_labeler $mol_labeler
-			title \Новость _должна_ включать:
-			content /
-				<= Include_string $mol_string
-					value? <=> include_string_value? \
-				<= Include_string_clear_button $mol_button_minor
-					click? <=> include_string_clear_click? null 
-					sub /
-						<= Include_string_close_icon $mol_icon_close
-		<= Excldue_labeler $mol_labeler
-			title \Новость _не_должна_ включать:
-			content /
-				<= Exclude_string $mol_string
-					value? <=> exclude_string_value? \
-				<= Exclude_string_clear_button $mol_button_minor
-					click? <=> exclude_string_clear_click? null 
-					sub /
-						<= Exclude_string_close_icon $mol_icon_close
-
 $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 
 $mol_check_box $mol_check
@@ -626,9 +542,19 @@ $mol_number $mol_view
 $mol_icon_settings $mol_icon path \M12,15.5C10.07,15.5 8.5,13.93 8.5,12C8.5,10.07 10.07,8.5 12,8.5C13.93,8.5 15.5,10.07 15.5,12C15.5,13.93 13.93,15.5 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z
 
 $ainews_app_settings $ainews_app_page
+	current_language \
+	langs_list *
+		ru \Russian
+		en \English
 	title @ \Настройки
 	Logo $mol_icon_settings
 	body /
+		<= Translate_to_labeler $mol_labeler
+			title @ \Переводить новость на
+			content /
+				<= Translate_to_select $mol_select
+					value? <=> current_language_code? \ru
+					dictionary <= langs_list
 		<= Localization_labeler $mol_labeler
 			title @ \Локализация новостей
 			content /
@@ -642,6 +568,92 @@ $ainews_app_settings $ainews_app_page
 					value? <=> description_count_limiter_value? 256
 					precision_change 20
 					value_min 20
+
+$mol_icon_script $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2H8C6.3,2 5,3.3 5,5V16H16V17C16,17.6 16.4,18 17,18H18V5C18,4.4 18.4,4 19,4C19.6,4 20,4.4 20,5V6H22V5C22,3.3 20.7,2 19,2Z
+
+$mol_icon_script_text $mol_icon path \M17.8,20C17.4,21.2 16.3,22 15,22H5C3.3,22 2,20.7 2,19V18H5L14.2,18C14.6,19.2 15.7,20 17,20H17.8M19,2C20.7,2 22,3.3 22,5V6H20V5C20,4.4 19.6,4 19,4C18.4,4 18,4.4 18,5V18H17C16.4,18 16,17.6 16,17V16H5V5C5,3.3 6.3,2 8,2H19M8,6V8H15V6H8M8,10V12H14V10H8Z
+
+$mol_row $mol_view
+
+$ainews_app_feed $ainews_app_page
+	filters $ainews_app_filters
+	settings $ainews_app_settings
+	title \Лента
+	Logo $mol_icon_script_text
+	body /
+		<= Tabs $mol_deck items <= Categories /
+	Category_page* $mol_list
+		title <= category_title* \blank category title
+		rows /
+			- <= Sources* $mol_select_list
+				value? <=> sources*? /
+				dictionary <= suggestions* /
+			<= Items* $mol_list rows <= articles* /
+	Article* $mol_row
+		sub /
+			<= Article_thumbnail* $ainews_app_feed_img
+				src <= article_image_src* /
+				alt <= article_title*
+				width 192
+				height 108
+			<= Article_title* $mol_paragraph
+				title <= article_title* \
+			<= Article_description* $mol_paragraph
+				title <= article_description* \
+			<= Article_link* $mol_link
+				title \Open link
+				uri_toggle <= article_link* \
+			<= Article_translated_link* $mol_link
+				title @ \Open translated link
+				uri_toggle <= article_translated_link* \
+			<= Article_translate_text* $mol_button_minor
+				title @ \Translate
+				enabled <= article_translate_enable true
+				click? <=> translate_click*? null
+
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+
+$mol_select_list $mol_view
+	value? /string
+	dictionary *
+	badges_list <= Badges /$mol_view
+	Badge* $mol_button_minor
+		title <= badge_title* \badge
+		click?event <=> remove*?event null
+		hint <= badge_hint @ \Drop
+		enabled <= drop_enabled <= enabled true
+	sub /$mol_view
+		<= Pick $mol_select
+			event_select*? <=> event_select*? null
+			align_hor <= align_hor \right
+			options <= options_pickable <= options /string
+			value? <=> pick? \
+			option_label* <= option_title* \
+			trigger_enabled <= pick_enabled <= enabled true
+			hint <= pick_hint @ \Add..
+			filter_pattern? => filter_pattern?
+			Trigger_icon <= Pick_icon $mol_icon_plus
+		^ badges_list
+
+$mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z
+
+$ainews_app_sources $ainews_app_page
+	title \Источники
+	Logo $mol_icon_open_source_initiative
+	body /
+		<= Sources_labeler $mol_labeler
+			title \Настройки источников
+			content /
+				<= Tabs $mol_list rows <= Categories /
+				- <= Tabs $mol_deck items <= Categories /
+	- Category_page* $mol_list
+	Category_page* $mol_labeler
+		title <= category_title* \blank category title
+		content /
+			<= Sources* $mol_select_list
+				value? <=> sources*? /
+				dictionary <= suggestions* /
+			<= Items* $mol_list rows <= articles* /
 
 $mol_icon_newspaper $mol_icon path \M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z
 
