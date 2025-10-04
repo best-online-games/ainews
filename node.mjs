@@ -10402,17 +10402,6 @@ var $;
 (function ($) {
     const { rem } = $mol_style_unit;
     $mol_style_define($ainews_app_feed, {
-        Body: {
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-        },
-        Body_content: {
-            maxWidth: rem(50),
-            width: '100%',
-            margin: 0,
-            padding: rem(1.5),
-        },
         Article: {
             background: {
                 color: $mol_theme.card,
