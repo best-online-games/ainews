@@ -9312,6 +9312,21 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		install_ios_instruction(){
+			return (this.$.$mol_locale.text("$ainews_app_settings_install_ios_instruction"));
+		}
+		install_chrome_instruction(){
+			return (this.$.$mol_locale.text("$ainews_app_settings_install_chrome_instruction"));
+		}
+		install_edge_instruction(){
+			return (this.$.$mol_locale.text("$ainews_app_settings_install_edge_instruction"));
+		}
+		install_unsupported_browser(){
+			return (this.$.$mol_locale.text("$ainews_app_settings_install_unsupported_browser"));
+		}
+		install_already_installed(){
+			return (this.$.$mol_locale.text("$ainews_app_settings_install_already_installed"));
+		}
 		body(){
 			return [
 				(this.Interface_language_labeler()), 
@@ -9396,22 +9411,26 @@ var $;
             }
             install() {
                 if (!this.deferredPrompt) {
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
                     const isDesktop = !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                    if (isDesktop) {
+                    if (isIOS) {
+                        alert(this.install_ios_instruction());
+                    }
+                    else if (isDesktop) {
                         const isChrome = navigator.userAgent.includes('Chrome') && !navigator.userAgent.includes('Edge');
                         const isEdge = navigator.userAgent.includes('Edge');
                         if (isChrome) {
-                            alert('To install on PC:\n\n1. Click the install icon ⊕ in the address bar (right side)\n2. Or open Chrome menu (⋮) → "Install app..."');
+                            alert(this.install_chrome_instruction());
                         }
                         else if (isEdge) {
-                            alert('To install on PC:\n\n1. Click the install icon ⊕ in the address bar (right side)\n2. Or open Edge menu (⋯) → Apps → "Install this site as an app"');
+                            alert(this.install_edge_instruction());
                         }
                         else {
-                            alert('To install this app, please use Chrome or Edge browser');
+                            alert(this.install_unsupported_browser());
                         }
                     }
                     else {
-                        alert('App is already installed or not supported');
+                        alert(this.install_already_installed());
                     }
                     return;
                 }

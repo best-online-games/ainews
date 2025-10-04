@@ -3952,6 +3952,11 @@ declare namespace $ {
 		title( ): string
 		Logo( ): $mol_icon_settings
 		install( next?: any ): any
+		install_ios_instruction( ): string
+		install_chrome_instruction( ): string
+		install_edge_instruction( ): string
+		install_unsupported_browser( ): string
+		install_already_installed( ): string
 		body( ): readonly(any)[]
 	}
 	
