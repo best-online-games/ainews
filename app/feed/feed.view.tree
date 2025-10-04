@@ -9,6 +9,17 @@ $ainews_app_feed $ainews_app_page
 			<= Searcher $mol_search
 				query? <=> search_word? \
 		<= Tabs $mol_deck items <= Categories /
+		<= Welcome_block $mol_list rows /
+			<= Welcome_block_p1_paragraph $mol_paragraph
+				title \Пустая лента - пока выбрать несколько источников!
+				dom_name \h4
+			<= Welcome_block_p2 $mol_view sub /
+				<= Welcome_block_p2_paragraph $mol_paragraph
+					- dom_name \h4
+					title \Для этого перейди на страницу Источники
+				<= Go_to_source_button $mol_link
+					title @ \(tap)
+					uri \#!=sources
 	Category_page* $mol_list
 		title <= category_title* \blank category title
 		rows /

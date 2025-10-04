@@ -221,7 +221,7 @@ namespace $.$$ {
 
 		// tabs fields
 		Categories() {
-			console.log({aa: this.app_source().runtime_links()})
+			// console.log({aa: this.app_source().runtime_links()})
 			return Object.keys(this.app_source().runtime_links())
 				.filter(
 					category =>
@@ -250,6 +250,20 @@ namespace $.$$ {
 				return "_blank"
 			}
 			return "_self"
+		}
+
+		body(){
+			if(this.Categories().length == 0) {
+				return [
+					 this.Welcome_block()
+				];
+			} else {
+				return [
+					this.Hot_fix(), 
+					this.Tabs(), 
+				];
+			}
+
 		}
 	}
 

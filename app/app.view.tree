@@ -8,8 +8,9 @@ $ainews_app $mol_book2_catalog
 		<= Theme $ainews_theme_auto
 	spreads *
 		\
-			<= FAQ $ainews_app_faq
-		feed <= Feed $ainews_app_feed
+			- <= FAQ $ainews_app_faq
+			<= Feed $ainews_app_feed
+		- feed <= Feed $ainews_app_feed
 		sources <= Sources $ainews_app_sources
 		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings
