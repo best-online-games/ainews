@@ -1,10 +1,8 @@
 {
-	"$ainews_app_faq_SomeWelcome2_title": "Lenta - izolenta :D",
-	"$ainews_app_faq_SomeWelcome3_title": "Rss feeds agregatoor - rss 🐱",
-	"$ainews_app_faq_SomeWelcome_title": "SomeWelcome",
 	"$ainews_app_feed_Article_link_title": "Open link",
 	"$ainews_app_feed_Article_translate_text_title": "Translate",
 	"$ainews_app_feed_Article_translated_link_title": "Open translated link",
+	"$ainews_app_feed_Go_to_source_button_title": "(tap)",
 	"$ainews_app_feed_title": "Feed",
 	"$ainews_app_filters_Excldue_labeler_title": "Post must exclude  text:",
 	"$ainews_app_filters_Include_labeler_title": "Post must include  text:",

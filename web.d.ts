@@ -2700,44 +2700,6 @@ declare namespace $ {
 //# sourceMappingURL=page.view.tree.d.ts.map
 declare namespace $ {
 
-	export class $mol_icon_frequently_asked_questions extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=questions.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_paragraph__title_ainews_app_faq_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_ainews_app_faq_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_ainews_app_faq_3 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	export class $ainews_app_faq extends $ainews_app_page {
-		SomeWelcome( ): $mol_paragraph
-		SomeWelcome2( ): $mol_paragraph
-		SomeWelcome3( ): $mol_paragraph
-		title( ): string
-		Logo( ): $mol_icon_frequently_asked_questions
-		body( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=faq.view.tree.d.ts.map
-declare namespace $ {
-
 	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
 		ReturnType< $mol_check_list['option_checked'] >
 		,
@@ -4073,112 +4035,147 @@ declare namespace $ {
 		,
 		ReturnType< $mol_deck['items'] >
 	>
-	type $mol_list__rows_ainews_app_feed_4 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['articles'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $ainews_app_feed_img__src_ainews_app_feed_5 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_image_src'] >
-		,
-		ReturnType< $ainews_app_feed_img['src'] >
-	>
-	type $ainews_app_feed_img__alt_ainews_app_feed_6 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_title'] >
-		,
-		ReturnType< $ainews_app_feed_img['alt'] >
-	>
-	type $ainews_app_feed_img__width_ainews_app_feed_7 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $ainews_app_feed_img['width'] >
-	>
-	type $ainews_app_feed_img__height_ainews_app_feed_8 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $ainews_app_feed_img['height'] >
-	>
-	type $mol_paragraph__title_ainews_app_feed_9 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_description'] >
+	type $mol_paragraph__title_ainews_app_feed_4 = $mol_type_enforce<
+		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_link__title_ainews_app_feed_10 = $mol_type_enforce<
+	type $mol_paragraph__dom_name_ainews_app_feed_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['dom_name'] >
+	>
+	type $mol_paragraph__title_ainews_app_feed_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_link__title_ainews_app_feed_7 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__target_ainews_app_feed_11 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['open_in_new_tab'] >
-		,
-		ReturnType< $mol_link['target'] >
-	>
-	type $mol_link__uri_toggle_ainews_app_feed_12 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_link'] >
-		,
-		ReturnType< $mol_link['uri_toggle'] >
-	>
-	type $mol_link__title_ainews_app_feed_13 = $mol_type_enforce<
+	type $mol_link__uri_ainews_app_feed_8 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_link['title'] >
+		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__target_ainews_app_feed_14 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['open_in_new_tab'] >
-		,
-		ReturnType< $mol_link['target'] >
-	>
-	type $mol_link__uri_toggle_ainews_app_feed_15 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_translated_link'] >
-		,
-		ReturnType< $mol_link['uri_toggle'] >
-	>
-	type $mol_button_minor__title_ainews_app_feed_16 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__enabled_ainews_app_feed_17 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_translate_enable'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_ainews_app_feed_18 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['translate_click'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_view__sub_ainews_app_feed_19 = $mol_type_enforce<
+	type $mol_view__sub_ainews_app_feed_9 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__title_ainews_app_feed_20 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['category_title'] >
-		,
-		ReturnType< $mol_list['title'] >
-	>
-	type $mol_list__rows_ainews_app_feed_21 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_expander__expanded_ainews_app_feed_22 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_11 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['articles'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $ainews_app_feed_img__src_ainews_app_feed_12 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_image_src'] >
+		,
+		ReturnType< $ainews_app_feed_img['src'] >
+	>
+	type $ainews_app_feed_img__alt_ainews_app_feed_13 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_title'] >
+		,
+		ReturnType< $ainews_app_feed_img['alt'] >
+	>
+	type $ainews_app_feed_img__width_ainews_app_feed_14 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $ainews_app_feed_img['width'] >
+	>
+	type $ainews_app_feed_img__height_ainews_app_feed_15 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $ainews_app_feed_img['height'] >
+	>
+	type $mol_paragraph__title_ainews_app_feed_16 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_description'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_link__title_ainews_app_feed_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__target_ainews_app_feed_18 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['open_in_new_tab'] >
+		,
+		ReturnType< $mol_link['target'] >
+	>
+	type $mol_link__uri_toggle_ainews_app_feed_19 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_link'] >
+		,
+		ReturnType< $mol_link['uri_toggle'] >
+	>
+	type $mol_link__title_ainews_app_feed_20 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__target_ainews_app_feed_21 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['open_in_new_tab'] >
+		,
+		ReturnType< $mol_link['target'] >
+	>
+	type $mol_link__uri_toggle_ainews_app_feed_22 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_translated_link'] >
+		,
+		ReturnType< $mol_link['uri_toggle'] >
+	>
+	type $mol_button_minor__title_ainews_app_feed_23 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__enabled_ainews_app_feed_24 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['article_translate_enable'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_ainews_app_feed_25 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['translate_click'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_view__sub_ainews_app_feed_26 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__title_ainews_app_feed_27 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['category_title'] >
+		,
+		ReturnType< $mol_list['title'] >
+	>
+	type $mol_list__rows_ainews_app_feed_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_expander__expanded_ainews_app_feed_29 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['openned_post'] >
 		,
 		ReturnType< $mol_expander['expanded'] >
 	>
-	type $mol_expander__label_ainews_app_feed_23 = $mol_type_enforce<
+	type $mol_expander__label_ainews_app_feed_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_expander['label'] >
 	>
-	type $mol_expander__content_ainews_app_feed_24 = $mol_type_enforce<
+	type $mol_expander__content_ainews_app_feed_31 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_expander['content'] >
 	>
-	type $mol_expander__Tools_ainews_app_feed_25 = $mol_type_enforce<
+	type $mol_expander__Tools_ainews_app_feed_32 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['Spoiler_tools'] >
 		,
 		ReturnType< $mol_expander['Tools'] >
@@ -4189,6 +4186,11 @@ declare namespace $ {
 		Hot_fix( ): $mol_view
 		Categories( ): readonly(any)[]
 		Tabs( ): $mol_deck
+		Welcome_block_p1_paragraph( ): $mol_paragraph
+		Welcome_block_p2_paragraph( ): $mol_paragraph
+		Go_to_source_button( ): $mol_link
+		Welcome_block_p2( ): $mol_view
+		Welcome_block( ): $mol_list
 		category_title( id: any): string
 		articles( id: any): readonly(any)[]
 		Items( id: any): $mol_list
@@ -4267,6 +4269,7 @@ declare namespace $.$$ {
         category_title(category: any): any;
         openned_post(id: any, next?: any): any;
         open_in_new_tab(id: any, next?: any): "_self" | "_blank";
+        body(): $mol_view[];
     }
     class $ainews_app_feed_title extends $.$ainews_app_feed_title {
         font_size_title(): string;
@@ -4301,7 +4304,6 @@ declare namespace $ {
 	export class $ainews_app extends $mol_book2_catalog {
 		Lights( ): $mol_lights_toggle
 		Theme( ): $ainews_theme_auto
-		FAQ( ): $ainews_app_faq
 		Feed( ): $ainews_app_feed
 		Sources( ): $ainews_app_sources
 		Filters( ): $ainews_app_filters
@@ -4312,8 +4314,7 @@ declare namespace $ {
 		menu_tools( ): readonly(any)[]
 		plugins( ): readonly(any)[]
 		spreads( ): ({ 
-			'': ReturnType< $ainews_app['FAQ'] >,
-			'feed': ReturnType< $ainews_app['Feed'] >,
+			'': ReturnType< $ainews_app['Feed'] >,
 			'sources': ReturnType< $ainews_app['Sources'] >,
 			'filters': ReturnType< $ainews_app['Filters'] >,
 			'settings': ReturnType< $ainews_app['Settings'] >,

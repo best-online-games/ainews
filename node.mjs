@@ -8264,58 +8264,6 @@ var $;
 "use strict";
 
 ;
-	($.$mol_icon_frequently_asked_questions) = class $mol_icon_frequently_asked_questions extends ($.$mol_icon) {
-		path(){
-			return "M18,15H6L2,19V3A1,1 0 0,1 3,2H18A1,1 0 0,1 19,3V14A1,1 0 0,1 18,15M23,9V23L19,19H8A1,1 0 0,1 7,18V17H21V8H22A1,1 0 0,1 23,9M8.19,4C7.32,4 6.62,4.2 6.08,4.59C5.56,5 5.3,5.57 5.31,6.36L5.32,6.39H7.25C7.26,6.09 7.35,5.86 7.53,5.7C7.71,5.55 7.93,5.47 8.19,5.47C8.5,5.47 8.76,5.57 8.94,5.75C9.12,5.94 9.2,6.2 9.2,6.5C9.2,6.82 9.13,7.09 8.97,7.32C8.83,7.55 8.62,7.75 8.36,7.91C7.85,8.25 7.5,8.55 7.31,8.82C7.11,9.08 7,9.5 7,10H9C9,9.69 9.04,9.44 9.13,9.26C9.22,9.08 9.39,8.9 9.64,8.74C10.09,8.5 10.46,8.21 10.75,7.81C11.04,7.41 11.19,7 11.19,6.5C11.19,5.74 10.92,5.13 10.38,4.68C9.85,4.23 9.12,4 8.19,4M7,11V13H9V11H7M13,13H15V11H13V13M13,4V10H15V4H13Z";
-		}
-	};
-
-
-;
-"use strict";
-
-;
-	($.$ainews_app_faq) = class $ainews_app_faq extends ($.$ainews_app_page) {
-		SomeWelcome(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome_title")));
-			return obj;
-		}
-		SomeWelcome2(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome2_title")));
-			return obj;
-		}
-		SomeWelcome3(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_faq_SomeWelcome3_title")));
-			return obj;
-		}
-		title(){
-			return "FAQ";
-		}
-		Logo(){
-			const obj = new this.$.$mol_icon_frequently_asked_questions();
-			return obj;
-		}
-		body(){
-			return [
-				(this.SomeWelcome()), 
-				(this.SomeWelcome2()), 
-				(this.SomeWelcome3())
-			];
-		}
-	};
-	($mol_mem(($.$ainews_app_faq.prototype), "SomeWelcome"));
-	($mol_mem(($.$ainews_app_faq.prototype), "SomeWelcome2"));
-	($mol_mem(($.$ainews_app_faq.prototype), "SomeWelcome3"));
-	($mol_mem(($.$ainews_app_faq.prototype), "Logo"));
-
-
-;
-"use strict";
-
-;
 	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
 		option_checked(id, next){
 			if(next !== undefined) return next;
@@ -10060,6 +10008,33 @@ var $;
 			(obj.items) = () => ((this.Categories()));
 			return obj;
 		}
+		Welcome_block_p1_paragraph(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("Пустая лента - пока выбрать несколько источников!");
+			(obj.dom_name) = () => ("h4");
+			return obj;
+		}
+		Welcome_block_p2_paragraph(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("Для этого перейди на страницу Источники");
+			return obj;
+		}
+		Go_to_source_button(){
+			const obj = new this.$.$mol_link();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Go_to_source_button_title")));
+			(obj.uri) = () => ("#!=sources");
+			return obj;
+		}
+		Welcome_block_p2(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Welcome_block_p2_paragraph()), (this.Go_to_source_button())]);
+			return obj;
+		}
+		Welcome_block(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Welcome_block_p1_paragraph()), (this.Welcome_block_p2())]);
+			return obj;
+		}
 		category_title(id){
 			return "blank category title";
 		}
@@ -10163,7 +10138,11 @@ var $;
 			return obj;
 		}
 		body(){
-			return [(this.Hot_fix()), (this.Tabs())];
+			return [
+				(this.Hot_fix()), 
+				(this.Tabs()), 
+				(this.Welcome_block())
+			];
 		}
 		Category_page(id){
 			const obj = new this.$.$mol_list();
@@ -10184,6 +10163,11 @@ var $;
 	($mol_mem(($.$ainews_app_feed.prototype), "Searcher"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Hot_fix"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Tabs"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p1_paragraph"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2_paragraph"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Go_to_source_button"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2"));
+	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Items"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "openned_post"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_thumbnail"));
@@ -10560,7 +10544,6 @@ var $;
                 return $mol_state_local.value(id) ?? [];
             }
             Categories() {
-                console.log({ aa: this.app_source().runtime_links() });
                 return Object.keys(this.app_source().runtime_links())
                     .filter(category => $mol_state_local.value(category) != null &&
                     $mol_state_local.value(category).length > 0)
@@ -10582,6 +10565,19 @@ var $;
                     return "_blank";
                 }
                 return "_self";
+            }
+            body() {
+                if (this.Categories().length == 0) {
+                    return [
+                        this.Welcome_block()
+                    ];
+                }
+                else {
+                    return [
+                        this.Hot_fix(),
+                        this.Tabs(),
+                    ];
+                }
             }
         }
         __decorate([
@@ -10714,10 +10710,6 @@ var $;
 			const obj = new this.$.$ainews_theme_auto();
 			return obj;
 		}
-		FAQ(){
-			const obj = new this.$.$ainews_app_faq();
-			return obj;
-		}
 		Feed(){
 			const obj = new this.$.$ainews_app_feed();
 			return obj;
@@ -10752,8 +10744,7 @@ var $;
 		}
 		spreads(){
 			return {
-				"": (this.FAQ()), 
-				"feed": (this.Feed()), 
+				"": (this.Feed()), 
 				"sources": (this.Sources()), 
 				"filters": (this.Filters()), 
 				"settings": (this.Settings())
@@ -10762,7 +10753,6 @@ var $;
 	};
 	($mol_mem(($.$ainews_app.prototype), "Lights"));
 	($mol_mem(($.$ainews_app.prototype), "Theme"));
-	($mol_mem(($.$ainews_app.prototype), "FAQ"));
 	($mol_mem(($.$ainews_app.prototype), "Feed"));
 	($mol_mem(($.$ainews_app.prototype), "Sources"));
 	($mol_mem(($.$ainews_app.prototype), "Filters"));
