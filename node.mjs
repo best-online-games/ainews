@@ -10479,6 +10479,30 @@ var $;
                     };
                 });
             }
+            cache_image(url) {
+                if (!url)
+                    return url;
+                const cached = $mol_state_local.value(`img_cache_${url}`);
+                if (cached)
+                    return cached;
+                try {
+                    $mol_wire_solid();
+                    const response = $mol_fetch.response(url);
+                    const arrayBuffer = response.buffer();
+                    const buffer = new Uint8Array(arrayBuffer);
+                    let binary = '';
+                    const len = buffer.length;
+                    for (let i = 0; i < len; i++) {
+                        binary += String.fromCharCode(buffer[i]);
+                    }
+                    const base64 = 'data:image/jpeg;base64,' + btoa(binary);
+                    $mol_state_local.value(`img_cache_${url}`, base64);
+                    return base64;
+                }
+                catch (e) {
+                    return url;
+                }
+            }
             make_proxy(url) {
                 return $$.$ainews_app_feed_proxy_url + url;
             }
@@ -10491,11 +10515,20 @@ var $;
             }
             request_articles_from_sources(source_url) {
                 $mol_wire_solid();
+                const cached = $mol_state_local.value(`feed_cache_${source_url}`);
+                if (cached) {
+                    try {
+                        return JSON.parse(cached);
+                    }
+                    catch (e) {
+                    }
+                }
                 const payload = new URLSearchParams({
                     link: source_url,
                 });
                 const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
                 const articles_list = this.parse_rss(xml_doc);
+                $mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(articles_list));
                 return articles_list;
             }
             get_articles_from_sources(source_url) {
@@ -10507,25 +10540,31 @@ var $;
                 const include_string_value = this.app_filters().include_string_value();
                 const exclude_string_value = this.app_filters().exclude_string_value();
                 if (include_string_value !== null && include_string_value.trim() !== '') {
-                    const rules = include_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "");
+                    const rules = include_string_value
+                        .split(',')
+                        .map(rule => rule.trim())
+                        .filter(rule => rule.trim() != '');
                     articles_list = articles_list.filter((article) => {
                         return rules.some(rule => {
-                            return new RegExp(rule, "ig").test(article.title);
+                            return new RegExp(rule, 'ig').test(article.title);
                         });
                     });
                 }
                 if (exclude_string_value !== null && exclude_string_value.trim() !== '') {
-                    const rules = exclude_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "");
+                    const rules = exclude_string_value
+                        .split(',')
+                        .map(rule => rule.trim())
+                        .filter(rule => rule.trim() != '');
                     console.log({ rules, exclude_string_value });
                     articles_list = articles_list.filter((article) => {
-                        return rules.some(rule => {
+                        return (rules.some(rule => {
                             console.log({ rule });
-                            return new RegExp(rule, "ig").test(article.title);
-                        }) == false;
+                            return new RegExp(rule, 'ig').test(article.title);
+                        }) == false);
                     });
                 }
-                if (this.search_word().trim() !== "")
-                    return articles_list.filter((item) => new RegExp(this.search_word(), "ig").test(item.title));
+                if (this.search_word().trim() !== '')
+                    return articles_list.filter((item) => new RegExp(this.search_word(), 'ig').test(item.title));
                 return articles_list;
             }
             is_need_translate(text) {
@@ -10591,7 +10630,10 @@ var $;
             }
             article_image_src(article) {
                 const src = article.image_src || '';
-                return src.trim().length > 0 ? src : null;
+                if (src.trim().length === 0)
+                    return [];
+                const cached = this.cache_image(src);
+                return cached ? [cached] : [];
             }
             article_translated_link(article) {
                 return `https://translate.google.com/translate?sl=auto&tl=ru-RU&u=${encodeURIComponent(article.link)}`;
@@ -10640,31 +10682,26 @@ var $;
             }
             open_in_new_tab(id, next) {
                 if (this.app_settings().open_links_in_new_tabs_check_box_value()) {
-                    return "_blank";
+                    return '_blank';
                 }
-                return "_self";
+                return '_self';
             }
             body() {
                 if (this.Categories().length == 0) {
-                    return [
-                        this.Welcome_block()
-                    ];
+                    return [this.Welcome_block()];
                 }
                 else {
-                    return [
-                        this.Hot_fix(),
-                        this.Tabs(),
-                    ];
+                    return [this.Hot_fix(), this.Tabs()];
                 }
             }
             Spoiler_tools(id) {
                 const obj = new this.$.$mol_view();
-                obj.sub = () => ([
+                obj.sub = () => [
                     this.Article_link(id),
                     this.Article_translated_link(id),
                     this.is_need_translate(id.title) ? this.Article_translate_text(id) : null,
                     this.Favorite(id),
-                ]);
+                ];
                 return obj;
             }
             base_checked(id, next) {
@@ -10681,6 +10718,9 @@ var $;
         __decorate([
             $mol_mem_key
         ], $ainews_app_feed.prototype, "translate_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $ainews_app_feed.prototype, "cache_image", null);
         __decorate([
             $mol_mem_key
         ], $ainews_app_feed.prototype, "request_articles_from_sources", null);

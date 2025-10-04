@@ -4281,16 +4281,11 @@ declare namespace $.$$ {
             link: string | undefined;
             image_src: string;
         }[];
+        cache_image(url: string): string;
         make_proxy(url: string): string;
         make_translate(text: string): string;
         articles(category: string): any;
-        request_articles_from_sources(source_url: string): {
-            title: string | undefined;
-            pubDate: string | undefined;
-            description: string;
-            link: string | undefined;
-            image_src: string;
-        }[];
+        request_articles_from_sources(source_url: string): any;
         get_articles_from_sources(source_url: string): any;
         filter_articles(articles_list: any): any;
         is_need_translate(text: string): boolean;
@@ -4298,7 +4293,7 @@ declare namespace $.$$ {
         article_title(article: any): any;
         article_description(article: any): string;
         article_link(article: any): any;
-        article_image_src(article: any): any;
+        article_image_src(article: any): string[];
         article_translated_link(article: any): string;
         article_translate_enable(): boolean;
         translate_click(article: any, next?: Event): Event | undefined;
