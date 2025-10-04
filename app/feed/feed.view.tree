@@ -21,7 +21,7 @@ $ainews_app_feed $ainews_app_page
 				<= Lock_icon $mol_icon_lock
 	Article* $mol_expander
 		expanded? <=> openned_post*? false
-		label <= article_title* \
+		label / <= article_title* \
 		content /
 			<= Article_thumbnail* $ainews_app_feed_img
 				src <= article_image_src* /
