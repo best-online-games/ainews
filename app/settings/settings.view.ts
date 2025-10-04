@@ -33,14 +33,14 @@ namespace $.$$ {
 		auto_open_spoiler_check_box_value(next?:any){
 			if(next !== undefined)
 				return $mol_state_local.value("auto_open_spoiler_check_box_value", next);
-			return $mol_state_local.value("auto_open_spoiler_check_box_value") ?? "ru"
+			return $mol_state_local.value("auto_open_spoiler_check_box_value") ?? super.auto_open_spoiler_check_box_value()
 		}
 
 		@$mol_mem
 		open_links_in_new_tabs_check_box_value(next?:any){
 			if(next !== undefined)
 				return $mol_state_local.value("open_links_in_new_tabs_check_box_value", next);
-			return $mol_state_local.value("open_links_in_new_tabs_check_box_value") ?? true
+			return $mol_state_local.value("open_links_in_new_tabs_check_box_value") ?? super.open_links_in_new_tabs_check_box_value()
 		}
 		
 

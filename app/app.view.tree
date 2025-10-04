@@ -14,3 +14,8 @@ $ainews_app $mol_book2_catalog
 		sources <= Sources $ainews_app_sources
 		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings
+		features <= Features $mol_page
+			title \Список возможностей
+			body /
+				<= Feat_1 $mol_paragraph title \* Указывать свои rss фиды
+				<= Feat_2 $mol_paragraph title \* Выбрать из пресетов готовых
