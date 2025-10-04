@@ -4,5 +4,7 @@
 	"$ainews_app_feed_Article_translate_text_title": "Перевести",
 	"$ainews_app_feed_Article_link_title": "Открыть",
 	"$ainews_app_feed_Go_to_source_button_title": "(тык)",
-	"$ainews_app_feed_Article_description_summary_button_title": "Сделать краткую выжимку"
+	"$ainews_app_feed_Article_description_summary_button_title": "Сделать краткую выжимку",
+	"$ainews_app_feed_Welcome_block_p1_paragraph_title": "Пустая лента - пора выбрать несколько источников!",
+	"$ainews_app_feed_Welcome_block_p2_paragraph_title": "Для этого перейдите на страницу Источники"
 }

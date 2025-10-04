@@ -12,12 +12,11 @@ $ainews_app_feed $ainews_app_page
 		<= Tabs $mol_deck items <= Categories /
 		<= Welcome_block $mol_list rows /
 			<= Welcome_block_p1_paragraph $mol_paragraph
-				title \Пустая лента - пора выбрать несколько источников!
+				title @ \Empty feed - time to choose some sources!
 				dom_name \h4
 			<= Welcome_block_p2 $mol_view sub /
-				<= Welcome_block_p2_paragraph $mol_labeler title \Для этого перейди на страницу Источники
-				<= Go_to_source_button $mol_link
-					title @ \(tap)
+				<= Welcome_block_p2_paragraph $mol_link 
+					title @ \To do this, go to the Sources page
 					uri \#!=sources
 	Category_page* $mol_list
 		title <= category_title* \blank category title
