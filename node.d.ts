@@ -4450,7 +4450,7 @@ declare namespace $.$$ {
         is_need_translate(text: string): boolean;
         force_translate(article: any, next?: boolean): boolean;
         article_title(article: any): any;
-        article_description(article: any): any;
+        article_description(article: any): string;
         article_link(article: any): any;
         article_image_src(article: any): any;
         article_translated_link(article: any): string;

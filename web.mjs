@@ -9930,17 +9930,24 @@ var $;
                 return article.title;
             }
             article_description(article) {
-                const description_count_limiter_value = this.app_settings().description_count_limiter_value();
-                const description = article.description.substring(0, description_count_limiter_value);
-                if (this.force_summary(article)) {
-                    return this.summary_text(article.description);
+                function strip_html_tags(html) {
+                    let doc = new DOMParser().parseFromString(html, 'text/html');
+                    return doc.body.textContent || "";
                 }
-                const should_translate = (this.app_settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
+                const description_count_limiter_value = this.app_settings().description_count_limiter_value();
+                const description_without_html_tags = strip_html_tags(article.description);
+                const description_limited = description_without_html_tags.substring(0, description_count_limiter_value);
+                if (this.force_summary(article)) {
+                    return this.summary_text(description_without_html_tags);
+                }
+                const should_translate = (this.app_settings().is_enable_auto_translate() && this.is_need_translate(description_without_html_tags)) ||
                     this.force_translate(article);
                 if (should_translate) {
-                    return this.translate_text(description);
+                    return this.translate_text(description_without_html_tags);
                 }
-                return description;
+                else {
+                    return description_limited;
+                }
             }
             article_link(article) {
                 return article.link;
