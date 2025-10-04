@@ -179,6 +179,10 @@ namespace $.$$ {
 			const description_count_limiter_value = this.app_settings().description_count_limiter_value()
 			const description = article.description.substring(0, description_count_limiter_value)
 
+			if(this.force_summary(article)) {
+				return this.summary_text(article.description)
+			}
+
 			const should_translate =
 				(this.app_settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
 				this.force_translate(article)
@@ -210,6 +214,19 @@ namespace $.$$ {
 				this.force_translate(article, true)
 			}
 			return next
+		}
+
+		@$mol_action
+		summary_description_click(article:any, next:any) {
+			if (next) {
+				this.force_summary(article, true)
+			}
+			return next
+		}
+		@$mol_mem_key
+		force_summary(article: any, next?: boolean) {
+			if (next !== undefined) return next
+			return false
 		}
 
 		// sources fileds

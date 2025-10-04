@@ -94,5 +94,8 @@ namespace $ {
 			},
 		},
 		
+		Article_description_summary_button: {
+			color: $mol_theme.shade,
+		}
 	})
 }
