@@ -22,4 +22,4 @@
 \/ainews/app
 	include \/mol/offline/install
 	deploy \/ainews/favicon.svg
-	deploy \/ainews/app/manifest.webmanifest
+	deploy \/ainews/manifest.webmanifest
