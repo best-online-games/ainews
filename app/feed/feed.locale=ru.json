@@ -3,5 +3,6 @@
 	"$ainews_app_feed_Article_translated_link_title": "Открыть перевод",
 	"$ainews_app_feed_Article_translate_text_title": "Перевести",
 	"$ainews_app_feed_Article_link_title": "Открыть",
-	"$ainews_app_feed_Go_to_source_button_title": "(тык)"
+	"$ainews_app_feed_Go_to_source_button_title": "(тык)",
+	"$ainews_app_feed_Article_description_summary_button_title": "Сделать краткую выжимку"
 }

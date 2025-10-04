@@ -231,16 +231,27 @@ namespace $.$$ {
 
 		@$mol_mem_key
 		article_description(article: any) {
+			function strip_html_tags(html:string){
+				let doc = new DOMParser().parseFromString(html, 'text/html');
+				return doc.body.textContent || "";
+			}
+
 			const description_count_limiter_value = this.app_settings().description_count_limiter_value()
-			const description = article.description.substring(0, description_count_limiter_value)
+			const description_without_html_tags = strip_html_tags(article.description)
+			const description_limited = description_without_html_tags.substring(0, description_count_limiter_value)
+
+			if(this.force_summary(article)) {
+				return this.summary_text(description_without_html_tags)
+			}
 
 			const should_translate =
-				(this.app_settings().is_enable_auto_translate() && this.is_need_translate(description)) ||
+				(this.app_settings().is_enable_auto_translate() && this.is_need_translate(description_without_html_tags)) ||
 				this.force_translate(article)
 			if (should_translate) {
-				return this.translate_text(description)
+				return this.translate_text(description_without_html_tags)
+			} else {
+				return description_limited
 			}
-			return description
 		}
 
 		article_link(article: any) {
@@ -269,6 +280,19 @@ namespace $.$$ {
 				this.force_translate(article, true)
 			}
 			return next
+		}
+
+		@$mol_action
+		summary_description_click(article:any, next:any) {
+			if (next) {
+				this.force_summary(article, true)
+			}
+			return next
+		}
+		@$mol_mem_key
+		force_summary(article: any, next?: boolean) {
+			if (next !== undefined) return next
+			return false
 		}
 
 		// sources fileds

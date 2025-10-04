@@ -41,6 +41,9 @@ $ainews_app_feed $ainews_app_page
 			- <= Article_title* $ainews_app_feed_title
 				line_height <= font_size_value* 7
 				title <= article_title* \
+			<= Article_description_summary_button* $mol_button_minor
+				title @ \Summary this
+				click? <=> summary_description_click*? null
 			<= Article_description* $mol_paragraph
 				title <= article_description* \
 		Tools <= Spoiler_tools* $mol_view
