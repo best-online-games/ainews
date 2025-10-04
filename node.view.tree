@@ -595,10 +595,10 @@ $ainews_app_settings $ainews_app_page
 			title @ \Common options
 			content / <= Spoilers_labeler_list $mol_list rows /
 				<= Auto_open_spoiler_check_box $mol_check_box
-					title @ \Auto open post spoilers?
+					title @ \Auto open post spoilers ?
 					checked? <=> auto_open_spoiler_check_box_value? false
 				<= Open_links_in_new_tabs_check_box $mol_check_box
-					title @ \Open post links in new tab?
+					title @ \Open post links in new tab ?
 					checked? <=> open_links_in_new_tabs_check_box_value? true
 		<= Install_labeler $mol_labeler
 			title @ \Install app
@@ -704,7 +704,7 @@ $ainews_app_feed_title $mol_paragraph
 		font-size <= font_size_title \1.22rem
 
 $ainews_app_favorites $ainews_app_feed
-	title \Избранное
+	title @ \Favorites
 	category_title* \ 
 	add_post? null
 	remove_post? null
@@ -730,10 +730,10 @@ $ainews_app $mol_book2_catalog
 		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings
 		features <= Features $mol_page
-			title \Список возможностей
+			title @ \Features list
 			body /
-				<= Feat_1 $mol_paragraph title \* Указывать свои rss фиды
-				<= Feat_2 $mol_paragraph title \* Выбрать из пресетов готовых
+				<= Feat_1 $mol_paragraph title @ \* Specify your own RSS feeds
+				<= Feat_2 $mol_paragraph title @ \* Choose from ready-made presets
 
 $mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 

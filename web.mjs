@@ -10317,7 +10317,7 @@ var $;
 ;
 	($.$ainews_app_favorites) = class $ainews_app_favorites extends ($.$ainews_app_feed) {
 		title(){
-			return "Избранное";
+			return (this.$.$mol_locale.text("$ainews_app_favorites_title"));
 		}
 		category_title(id){
 			return " ";
@@ -10429,17 +10429,17 @@ var $;
 		}
 		Feat_1(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("* Указывать свои rss фиды");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Feat_1_title")));
 			return obj;
 		}
 		Feat_2(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("* Выбрать из пресетов готовых");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Feat_2_title")));
 			return obj;
 		}
 		Features(){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ("Список возможностей");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Features_title")));
 			(obj.body) = () => ([(this.Feat_1()), (this.Feat_2())]);
 			return obj;
 		}
