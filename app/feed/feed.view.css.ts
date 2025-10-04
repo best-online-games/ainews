@@ -2,20 +2,6 @@ namespace $ {
 	const { rem } = $mol_style_unit
 
 	$mol_style_define($ainews_app_feed, {
-		// Центрирование контента
-		Body: {
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'flex-start',
-		},
-
-		Body_content: {
-			maxWidth: rem(50), // ~800px
-			width: '100%',
-			margin: 0,
-			padding: rem(1.5),
-		},
-
 		// Стили для карточек новостей (Article)
 		Article: {
 			background: {
