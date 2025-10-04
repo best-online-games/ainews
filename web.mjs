@@ -9881,7 +9881,13 @@ var $;
                 const cached = $mol_state_local.value(`feed_cache_${source_url}`);
                 if (cached) {
                     try {
-                        return JSON.parse(cached);
+                        const cache_data = JSON.parse(cached);
+                        const cache_time = cache_data.timestamp || 0;
+                        const now = Date.now();
+                        const cache_ttl = 60 * 60 * 1000;
+                        if (now - cache_time < cache_ttl) {
+                            return cache_data.articles;
+                        }
                     }
                     catch (e) {
                     }
@@ -9891,7 +9897,11 @@ var $;
                 });
                 const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
                 const articles_list = this.parse_rss(xml_doc);
-                $mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(articles_list));
+                const cache_data = {
+                    timestamp: Date.now(),
+                    articles: articles_list,
+                };
+                $mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(cache_data));
                 return articles_list;
             }
             get_articles_from_sources(source_url) {
@@ -9971,7 +9981,7 @@ var $;
             article_description(article) {
                 function strip_html_tags(html) {
                     let doc = new DOMParser().parseFromString(html, 'text/html');
-                    return doc.body.textContent || "";
+                    return doc.body.textContent || '';
                 }
                 const description_count_limiter_value = this.app_settings().description_count_limiter_value();
                 const description_without_html_tags = strip_html_tags(article.description);
@@ -9979,7 +9989,8 @@ var $;
                 if (this.force_summary(article)) {
                     return this.summary_text(description_without_html_tags);
                 }
-                const should_translate = (this.app_settings().is_enable_auto_translate() && this.is_need_translate(description_without_html_tags)) ||
+                const should_translate = (this.app_settings().is_enable_auto_translate() &&
+                    this.is_need_translate(description_without_html_tags)) ||
                     this.force_translate(article);
                 if (should_translate) {
                     return this.translate_text(description_without_html_tags);
