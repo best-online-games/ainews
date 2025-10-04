@@ -670,7 +670,7 @@ $ainews_app_feed $ainews_app_page
 					uri_toggle <= article_translated_link* \
 				<= Article_translate_text* $mol_button_minor
 					title @ \Translate
-					enabled <= article_translate_enable true
+					- enabled <= article_translate_enable true
 					click? <=> translate_click*? null
 $ainews_app_feed_title $mol_paragraph
 	style *

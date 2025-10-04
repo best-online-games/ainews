@@ -4289,47 +4289,42 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__enabled_ainews_app_feed_24 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_translate_enable'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_ainews_app_feed_25 = $mol_type_enforce<
+	type $mol_button_minor__click_ainews_app_feed_24 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['translate_click'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_view__sub_ainews_app_feed_26 = $mol_type_enforce<
+	type $mol_view__sub_ainews_app_feed_25 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__title_ainews_app_feed_27 = $mol_type_enforce<
+	type $mol_list__title_ainews_app_feed_26 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_feed_28 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_27 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_expander__expanded_ainews_app_feed_29 = $mol_type_enforce<
+	type $mol_expander__expanded_ainews_app_feed_28 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['openned_post'] >
 		,
 		ReturnType< $mol_expander['expanded'] >
 	>
-	type $mol_expander__label_ainews_app_feed_30 = $mol_type_enforce<
+	type $mol_expander__label_ainews_app_feed_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_expander['label'] >
 	>
-	type $mol_expander__content_ainews_app_feed_31 = $mol_type_enforce<
+	type $mol_expander__content_ainews_app_feed_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_expander['content'] >
 	>
-	type $mol_expander__Tools_ainews_app_feed_32 = $mol_type_enforce<
+	type $mol_expander__Tools_ainews_app_feed_31 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['Spoiler_tools'] >
 		,
 		ReturnType< $mol_expander['Tools'] >
@@ -4359,7 +4354,6 @@ declare namespace $ {
 		Article_link( id: any): $mol_link
 		article_translated_link( id: any): string
 		Article_translated_link( id: any): $mol_link
-		article_translate_enable( ): boolean
 		translate_click( id: any, next?: any ): any
 		Article_translate_text( id: any): $mol_button_minor
 		Spoiler_tools( id: any): $mol_view
@@ -4424,6 +4418,7 @@ declare namespace $.$$ {
         openned_post(id: any, next?: any): any;
         open_in_new_tab(id: any, next?: any): "_self" | "_blank";
         body(): $mol_view[];
+        Spoiler_tools(id: any): $mol_view;
     }
     class $ainews_app_feed_title extends $.$ainews_app_feed_title {
         font_size_title(): string;
