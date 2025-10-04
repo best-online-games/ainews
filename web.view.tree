@@ -392,12 +392,6 @@ $mol_deck $mol_list
 			options <= switch_options *
 		<= Content $mol_view
 
-$ainews_app_feed_img $mol_view
-	src? null
-	alt? null
-	width? null
-	height? null
-
 $mol_labeler $mol_list
 	rows /
 		<= Label $mol_view
@@ -407,6 +401,12 @@ $mol_labeler $mol_list
 		<= Content $mol_view
 			minimal_height 24
 			sub <= content /
+
+$ainews_app_feed_img $mol_view
+	src? null
+	alt? null
+	width? null
+	height? null
 
 $ainews_app_filters $ainews_app_page
 	title @ \Filters
@@ -627,12 +627,10 @@ $ainews_app_feed $ainews_app_page
 		<= Tabs $mol_deck items <= Categories /
 		<= Welcome_block $mol_list rows /
 			<= Welcome_block_p1_paragraph $mol_paragraph
-				title \Пустая лента - пока выбрать несколько источников!
+				title \Пустая лента - пора выбрать несколько источников!
 				dom_name \h4
 			<= Welcome_block_p2 $mol_view sub /
-				<= Welcome_block_p2_paragraph $mol_paragraph
-					- dom_name \h4
-					title \Для этого перейди на страницу Источники
+				<= Welcome_block_p2_paragraph $mol_labeler title \Для этого перейди на страницу Источники
 				<= Go_to_source_button $mol_link
 					title @ \(tap)
 					uri \#!=sources
@@ -697,6 +695,11 @@ $ainews_app $mol_book2_catalog
 		sources <= Sources $ainews_app_sources
 		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings
+		features <= Features $mol_page
+			title \Список возможностей
+			body /
+				<= Feat_1 $mol_paragraph title \* Указывать свои rss фиды
+				<= Feat_2 $mol_paragraph title \* Выбрать из пресетов готовых
 
 $mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 

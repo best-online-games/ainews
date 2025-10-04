@@ -2937,29 +2937,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-
-	export class $ainews_app_feed_img extends $mol_view {
-		src( next?: any ): any
-		alt( next?: any ): any
-		width( next?: any ): any
-		height( next?: any ): any
-	}
-	
-}
-
-//# sourceMappingURL=img.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $ainews_app_feed_img extends $.$ainews_app_feed_img {
-        dom_name(): "img";
-        attr(): any;
-        render(): void | null;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -2995,6 +2972,29 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=labeler.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $ainews_app_feed_img extends $mol_view {
+		src( next?: any ): any
+		alt( next?: any ): any
+		width( next?: any ): any
+		height( next?: any ): any
+	}
+	
+}
+
+//# sourceMappingURL=img.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $ainews_app_feed_img extends $.$ainews_app_feed_img {
+        dom_name(): "img";
+        attr(): any;
+        render(): void | null;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_string__value_ainews_app_filters_1 = $mol_type_enforce<
@@ -4199,10 +4199,10 @@ declare namespace $ {
 		,
 		ReturnType< $mol_paragraph['dom_name'] >
 	>
-	type $mol_paragraph__title_ainews_app_feed_6 = $mol_type_enforce<
+	type $mol_labeler__title_ainews_app_feed_6 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_paragraph['title'] >
+		ReturnType< $mol_labeler['title'] >
 	>
 	type $mol_link__title_ainews_app_feed_7 = $mol_type_enforce<
 		string
@@ -4341,7 +4341,7 @@ declare namespace $ {
 		Categories( ): readonly(any)[]
 		Tabs( ): $mol_deck
 		Welcome_block_p1_paragraph( ): $mol_paragraph
-		Welcome_block_p2_paragraph( ): $mol_paragraph
+		Welcome_block_p2_paragraph( ): $mol_labeler
 		Go_to_source_button( ): $mol_link
 		Welcome_block_p2( ): $mol_view
 		Welcome_block( ): $mol_list
@@ -4451,6 +4451,26 @@ declare namespace $ {
 
 declare namespace $ {
 
+	type $mol_paragraph__title_ainews_app_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_ainews_app_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_page__title_ainews_app_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_page['title'] >
+	>
+	type $mol_page__body_ainews_app_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_page['body'] >
+	>
 	export class $ainews_app extends $mol_book2_catalog {
 		Lights( ): $mol_lights_toggle
 		Theme( ): $ainews_theme_auto
@@ -4458,6 +4478,9 @@ declare namespace $ {
 		Sources( ): $ainews_app_sources
 		Filters( ): $ainews_app_filters
 		Settings( ): $ainews_app_settings
+		Feat_1( ): $mol_paragraph
+		Feat_2( ): $mol_paragraph
+		Features( ): $mol_page
 		Placeholder( ): any
 		Menu_logo( ): $mol_icon_newspaper
 		menu_title( ): string
@@ -4468,6 +4491,7 @@ declare namespace $ {
 			'sources': ReturnType< $ainews_app['Sources'] >,
 			'filters': ReturnType< $ainews_app['Filters'] >,
 			'settings': ReturnType< $ainews_app['Settings'] >,
+			'features': ReturnType< $ainews_app['Features'] >,
 		}) 
 	}
 	
