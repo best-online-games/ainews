@@ -60,6 +60,38 @@ namespace $.$$ {
 			})
 		}
 
+		@$mol_mem_key
+		cache_image(url: string) {
+			if (!url) return url
+
+			// Проверяем кеш
+			const cached = $mol_state_local.value(`img_cache_${url}`)
+			if (cached) return cached as string
+
+			// Загружаем синхронно через $mol_fetch
+			try {
+				$mol_wire_solid()
+				const response = $mol_fetch.response(url)
+				const arrayBuffer = response.buffer()
+
+				// Конвертируем ArrayBuffer в base64
+				const buffer = new Uint8Array(arrayBuffer)
+				let binary = ''
+				const len = buffer.length
+				for (let i = 0; i < len; i++) {
+					binary += String.fromCharCode(buffer[i])
+				}
+				const base64 = 'data:image/jpeg;base64,' + btoa(binary)
+
+				// Сохраняем в localStorage
+				$mol_state_local.value(`img_cache_${url}`, base64)
+
+				return base64
+			} catch (e) {
+				return url
+			}
+		}
+
 		make_proxy(url: string) {
 			return $ainews_app_feed_proxy_url + url
 		}
@@ -77,11 +109,26 @@ namespace $.$$ {
 		@$mol_mem_key
 		request_articles_from_sources(source_url: string) {
 			$mol_wire_solid()
+
+			// Пробуем загрузить из localStorage
+			const cached = $mol_state_local.value(`feed_cache_${source_url}`)
+			if (cached) {
+				try {
+					return JSON.parse(cached as string)
+				} catch (e) {
+					// Если не удалось распарсить, продолжаем загрузку
+				}
+			}
+
 			const payload = new URLSearchParams({
 				link: source_url,
 			})
 			const xml_doc = $mol_fetch.xml($ainews_app_feed_proxy_url + '?' + payload.toString())
 			const articles_list = this.parse_rss(xml_doc)
+
+			// Сохраняем в localStorage
+			$mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(articles_list))
+
 			return articles_list
 		}
 
@@ -97,28 +144,36 @@ namespace $.$$ {
 			const exclude_string_value = this.app_filters().exclude_string_value()
 
 			if (include_string_value !== null && include_string_value.trim() !== '') {
-				const rules = include_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "")
+				const rules = include_string_value
+					.split(',')
+					.map(rule => rule.trim())
+					.filter(rule => rule.trim() != '')
 				articles_list = articles_list.filter((article: any) => {
-					return rules.some( rule => {
-						return new RegExp(rule, "ig").test(article.title)
+					return rules.some(rule => {
+						return new RegExp(rule, 'ig').test(article.title)
 					})
 				})
 			}
 
 			if (exclude_string_value !== null && exclude_string_value.trim() !== '') {
-				const rules = exclude_string_value.split(",").map(rule => rule.trim()).filter(rule => rule.trim() != "")
-						console.log({rules, exclude_string_value})
-				
+				const rules = exclude_string_value
+					.split(',')
+					.map(rule => rule.trim())
+					.filter(rule => rule.trim() != '')
+				console.log({ rules, exclude_string_value })
+
 				articles_list = articles_list.filter((article: any) => {
-					return rules.some( rule => {
-						console.log({rule})
-						return new RegExp(rule, "ig").test(article.title)
-					}) == false
+					return (
+						rules.some(rule => {
+							console.log({ rule })
+							return new RegExp(rule, 'ig').test(article.title)
+						}) == false
+					)
 				})
 			}
 
-			if(this.search_word().trim() !== "")
-				return articles_list.filter((item:any) => new RegExp(this.search_word(), "ig").test(item.title))
+			if (this.search_word().trim() !== '')
+				return articles_list.filter((item: any) => new RegExp(this.search_word(), 'ig').test(item.title))
 
 			return articles_list
 		}
@@ -194,7 +249,11 @@ namespace $.$$ {
 
 		article_image_src(article: any) {
 			const src = article.image_src || ''
-			return src.trim().length > 0 ? src : null
+			if (src.trim().length === 0) return []
+
+			// Возвращаем закешированную версию или загружаем
+			const cached = this.cache_image(src)
+			return cached ? [cached] : []
 		}
 
 		article_translated_link(article: any) {
@@ -235,65 +294,57 @@ namespace $.$$ {
 		}
 
 		@$mol_mem_key
-		openned_post(id:any, next?:any){
-			if(this.app_settings().auto_open_spoiler_check_box_value()) {
+		openned_post(id: any, next?: any) {
+			if (this.app_settings().auto_open_spoiler_check_box_value()) {
 				return true
 			}
 
-			if(next !== undefined) return next;
-			return false;
+			if (next !== undefined) return next
+			return false
 		}
 
 		@$mol_mem_key
-		open_in_new_tab(id:any, next?:any) {
-			if(this.app_settings().open_links_in_new_tabs_check_box_value()) {
-				return "_blank"
+		open_in_new_tab(id: any, next?: any) {
+			if (this.app_settings().open_links_in_new_tabs_check_box_value()) {
+				return '_blank'
 			}
-			return "_self"
+			return '_self'
 		}
 
-		body(){
-			if(this.Categories().length == 0) {
-				return [
-					 this.Welcome_block()
-				];
+		body() {
+			if (this.Categories().length == 0) {
+				return [this.Welcome_block()]
 			} else {
-				return [
-					this.Hot_fix(), 
-					this.Tabs(), 
-				];
+				return [this.Hot_fix(), this.Tabs()]
 			}
-
 		}
 
 		@$mol_mem
-		Spoiler_tools(id:any){
-			const obj = new this.$.$mol_view();
-			obj.sub = () => ([
-				this.Article_link(id), 
-				this.Article_translated_link(id), 
+		Spoiler_tools(id: any) {
+			const obj = new this.$.$mol_view()
+			obj.sub = () => [
+				this.Article_link(id),
+				this.Article_translated_link(id),
 				this.is_need_translate(id.title) ? this.Article_translate_text(id) : null,
 				this.Favorite(id),
-			]);
-			return obj;
+			]
+			return obj
 		}
 
 		@$mol_mem_key
-		base_checked(id:any, next?: any){
-			if(next !== undefined) {
-				if(next == true)
-					this.app_favorites().add_post(id)
-				if(next == false)
-					this.app_favorites().remove_post(id)
-				return next;
+		base_checked(id: any, next?: any) {
+			if (next !== undefined) {
+				if (next == true) this.app_favorites().add_post(id)
+				if (next == false) this.app_favorites().remove_post(id)
+				return next
 			}
-			return this.app_favorites().posts().includes(id);
+			return this.app_favorites().posts().includes(id)
 		}
 	}
 
 	export class $ainews_app_feed_title extends $.$ainews_app_feed_title {
 		font_size_title() {
-			return $ainews_app_settings_font_size_value()//$mol_state_local.value("font_size_value") ?? 7 //super.font_size_value()
+			return $ainews_app_settings_font_size_value() //$mol_state_local.value("font_size_value") ?? 7 //super.font_size_value()
 		}
 	}
 }
