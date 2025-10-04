@@ -14,6 +14,8 @@
 	"$ainews_app_settings_Auto_open_spoiler_check_box_title": "Auto open post spoilers?",
 	"$ainews_app_settings_Auto_translate_title": "Auto translate post to selected language",
 	"$ainews_app_settings_Description_count_limiter_labeler_title": "Limit description lenght",
+	"$ainews_app_settings_Install_button_title": "Add to Home Screen",
+	"$ainews_app_settings_Install_labeler_title": "Install app",
 	"$ainews_app_settings_Interface_language_labeler_title": "Interface language",
 	"$ainews_app_settings_Localization_labeler_title": "Localization",
 	"$ainews_app_settings_Open_links_in_new_tabs_check_box_title": "Open post links in new tab?",

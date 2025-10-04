@@ -3879,6 +3879,18 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_major extends $mol_button_minor {
+		theme( ): string
+	}
+	
+}
+
+//# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $ {
 
 	export class $mol_icon_settings extends $mol_icon {
 		path( ): string
@@ -4007,6 +4019,26 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
+	type $mol_button_major__title_ainews_app_settings_24 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_ainews_app_settings_25 = $mol_type_enforce<
+		ReturnType< $ainews_app_settings['install'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_labeler__title_ainews_app_settings_26 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_settings_27 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
 	export class $ainews_app_settings extends $ainews_app_page {
 		Interface_language_select( ): $mol_locale_select
 		Interface_language_labeler( ): $mol_labeler
@@ -4025,6 +4057,8 @@ declare namespace $ {
 		Open_links_in_new_tabs_check_box( ): $mol_check_box
 		Spoilers_labeler_list( ): $mol_list
 		Spoilers_labeler( ): $mol_labeler
+		Install_button( ): $mol_button_major
+		Install_labeler( ): $mol_labeler
 		current_language( ): string
 		langs_list( ): ({ 
 			'ru': string,
@@ -4032,6 +4066,7 @@ declare namespace $ {
 		}) 
 		title( ): string
 		Logo( ): $mol_icon_settings
+		install( next?: any ): any
 		body( ): readonly(any)[]
 	}
 	
@@ -4047,6 +4082,9 @@ declare namespace $.$$ {
         current_language(): any;
         auto_open_spoiler_check_box_value(next?: any): any;
         open_links_in_new_tabs_check_box_value(next?: any): any;
+        deferredPrompt: any;
+        auto(): void;
+        install(): void;
     }
 }
 
@@ -4698,18 +4736,6 @@ declare namespace $.$$ {
 declare namespace $.$$ {
 }
 
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_major extends $mol_button_minor {
-		theme( ): string
-	}
-	
-}
-
-//# sourceMappingURL=major.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_open_source_initiative extends $mol_icon {

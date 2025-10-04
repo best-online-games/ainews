@@ -9619,6 +9619,24 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+;
 	($.$mol_icon_settings) = class $mol_icon_settings extends ($.$mol_icon) {
 		path(){
 			return "M12,15.5C10.07,15.5 8.5,13.93 8.5,12C8.5,10.07 10.07,8.5 12,8.5C13.93,8.5 15.5,10.07 15.5,12C15.5,13.93 13.93,15.5 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z";
@@ -9722,6 +9740,18 @@ var $;
 			(obj.content) = () => ([(this.Spoilers_labeler_list())]);
 			return obj;
 		}
+		Install_button(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Install_button_title")));
+			(obj.click) = (next) => ((this.install(next)));
+			return obj;
+		}
+		Install_labeler(){
+			const obj = new this.$.$mol_labeler();
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Install_labeler_title")));
+			(obj.content) = () => ([(this.Install_button())]);
+			return obj;
+		}
 		current_language(){
 			return "";
 		}
@@ -9735,13 +9765,18 @@ var $;
 			const obj = new this.$.$mol_icon_settings();
 			return obj;
 		}
+		install(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		body(){
 			return [
 				(this.Interface_language_labeler()), 
 				(this.Translate_to_labeler()), 
 				(this.Localization_labeler()), 
 				(this.Description_count_limiter_labeler()), 
-				(this.Spoilers_labeler())
+				(this.Spoilers_labeler()), 
+				(this.Install_labeler())
 			];
 		}
 	};
@@ -9762,7 +9797,10 @@ var $;
 	($mol_mem(($.$ainews_app_settings.prototype), "Open_links_in_new_tabs_check_box"));
 	($mol_mem(($.$ainews_app_settings.prototype), "Spoilers_labeler_list"));
 	($mol_mem(($.$ainews_app_settings.prototype), "Spoilers_labeler"));
+	($mol_mem(($.$ainews_app_settings.prototype), "Install_button"));
+	($mol_mem(($.$ainews_app_settings.prototype), "Install_labeler"));
 	($mol_mem(($.$ainews_app_settings.prototype), "Logo"));
+	($mol_mem(($.$ainews_app_settings.prototype), "install"));
 
 
 ;
@@ -9774,35 +9812,73 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $$.$ainews_app_settings_font_size_value = () => $mol_state_local.value("font_size_value") ? ($mol_state_local.value("font_size_value") + "rem") : "0.4rem";
+        $$.$ainews_app_settings_font_size_value = () => $mol_state_local.value('font_size_value') ? $mol_state_local.value('font_size_value') + 'rem' : '0.4rem';
         class $ainews_app_settings extends $.$ainews_app_settings {
             is_enable_auto_translate(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("is_enable_auto_translate", next);
-                return $mol_state_local.value("is_enable_auto_translate") ?? true;
+                    return $mol_state_local.value('is_enable_auto_translate', next);
+                return $mol_state_local.value('is_enable_auto_translate') ?? true;
             }
             description_count_limiter_value(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("description_count_limiter_value", next);
-                return $mol_state_local.value("description_count_limiter_value") ?? 256;
+                    return $mol_state_local.value('description_count_limiter_value', next);
+                return $mol_state_local.value('description_count_limiter_value') ?? 256;
             }
             current_language_code(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("current_language", next);
-                return $mol_state_local.value("current_language") ?? "ru";
+                    return $mol_state_local.value('current_language', next);
+                return $mol_state_local.value('current_language') ?? 'ru';
             }
             current_language() {
                 return this.langs_list()[this.current_language_code()];
             }
             auto_open_spoiler_check_box_value(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("auto_open_spoiler_check_box_value", next);
-                return $mol_state_local.value("auto_open_spoiler_check_box_value") ?? super.auto_open_spoiler_check_box_value();
+                    return $mol_state_local.value('auto_open_spoiler_check_box_value', next);
+                return ($mol_state_local.value('auto_open_spoiler_check_box_value') ?? super.auto_open_spoiler_check_box_value());
             }
             open_links_in_new_tabs_check_box_value(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("open_links_in_new_tabs_check_box_value", next);
-                return $mol_state_local.value("open_links_in_new_tabs_check_box_value") ?? super.open_links_in_new_tabs_check_box_value();
+                    return $mol_state_local.value('open_links_in_new_tabs_check_box_value', next);
+                return ($mol_state_local.value('open_links_in_new_tabs_check_box_value') ??
+                    super.open_links_in_new_tabs_check_box_value());
+            }
+            deferredPrompt = null;
+            auto() {
+                super.auto();
+                window.addEventListener('beforeinstallprompt', e => {
+                    e.preventDefault();
+                    this.deferredPrompt = e;
+                });
+            }
+            install() {
+                if (!this.deferredPrompt) {
+                    const isDesktop = !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                    if (isDesktop) {
+                        const isChrome = navigator.userAgent.includes('Chrome') && !navigator.userAgent.includes('Edge');
+                        const isEdge = navigator.userAgent.includes('Edge');
+                        if (isChrome) {
+                            alert('To install on PC:\n\n1. Click the install icon ⊕ in the address bar (right side)\n2. Or open Chrome menu (⋮) → "Install app..."');
+                        }
+                        else if (isEdge) {
+                            alert('To install on PC:\n\n1. Click the install icon ⊕ in the address bar (right side)\n2. Or open Edge menu (⋯) → Apps → "Install this site as an app"');
+                        }
+                        else {
+                            alert('To install this app, please use Chrome or Edge browser');
+                        }
+                    }
+                    else {
+                        alert('App is already installed or not supported');
+                    }
+                    return;
+                }
+                this.deferredPrompt.prompt();
+                this.deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    this.deferredPrompt = null;
+                });
             }
         }
         __decorate([
@@ -9823,6 +9899,9 @@ var $;
         __decorate([
             $mol_mem
         ], $ainews_app_settings.prototype, "open_links_in_new_tabs_check_box_value", null);
+        __decorate([
+            $mol_action
+        ], $ainews_app_settings.prototype, "install", null);
         $$.$ainews_app_settings = $ainews_app_settings;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -11256,24 +11335,6 @@ var $;
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
-		theme(){
-			return "$mol_theme_base";
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 	($.$mol_icon_open_source_initiative) = class $mol_icon_open_source_initiative extends ($.$mol_icon) {
