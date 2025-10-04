@@ -1,11 +1,25 @@
 <!doctype html>
-<html mol_view_root>
+<html mol_view_root lang="ru">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no" />
+
+		<!-- PWA мета-теги -->
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="AI News" />
+		<meta name="application-name" content="AI News" />
+		<meta name="theme-color" content="#2196f3" />
+		<meta name="description" content="Агрегатор новостей об искусственном интеллекте" />
+
+		<!-- Иконки -->
+		<link rel="icon" href="./ainews/favicon.svg" type="image/svg+xml" />
 		<link rel="shortcut icon" href="./ainews/favicon.svg" />
+		<link rel="apple-touch-icon" href="./icon-192.png" />
+
+		<!-- Манифест -->
+		<link rel="manifest" href=".ainews/app/manifest.webmanifest" />
 	</head>
 	<body mol_view_root>
 		<div mol_view_root="$ainews_app"></div>
