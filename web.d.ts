@@ -3877,6 +3877,41 @@ declare namespace $ {
 		,
 		ReturnType< $mol_labeler['content'] >
 	>
+	type $mol_check_box__title_ainews_app_settings_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_ainews_app_settings_18 = $mol_type_enforce<
+		ReturnType< $ainews_app_settings['auto_open_spoiler_check_box_value'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_check_box__title_ainews_app_settings_19 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_ainews_app_settings_20 = $mol_type_enforce<
+		ReturnType< $ainews_app_settings['open_links_in_new_tabs_check_box_value'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_list__rows_ainews_app_settings_21 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_labeler__title_ainews_app_settings_22 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_labeler['title'] >
+	>
+	type $mol_labeler__content_ainews_app_settings_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_labeler['content'] >
+	>
 	export class $ainews_app_settings extends $ainews_app_page {
 		Interface_language_select( ): $mol_locale_select
 		Interface_language_labeler( ): $mol_labeler
@@ -3889,6 +3924,12 @@ declare namespace $ {
 		description_count_limiter_value( next?: number ): number
 		Description_count_limiter( ): $mol_number
 		Description_count_limiter_labeler( ): $mol_labeler
+		auto_open_spoiler_check_box_value( next?: boolean ): boolean
+		Auto_open_spoiler_check_box( ): $mol_check_box
+		open_links_in_new_tabs_check_box_value( next?: boolean ): boolean
+		Open_links_in_new_tabs_check_box( ): $mol_check_box
+		Spoilers_labeler_list( ): $mol_list
+		Spoilers_labeler( ): $mol_labeler
 		current_language( ): string
 		langs_list( ): ({ 
 			'ru': string,
@@ -3903,11 +3944,14 @@ declare namespace $ {
 
 //# sourceMappingURL=settings.view.tree.d.ts.map
 declare namespace $.$$ {
+    const $ainews_app_settings_font_size_value: () => string;
     class $ainews_app_settings extends $.$ainews_app_settings {
         is_enable_auto_translate(next?: any): any;
         description_count_limiter_value(next?: any): any;
         current_language_code(next?: any): any;
         current_language(): any;
+        auto_open_spoiler_check_box_value(next?: any): any;
+        open_links_in_new_tabs_check_box_value(next?: any): any;
     }
 }
 
@@ -3933,16 +3977,85 @@ declare namespace $ {
 
 //# sourceMappingURL=text.view.tree.d.ts.map
 declare namespace $ {
-}
 
-declare namespace $ {
-
-	export class $mol_row extends $mol_view {
+	export class $mol_check_expand extends $mol_check {
+		level_style( ): string
+		expanded( next?: boolean ): boolean
+		expandable( ): boolean
+		Icon( ): $mol_icon_chevron
+		level( ): number
+		style( ): ({ 
+			'paddingLeft': ReturnType< $mol_check_expand['level_style'] >,
+		})  & ReturnType< $mol_check['style'] >
+		checked( next?: ReturnType< $mol_check_expand['expanded'] > ): ReturnType< $mol_check_expand['expanded'] >
+		enabled( ): ReturnType< $mol_check_expand['expandable'] >
 	}
 	
 }
 
-//# sourceMappingURL=row.view.tree.d.ts.map
+//# sourceMappingURL=expand.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check_expand extends $.$mol_check_expand {
+        level_style(): string;
+        expandable(): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_check_expand__checked_mol_expander_1 = $mol_type_enforce<
+		ReturnType< $mol_expander['expanded'] >
+		,
+		ReturnType< $mol_check_expand['checked'] >
+	>
+	type $mol_check_expand__expandable_mol_expander_2 = $mol_type_enforce<
+		ReturnType< $mol_expander['expandable'] >
+		,
+		ReturnType< $mol_check_expand['expandable'] >
+	>
+	type $mol_check_expand__label_mol_expander_3 = $mol_type_enforce<
+		ReturnType< $mol_expander['label'] >
+		,
+		ReturnType< $mol_check_expand['label'] >
+	>
+	type $mol_view__sub_mol_expander_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__rows_mol_expander_5 = $mol_type_enforce<
+		ReturnType< $mol_expander['content'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	export class $mol_expander extends $mol_list {
+		expanded( next?: boolean ): boolean
+		expandable( ): boolean
+		label( ): readonly(any)[]
+		Trigger( ): $mol_check_expand
+		Tools( ): any
+		Label( ): $mol_view
+		content( ): readonly(any)[]
+		Content( ): $mol_list
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=expander.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_expander extends $.$mol_expander {
+        rows(): $mol_view[];
+        expandable(): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_search__query_ainews_app_feed_1 = $mol_type_enforce<
@@ -3986,19 +4099,19 @@ declare namespace $ {
 		ReturnType< $ainews_app_feed_img['height'] >
 	>
 	type $mol_paragraph__title_ainews_app_feed_9 = $mol_type_enforce<
-		ReturnType< $ainews_app_feed['article_title'] >
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_ainews_app_feed_10 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_description'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_link__title_ainews_app_feed_11 = $mol_type_enforce<
+	type $mol_link__title_ainews_app_feed_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['title'] >
+	>
+	type $mol_link__target_ainews_app_feed_11 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['open_in_new_tab'] >
+		,
+		ReturnType< $mol_link['target'] >
 	>
 	type $mol_link__uri_toggle_ainews_app_feed_12 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_link'] >
@@ -4010,40 +4123,65 @@ declare namespace $ {
 		,
 		ReturnType< $mol_link['title'] >
 	>
-	type $mol_link__uri_toggle_ainews_app_feed_14 = $mol_type_enforce<
+	type $mol_link__target_ainews_app_feed_14 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['open_in_new_tab'] >
+		,
+		ReturnType< $mol_link['target'] >
+	>
+	type $mol_link__uri_toggle_ainews_app_feed_15 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_translated_link'] >
 		,
 		ReturnType< $mol_link['uri_toggle'] >
 	>
-	type $mol_button_minor__title_ainews_app_feed_15 = $mol_type_enforce<
+	type $mol_button_minor__title_ainews_app_feed_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__enabled_ainews_app_feed_16 = $mol_type_enforce<
+	type $mol_button_minor__enabled_ainews_app_feed_17 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['article_translate_enable'] >
 		,
 		ReturnType< $mol_button_minor['enabled'] >
 	>
-	type $mol_button_minor__click_ainews_app_feed_17 = $mol_type_enforce<
+	type $mol_button_minor__click_ainews_app_feed_18 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['translate_click'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_list__title_ainews_app_feed_18 = $mol_type_enforce<
+	type $mol_view__sub_ainews_app_feed_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_list__title_ainews_app_feed_20 = $mol_type_enforce<
 		ReturnType< $ainews_app_feed['category_title'] >
 		,
 		ReturnType< $mol_list['title'] >
 	>
-	type $mol_list__rows_ainews_app_feed_19 = $mol_type_enforce<
+	type $mol_list__rows_ainews_app_feed_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_row__sub_ainews_app_feed_20 = $mol_type_enforce<
+	type $mol_expander__expanded_ainews_app_feed_22 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['openned_post'] >
+		,
+		ReturnType< $mol_expander['expanded'] >
+	>
+	type $mol_expander__label_ainews_app_feed_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_row['sub'] >
+		ReturnType< $mol_expander['label'] >
+	>
+	type $mol_expander__content_ainews_app_feed_24 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_expander['content'] >
+	>
+	type $mol_expander__Tools_ainews_app_feed_25 = $mol_type_enforce<
+		ReturnType< $ainews_app_feed['Spoiler_tools'] >
+		,
+		ReturnType< $mol_expander['Tools'] >
 	>
 	export class $ainews_app_feed extends $ainews_app_page {
 		search_word( next?: string ): string
@@ -4054,12 +4192,13 @@ declare namespace $ {
 		category_title( id: any): string
 		articles( id: any): readonly(any)[]
 		Items( id: any): $mol_list
+		openned_post( id: any, next?: boolean ): boolean
+		article_title( id: any): string
 		article_image_src( id: any): readonly(any)[]
 		Article_thumbnail( id: any): $ainews_app_feed_img
-		article_title( id: any): string
-		Article_title( id: any): $mol_paragraph
 		article_description( id: any): string
 		Article_description( id: any): $mol_paragraph
+		open_in_new_tab( id: any): string
 		article_link( id: any): string
 		Article_link( id: any): $mol_link
 		article_translated_link( id: any): string
@@ -4067,6 +4206,7 @@ declare namespace $ {
 		article_translate_enable( ): boolean
 		translate_click( id: any, next?: any ): any
 		Article_translate_text( id: any): $mol_button_minor
+		Spoiler_tools( id: any): $mol_view
 		app_filters( ): $ainews_app_filters
 		app_settings( ): $ainews_app_settings
 		app_source( ): $ainews_app_sources
@@ -4074,7 +4214,14 @@ declare namespace $ {
 		Logo( ): $mol_icon_script_text
 		body( ): readonly(any)[]
 		Category_page( id: any): $mol_list
-		Article( id: any): $mol_row
+		Article( id: any): $mol_expander
+	}
+	
+	export class $ainews_app_feed_title extends $mol_paragraph {
+		font_size_title( ): string
+		style( ): ({ 
+			'font-size': ReturnType< $ainews_app_feed_title['font_size_title'] >,
+		})  & ReturnType< $mol_paragraph['style'] >
 	}
 	
 }
@@ -4118,6 +4265,11 @@ declare namespace $.$$ {
         sources(id: string, next?: any): any;
         Categories(): $.$mol_list[];
         category_title(category: any): any;
+        openned_post(id: any, next?: any): any;
+        open_in_new_tab(id: any, next?: any): "_self" | "_blank";
+    }
+    class $ainews_app_feed_title extends $.$ainews_app_feed_title {
+        font_size_title(): string;
     }
 }
 
