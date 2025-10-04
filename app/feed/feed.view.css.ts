@@ -1,6 +1,6 @@
 namespace $ {
 	const { rem } = $mol_style_unit
-
+	
 	$mol_style_define($ainews_app_feed, {
 		// Стили для карточек новостей (Article)
 		Article: {
@@ -10,9 +10,9 @@ namespace $ {
 			border: {
 				radius: rem(0.75),
 			},
-			padding: rem(1.5),
+			padding: rem(0.5),
 			margin: {
-				bottom: rem(1),
+				bottom: rem(0.7),
 			},
 			boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
 
@@ -23,26 +23,28 @@ namespace $ {
 			},
 		},
 
+		/*
 		// Заголовки новостей (Article_title)
 		Article_title: {
 			font: {
-				size: rem(1.125),
+				// size: rem(1.125),
 				weight: 600,
 			},
-			lineHeight: '1.4',
-			margin: {
-				bottom: rem(0.5),
-			},
+			// lineHeight: '1.4',
+			// margin: {
+			// 	bottom: rem(0.5),
+			// },
 			color: $mol_theme.text,
 		},
-
+		*/
 		// Описание/превью (Article_description)
 		Article_description: {
 			font: {
 				size: rem(0.875),
 			},
 			lineHeight: '1.5',
-			color: $mol_theme.shade,
+			// color: $mol_theme.shade,
+			color: $mol_theme.text,
 			margin: {
 				bottom: rem(1),
 			},
@@ -53,7 +55,7 @@ namespace $ {
 			font: {
 				size: rem(0.75),
 			},
-			color: $mol_theme.control,
+			color: $mol_theme.shade,
 			textDecoration: 'none',
 
 			':hover': {
@@ -65,7 +67,7 @@ namespace $ {
 			font: {
 				size: rem(0.75),
 			},
-			color: $mol_theme.control,
+			color: $mol_theme.shade,
 			textDecoration: 'none',
 			margin: {
 				left: rem(1),
@@ -75,5 +77,22 @@ namespace $ {
 				textDecoration: 'underline',
 			},
 		},
+
+
+		Article_translate_text: {
+			font: {
+				size: rem(0.75),
+			},
+			color: $mol_theme.shade,
+			// textDecoration: 'none',
+			margin: {
+				left: rem(1),
+			},
+
+			':hover': {
+				textDecoration: 'underline',
+			},
+		},
+		
 	})
 }

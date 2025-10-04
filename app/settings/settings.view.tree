@@ -32,3 +32,20 @@ $ainews_app_settings $ainews_app_page
 					value? <=> description_count_limiter_value? 256
 					precision_change 20
 					value_min 20
+		- <= Font_size_labeler $mol_labeler
+			title @ \Font size
+			content /
+				<= Font_size_number $mol_number
+					value? <=> font_size_value? 1.2
+					precision_change 0.1
+					precision 0.1
+					value_min 0.1
+		<= Spoilers_labeler $mol_labeler
+			title @ \Common options
+			content / <= Spoilers_labeler_list $mol_list rows /
+				<= Auto_open_spoiler_check_box $mol_check_box
+					title @ \Auto open post spoilers?
+					checked? <=> auto_open_spoiler_check_box_value? false
+				<= Open_links_in_new_tabs_check_box $mol_check_box
+					title @ \Open post links in new tab?
+					checked? <=> open_links_in_new_tabs_check_box_value? true

@@ -4,5 +4,8 @@
 	"$ainews_app_settings_Translate_to_labeler_title": "Переводить новость на",
 	"$ainews_app_settings_Auto_translate_title": "Автоперевод новости на русский язык",
 	"$ainews_app_settings_Localization_labeler_title": "Локализация новостей",
-	"$ainews_app_settings_Description_count_limiter_labeler_title": "Ограничение длины описания новости"
+	"$ainews_app_settings_Description_count_limiter_labeler_title": "Ограничение длины описания новости",
+	"$ainews_app_settings_Auto_open_spoiler_check_box_title": "Раскрывать автоматически посты?",
+	"$ainews_app_settings_Open_links_in_new_tabs_check_box_title": "Открывать посты при клике в новых вкладках?",
+	"$ainews_app_settings_Spoilers_labeler_title": "Общие настройки"
 }

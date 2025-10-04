@@ -233,5 +233,29 @@ namespace $.$$ {
 		category_title(category: any) {
 			return category
 		}
+
+		@$mol_mem_key
+		openned_post(id:any, next?:any){
+			if(this.app_settings().auto_open_spoiler_check_box_value()) {
+				return true
+			}
+
+			if(next !== undefined) return next;
+			return false;
+		}
+
+		@$mol_mem_key
+		open_in_new_tab(id:any, next?:any) {
+			if(this.app_settings().open_links_in_new_tabs_check_box_value()) {
+				return "_blank"
+			}
+			return "_self"
+		}
+	}
+
+	export class $ainews_app_feed_title extends $.$ainews_app_feed_title {
+		font_size_title() {
+			return $ainews_app_settings_font_size_value()//$mol_state_local.value("font_size_value") ?? 7 //super.font_size_value()
+		}
 	}
 }

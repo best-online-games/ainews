@@ -13,24 +13,41 @@ $ainews_app_feed $ainews_app_page
 		title <= category_title* \blank category title
 		rows /
 			<= Items* $mol_list rows <= articles* /
-	Article* $mol_row
-		sub /
+	- <= Spoiler $mol_expander
+		label / \Murder is..
+		content / \majordomo
+		Tools <= Spoiler_tools $mol_view
+			sub /
+				<= Lock_icon $mol_icon_lock
+	Article* $mol_expander
+		expanded? <=> openned_post*? false
+		label <= article_title*
+		content /
 			<= Article_thumbnail* $ainews_app_feed_img
 				src <= article_image_src* /
 				alt <= article_title*
 				width 192
 				height 108
-			<= Article_title* $mol_paragraph
+			- <= Article_title* $ainews_app_feed_title
+				line_height <= font_size_value* 7
 				title <= article_title* \
 			<= Article_description* $mol_paragraph
 				title <= article_description* \
-			<= Article_link* $mol_link
-				title @ \Open link
-				uri_toggle <= article_link* \
-			<= Article_translated_link* $mol_link
-				title @ \Open translated link
-				uri_toggle <= article_translated_link* \
-			<= Article_translate_text* $mol_button_minor
-				title @ \Translate
-				enabled <= article_translate_enable true
-				click? <=> translate_click*? null
+		Tools <= Spoiler_tools* $mol_view
+			sub /
+				<= Article_link* $mol_link
+					title @ \Open link
+					target <= open_in_new_tab* \_self
+					uri_toggle <= article_link* \
+				<= Article_translated_link* $mol_link
+					title @ \Open translated link
+					target <= open_in_new_tab*
+					uri_toggle <= article_translated_link* \
+				<= Article_translate_text* $mol_button_minor
+					title @ \Translate
+					enabled <= article_translate_enable true
+					click? <=> translate_click*? null
+$ainews_app_feed_title $mol_paragraph
+	style *
+		^
+		font-size <= font_size_title \1.22rem
