@@ -265,6 +265,17 @@ namespace $.$$ {
 			}
 
 		}
+
+		@$mol_mem
+		Spoiler_tools(id:any){
+			const obj = new this.$.$mol_view();
+			obj.sub = () => ([
+				this.Article_link(id), 
+				this.Article_translated_link(id), 
+				this.is_need_translate(id.title) ? this.Article_translate_text(id) : null
+			]);
+			return obj;
+		}
 	}
 
 	export class $ainews_app_feed_title extends $.$ainews_app_feed_title {
