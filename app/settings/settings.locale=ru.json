@@ -7,5 +7,7 @@
 	"$ainews_app_settings_Description_count_limiter_labeler_title": "Ограничение длины описания новости",
 	"$ainews_app_settings_Auto_open_spoiler_check_box_title": "Раскрывать автоматически посты?",
 	"$ainews_app_settings_Open_links_in_new_tabs_check_box_title": "Открывать посты при клике в новых вкладках?",
-	"$ainews_app_settings_Spoilers_labeler_title": "Общие настройки"
+	"$ainews_app_settings_Spoilers_labeler_title": "Общие настройки",
+	"$ainews_app_settings_Install_button_title": "Добавить на главный экран",
+	"$ainews_app_settings_Install_labeler_title": "Установить приложение"
 }
