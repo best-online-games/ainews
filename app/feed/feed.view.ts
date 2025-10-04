@@ -272,9 +272,22 @@ namespace $.$$ {
 			obj.sub = () => ([
 				this.Article_link(id), 
 				this.Article_translated_link(id), 
-				this.is_need_translate(id.title) ? this.Article_translate_text(id) : null
+				this.is_need_translate(id.title) ? this.Article_translate_text(id) : null,
+				this.Favorite(id),
 			]);
 			return obj;
+		}
+
+		@$mol_mem_key
+		base_checked(id:any, next?: any){
+			if(next !== undefined) {
+				if(next == true)
+					this.app_favorites().add_post(id)
+				if(next == false)
+					this.app_favorites().remove_post(id)
+				return next;
+			}
+			return this.app_favorites().posts().includes(id);
 		}
 	}
 

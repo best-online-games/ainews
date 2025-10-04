@@ -2,6 +2,7 @@ $ainews_app_feed $ainews_app_page
 	app_filters $ainews_app_filters
 	app_settings $ainews_app_settings
 	app_source $ainews_app_sources
+	app_favorites $ainews_app_favorites
 	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
@@ -56,6 +57,9 @@ $ainews_app_feed $ainews_app_page
 					title @ \Translate
 					- enabled <= article_translate_enable true
 					click? <=> translate_click*? null
+				<= Favorite* $mol_check_icon
+					Icon <= Base_icon* $mol_icon_cards_heart
+					checked? <=> base_checked*? false
 $ainews_app_feed_title $mol_paragraph
 	style *
 		^

@@ -1,5 +1,6 @@
 $ainews_app_sources $ainews_app_page
 	runtime_links null
+	custom_sources*? /
 	title @ \Source
 	Logo $mol_icon_open_source_initiative
 	body /

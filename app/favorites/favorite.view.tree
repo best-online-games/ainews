@@ -1,0 +1,6 @@
+$ainews_app_favorites $ainews_app_feed
+	title \Избранное
+	category_title* \ 
+	add_post? null
+	remove_post? null
+	posts /
