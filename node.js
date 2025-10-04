@@ -8514,44 +8514,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
-		label(){
-			return [(this.title())];
-		}
-		Label(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (32);
-			(obj.sub) = () => ((this.label()));
-			return obj;
-		}
-		content(){
-			return [];
-		}
-		Content(){
-			const obj = new this.$.$mol_view();
-			(obj.minimal_height) = () => (24);
-			(obj.sub) = () => ((this.content()));
-			return obj;
-		}
-		rows(){
-			return [(this.Label()), (this.Content())];
-		}
-	};
-	($mol_mem(($.$mol_labeler.prototype), "Label"));
-	($mol_mem(($.$mol_labeler.prototype), "Content"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-;
 	($.$ainews_app_feed_img) = class $ainews_app_feed_img extends ($.$mol_view) {
 		src(next){
 			if(next !== undefined) return next;
@@ -8646,6 +8608,44 @@ var $;
 		}
 	};
 
+
+;
+"use strict";
+
+;
+	($.$mol_labeler) = class $mol_labeler extends ($.$mol_list) {
+		label(){
+			return [(this.title())];
+		}
+		Label(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (32);
+			(obj.sub) = () => ((this.label()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (24);
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		rows(){
+			return [(this.Label()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_labeler.prototype), "Label"));
+	($mol_mem(($.$mol_labeler.prototype), "Content"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tmin-height: 2rem;\n\tcolor: var(--mol_theme_shade);\n\tpadding: .5rem .75rem 0;\n\tgap: 0 var(--mol_gap_block);\n\tflex-wrap: wrap;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n\tpadding: var(--mol_gap_text);\n}\n");
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -10130,24 +10130,19 @@ var $;
 		}
 		Welcome_block_p1_paragraph(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ("Пустая лента - пора выбрать несколько источников!");
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Welcome_block_p1_paragraph_title")));
 			(obj.dom_name) = () => ("h4");
 			return obj;
 		}
 		Welcome_block_p2_paragraph(){
-			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ("Для этого перейди на страницу Источники");
-			return obj;
-		}
-		Go_to_source_button(){
 			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Go_to_source_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Welcome_block_p2_paragraph_title")));
 			(obj.uri) = () => ("#!=sources");
 			return obj;
 		}
 		Welcome_block_p2(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Welcome_block_p2_paragraph()), (this.Go_to_source_button())]);
+			(obj.sub) = () => ([(this.Welcome_block_p2_paragraph())]);
 			return obj;
 		}
 		Welcome_block(){
@@ -10314,7 +10309,6 @@ var $;
 	($mol_mem(($.$ainews_app_feed.prototype), "Tabs"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p1_paragraph"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2_paragraph"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Go_to_source_button"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2"));
 	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block"));
 	($mol_mem_key(($.$ainews_app_feed.prototype), "Items"));
