@@ -114,7 +114,15 @@ namespace $.$$ {
 			const cached = $mol_state_local.value(`feed_cache_${source_url}`)
 			if (cached) {
 				try {
-					return JSON.parse(cached as string)
+					const cache_data = JSON.parse(cached as string)
+					const cache_time = cache_data.timestamp || 0
+					const now = Date.now()
+					const cache_ttl = 60 * 60 * 1000 // 1 час в миллисекундах
+
+					// Если кеш свежий, возвращаем его
+					if (now - cache_time < cache_ttl) {
+						return cache_data.articles
+					}
 				} catch (e) {
 					// Если не удалось распарсить, продолжаем загрузку
 				}
@@ -126,8 +134,12 @@ namespace $.$$ {
 			const xml_doc = $mol_fetch.xml($ainews_app_feed_proxy_url + '?' + payload.toString())
 			const articles_list = this.parse_rss(xml_doc)
 
-			// Сохраняем в localStorage
-			$mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(articles_list))
+			// Сохраняем в localStorage с временной меткой
+			const cache_data = {
+				timestamp: Date.now(),
+				articles: articles_list,
+			}
+			$mol_state_local.value(`feed_cache_${source_url}`, JSON.stringify(cache_data))
 
 			return articles_list
 		}
@@ -231,21 +243,22 @@ namespace $.$$ {
 
 		@$mol_mem_key
 		article_description(article: any) {
-			function strip_html_tags(html:string){
-				let doc = new DOMParser().parseFromString(html, 'text/html');
-				return doc.body.textContent || "";
+			function strip_html_tags(html: string) {
+				let doc = new DOMParser().parseFromString(html, 'text/html')
+				return doc.body.textContent || ''
 			}
 
 			const description_count_limiter_value = this.app_settings().description_count_limiter_value()
 			const description_without_html_tags = strip_html_tags(article.description)
 			const description_limited = description_without_html_tags.substring(0, description_count_limiter_value)
 
-			if(this.force_summary(article)) {
+			if (this.force_summary(article)) {
 				return this.summary_text(description_without_html_tags)
 			}
 
 			const should_translate =
-				(this.app_settings().is_enable_auto_translate() && this.is_need_translate(description_without_html_tags)) ||
+				(this.app_settings().is_enable_auto_translate() &&
+					this.is_need_translate(description_without_html_tags)) ||
 				this.force_translate(article)
 			if (should_translate) {
 				return this.translate_text(description_without_html_tags)
@@ -283,7 +296,7 @@ namespace $.$$ {
 		}
 
 		@$mol_action
-		summary_description_click(article:any, next:any) {
+		summary_description_click(article: any, next: any) {
 			if (next) {
 				this.force_summary(article, true)
 			}
