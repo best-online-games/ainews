@@ -408,6 +408,10 @@ $ainews_app_feed_img $mol_view
 	width? null
 	height? null
 
+$mol_icon_cards $mol_icon path \M21.47,4.35L20.13,3.79V12.82L22.56,6.96C22.97,5.94 22.5,4.77 21.47,4.35M1.97,8.05L6.93,20C7.24,20.77 7.97,21.24 8.74,21.26C9,21.26 9.27,21.21 9.53,21.1L16.9,18.05C17.65,17.74 18.11,17 18.13,16.26C18.14,16 18.09,15.71 18,15.45L13,3.5C12.71,2.73 11.97,2.26 11.19,2.25C10.93,2.25 10.67,2.31 10.42,2.4L3.06,5.45C2.04,5.87 1.55,7.04 1.97,8.05M18.12,4.25A2,2 0 0,0 16.12,2.25H14.67L18.12,10.59
+
+$mol_icon_cards_heart $mol_icon path \M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z
+
 $ainews_app_filters $ainews_app_page
 	title @ \Filters
 	body /
@@ -618,6 +622,7 @@ $ainews_app_feed $ainews_app_page
 	app_filters $ainews_app_filters
 	app_settings $ainews_app_settings
 	app_source $ainews_app_sources
+	app_favorites $ainews_app_favorites
 	title @ \Feed
 	Logo $mol_icon_script_text
 	body /
@@ -672,10 +677,20 @@ $ainews_app_feed $ainews_app_page
 					title @ \Translate
 					- enabled <= article_translate_enable true
 					click? <=> translate_click*? null
+				<= Favorite* $mol_check_icon
+					Icon <= Base_icon* $mol_icon_cards_heart
+					checked? <=> base_checked*? false
 $ainews_app_feed_title $mol_paragraph
 	style *
 		^
 		font-size <= font_size_title \1.22rem
+
+$ainews_app_favorites $ainews_app_feed
+	title \Избранное
+	category_title* \ 
+	add_post? null
+	remove_post? null
+	posts /
 
 $mol_icon_newspaper $mol_icon path \M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z
 
@@ -692,6 +707,7 @@ $ainews_app $mol_book2_catalog
 			- <= FAQ $ainews_app_faq
 			<= Feed $ainews_app_feed
 		- feed <= Feed $ainews_app_feed
+		favorite <= Favorite $ainews_app_favorites
 		sources <= Sources $ainews_app_sources
 		filters <= Filters $ainews_app_filters
 		settings <= Settings $ainews_app_settings
@@ -732,6 +748,7 @@ $mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.
 
 $ainews_app_sources $ainews_app_page
 	runtime_links null
+	custom_sources*? /
 	title @ \Source
 	Logo $mol_icon_open_source_initiative
 	body /
