@@ -1,5 +1,5 @@
 $ainews_app_favorites $ainews_app_feed
-	title \Избранное
+	title @ \Favorites
 	category_title* \ 
 	add_post? null
 	remove_post? null

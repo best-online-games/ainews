@@ -50,10 +50,10 @@ $ainews_app_settings $ainews_app_page
 			title @ \Common options
 			content / <= Spoilers_labeler_list $mol_list rows /
 				<= Auto_open_spoiler_check_box $mol_check_box
-					title @ \Auto open post spoilers?
+					title @ \Auto open post spoilers ?
 					checked? <=> auto_open_spoiler_check_box_value? false
 				<= Open_links_in_new_tabs_check_box $mol_check_box
-					title @ \Open post links in new tab?
+					title @ \Open post links in new tab ?
 					checked? <=> open_links_in_new_tabs_check_box_value? true
 		<= Install_labeler $mol_labeler
 			title @ \Install app
