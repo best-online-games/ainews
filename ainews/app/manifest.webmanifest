@@ -2,7 +2,7 @@
   "name": "Vibe News",
   "short_name": "Vibe News",
   "description": "Агрегатор новостей",
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196f3",
