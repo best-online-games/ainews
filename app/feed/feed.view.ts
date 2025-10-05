@@ -306,7 +306,7 @@ namespace $.$$ {
 		}
 
 		translate_click(article: any, next?: Event) {
-			if (next) {
+			if (next && navigator.onLine) {
 				this.force_translate(article, true)
 			}
 			return next
