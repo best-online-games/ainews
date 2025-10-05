@@ -10526,6 +10526,8 @@ var $;
         $$.$ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary';
         class $ainews_app_feed extends $.$ainews_app_feed {
             translate_text(text, to_lang = this.app_settings().current_language()) {
+                if (!navigator.onLine)
+                    return text;
                 const payload = new URLSearchParams({
                     text: text.substring(0, 512),
                     to_lang,
@@ -10533,6 +10535,8 @@ var $;
                 return $mol_fetch.text($$.$ainews_app_feed_translate_url + '?' + payload.toString());
             }
             summary_text(text, to_lang = this.app_settings().current_language()) {
+                if (!navigator.onLine)
+                    return text;
                 const payload = new URLSearchParams({
                     text: text.substring(0, 1024),
                     to_lang,
