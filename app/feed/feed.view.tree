@@ -47,11 +47,6 @@ $ainews_app_feed $ainews_app_page
 				bubble_content /
 					<= Category_summary_content* $mol_page
 						title @ \Category summary
-						minimal_width 300
-						minimal_height 200
-						style *
-							max-width \90vw
-							max-height \80vh
 						tools /
 							<= Category_summary_close* $mol_button_minor
 								title @ \Close
@@ -59,10 +54,6 @@ $ainews_app_feed $ainews_app_page
 						body /
 							<= Category_summary_text* $mol_paragraph
 								title <= category_summary_result* \
-								style *
-									word-wrap \break-word
-									overflow-wrap \break-word
-									max-width \100%
 			<= Items* $mol_list rows <= articles* /
 	- <= Spoiler $mol_expander
 		label / \Murder is..

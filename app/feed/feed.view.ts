@@ -459,7 +459,7 @@ namespace $.$$ {
 			if (!navigator.onLine) return 'No internet connection'
 			if (texts.length === 0) return 'No news for summary'
 
-			return this.summary_text(texts.substring(0, 10000))
+			return this.summary_text(texts.substring(0, 1000))
 		}
 
 		@$mol_action
@@ -484,7 +484,7 @@ namespace $.$$ {
 			const to_lang = this.app_settings().current_language()
 
 			const payload = new URLSearchParams({
-				text: text.substring(0, 10000),
+				text: text.substring(0, 1000),
 				to_lang,
 			})
 

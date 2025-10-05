@@ -100,27 +100,29 @@ namespace $ {
 		Category_summary_content: {
 			maxWidth: '65vw',
 			maxHeight: '80vh',
-			width: 'auto',
-			height: 'auto',
+			width: 'fit-content',
+			height: 'fit-content',
 		},
 
 		Category_summary_text: {
 			wordWrap: 'break-word',
 			overflowWrap: 'break-word',
 			whiteSpace: 'pre-wrap',
+			maxWidth: '100%',
 		},
 
 		Summary_all_content: {
 			maxWidth: '65vw',
 			maxHeight: '80vh',
-			width: 'auto',
-			height: 'auto',
+			width: 'fit-content',
+			height: 'fit-content',
 		},
 
 		Summary_all_text: {
 			wordWrap: 'break-word',
 			overflowWrap: 'break-word',
 			whiteSpace: 'pre-wrap',
+			maxWidth: '100%',
 		},
 	})
 }
