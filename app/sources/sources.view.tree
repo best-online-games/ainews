@@ -24,6 +24,17 @@ $ainews_app_sources $ainews_app_page
 			<= Sources* $mol_select_list
 				value? <=> sources*? /
 				dictionary <= suggestions* /
+			<= Custom_sources_labeler* $mol_labeler
+				title @ \Add custom sources:
+				content /
+					<= Category_custom_sources* $mol_list rows /
+						<= Category_add_source_string* $mol_string
+							hint @ \Enter RSS URL
+							value? <=> category_add_source_value*? \
+						<= Category_add_source_button* $mol_button_minor
+							title @ \Add
+							click? <=> category_add_source_click*? null
+					<= Category_custom_list* $mol_list rows <= category_custom_items* /
 			<= Items* $mol_list rows <= articles* /
 	My_rss_item* $mol_view
 		sub /
