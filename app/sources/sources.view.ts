@@ -1,5 +1,5 @@
 namespace $.$$ {
-	const $ainews_app_sources_custom_rss_feeds = "my"
+	const $ainews_app_sources_custom_rss_feeds = 'my'
 
 	const $ainews_app_source_links = {
 		tech: [
@@ -1042,14 +1042,13 @@ namespace $.$$ {
 			'https://www.youtube.com/feeds/videos.xml?channel_id=UCQfwfsi5VrQ8yKZ-UWmAEFg',
 		],
 	}
-	
-	export class $ainews_app_sources extends $.$ainews_app_sources {
 
+	export class $ainews_app_sources extends $.$ainews_app_sources {
 		runtime_links() {
 			const custom_rss = this.custom_sources($ainews_app_sources_custom_rss_feeds)
-			return {...$ainews_app_source_links, my: custom_rss}
+			return { ...$ainews_app_source_links, my: custom_rss }
 		}
-		
+
 		// tabs fields
 		Categories() {
 			return Object.keys($ainews_app_source_links).map(category => this.Category_page(category))
@@ -1058,57 +1057,65 @@ namespace $.$$ {
 			return category
 		}
 		// sources fileds
-		suggestions(category: any)  {
-			return $ainews_app_source_links[category as keyof typeof $ainews_app_source_links]
+		suggestions(category: any) {
+			const urls = $ainews_app_source_links[category as keyof typeof $ainews_app_source_links]
+			// Преобразуем массив URL в объект {url: domain}
+			return urls.reduce((acc: any, url: string) => {
+				try {
+					const domain = new URL(url).hostname.replace('www.', '')
+					acc[url] = domain
+				} catch {
+					acc[url] = url
+				}
+				return acc
+			}, {})
 		}
 
 		// @$mol_mem_key
-		sources(id: string, next?: any){
-			if(next !== undefined)
-				return $mol_state_local.value(id, next);
+		sources(id: string, next?: any) {
+			if (next !== undefined) return $mol_state_local.value(id, next)
 			return $mol_state_local.value(id) ?? []
 		}
 
 		@$mol_mem_key
-		custom_sources(id: string, next?: any){
-			if(next !== undefined)
-				return $mol_state_local.value(id, next);
+		custom_sources(id: string, next?: any) {
+			if (next !== undefined) return $mol_state_local.value(id, next)
 			return $mol_state_local.value(id) ?? []
 		}
 
 		My_rss_feeds() {
-			const my_rss = $mol_state_local.value($ainews_app_sources_custom_rss_feeds) as string[] ?? []
+			const my_rss = ($mol_state_local.value($ainews_app_sources_custom_rss_feeds) as string[]) ?? []
 			return my_rss.map((category: any) => this.My_rss_item(category))
 		}
 
 		add_custom_feed_click() {
 			const new_url = this.Add_feed_string().value()
-			const current_list = this.custom_sources( $ainews_app_sources_custom_rss_feeds )
+			const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds)
 
 			// skip if alrady added
-			if( current_list.includes( new_url ) ) {
+			if (current_list.includes(new_url)) {
 				return
 			}
 
-			if( new_url !== null && new_url.trim() !== "" ) {
-				if( new_url.includes( "https://" ) == false && new_url.includes( "http://" ) == false ) {
-					throw "Need valid http url!"
+			if (new_url !== null && new_url.trim() !== '') {
+				if (new_url.includes('https://') == false && new_url.includes('http://') == false) {
+					throw 'Need valid http url!'
 				}
 			}
-			const new_list = [ ...current_list, new_url ]
-			this.custom_sources( $ainews_app_sources_custom_rss_feeds, new_list )
+			const new_list = [...current_list, new_url]
+			this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list)
 			$mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list)
-			this.Add_feed_string().value( "" )
+			this.Add_feed_string().value('')
 		}
 
 		@$mol_mem_key
-		my_rss_title(id: string){
+		my_rss_title(id: string) {
 			return id
 		}
 
 		delete_custom_feed_click(id: string) {
 			const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds)
-			const new_list = current_list.filter((item:any) => item != id)
+			const new_list = current_list.filter((item: any) => item != id)
 			this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list)
 			$mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list)
 		}
