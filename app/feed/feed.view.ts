@@ -311,6 +311,11 @@ namespace $.$$ {
 			const src = article.image_src || ''
 			if (src.trim().length === 0) return []
 
+			// Проверяем, что это изображение, а не видео
+			if (src.includes('.mp4') || src.includes('/mp4/') || src.includes('format/mp4')) {
+				return []
+			}
+
 			// Возвращаем закешированную версию или загружаем
 			const cached = this.cache_image(src)
 			return cached ? [cached] : []
