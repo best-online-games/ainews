@@ -153,6 +153,23 @@ namespace $.$$ {
 			const xml_doc = $mol_fetch.xml($ainews_app_feed_proxy_url + '?' + payload.toString())
 			const articles_list = this.parse_rss(xml_doc)
 
+			// Очищаем старые фиды (оставляем только 20)
+			const feed_cache_list_key = 'feed_cache_list'
+			const feed_cache_list = ($mol_state_local.value(feed_cache_list_key) as string[]) || []
+
+			// Добавляем новый URL в начало списка
+			const updated_feed_list = [source_url, ...feed_cache_list.filter(u => u !== source_url)].slice(0, 20)
+
+			// Удаляем фиды, которые вышли за пределы лимита
+			feed_cache_list.forEach(old_url => {
+				if (!updated_feed_list.includes(old_url)) {
+					$mol_state_local.value(`feed_cache_${old_url}`, null)
+				}
+			})
+
+			// Обновляем список
+			$mol_state_local.value(feed_cache_list_key, updated_feed_list)
+
 			// Сохраняем в localStorage с временной меткой
 			const cache_data = {
 				timestamp: Date.now(),
