@@ -1,6 +1,9 @@
 namespace $.$$ {
 	const $ainews_app_sources_custom_rss_feeds = 'my'
 
+	// Ключ для хранения пользовательских источников по категориям
+	const $ainews_app_sources_custom_category_sources = 'custom_category_sources'
+
 	const $ainews_app_source_links = {
 		tech: [
 			'https://devblogs.microsoft.com/landingpage/',
@@ -1046,7 +1049,30 @@ namespace $.$$ {
 	export class $ainews_app_sources extends $.$ainews_app_sources {
 		runtime_links() {
 			const custom_rss = this.custom_sources($ainews_app_sources_custom_rss_feeds)
-			return { ...$ainews_app_source_links, my: custom_rss }
+			const all_links = { ...$ainews_app_source_links, my: custom_rss }
+
+			// Добавляем пользовательские источники к каждой категории
+			const custom_category_sources = this.get_custom_category_sources()
+			Object.keys(custom_category_sources).forEach(category => {
+				if (all_links[category]) {
+					all_links[category] = [...all_links[category], ...custom_category_sources[category]]
+				}
+			})
+
+			return all_links
+		}
+
+		// Получить пользовательские источники по категориям
+		@$mol_mem
+		get_custom_category_sources() {
+			return (
+				($mol_state_local.value($ainews_app_sources_custom_category_sources) as Record<string, string[]>) ?? {}
+			)
+		}
+
+		// Сохранить пользовательские источники по категориям
+		set_custom_category_sources(sources: Record<string, string[]>) {
+			$mol_state_local.value($ainews_app_sources_custom_category_sources, sources)
 		}
 
 		// tabs fields
@@ -1058,9 +1084,15 @@ namespace $.$$ {
 		}
 		// sources fileds
 		suggestions(category: any) {
-			const urls = $ainews_app_source_links[category as keyof typeof $ainews_app_source_links]
+			const base_urls = $ainews_app_source_links[category as keyof typeof $ainews_app_source_links]
+			const custom_sources = this.get_custom_category_sources()
+			const category_custom = custom_sources[category] ?? []
+
+			// Объединяем базовые и пользовательские источники
+			const all_urls = [...base_urls, ...category_custom]
+
 			// Преобразуем массив URL в объект {url: domain}
-			return urls.reduce((acc: any, url: string) => {
+			return all_urls.reduce((acc: any, url: string) => {
 				try {
 					const domain = new URL(url).hostname.replace('www.', '')
 					acc[url] = domain
@@ -1118,6 +1150,78 @@ namespace $.$$ {
 			const new_list = current_list.filter((item: any) => item != id)
 			this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list)
 			$mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list)
+		}
+
+		// Методы для работы с пользовательскими источниками категорий
+		@$mol_mem_key
+		category_add_source_value(category: string, next?: string) {
+			if (next !== undefined) return next
+			return ''
+		}
+
+		category_add_source_click(category: string) {
+			const new_url = this.category_add_source_value(category)
+
+			if (!new_url || new_url.trim() === '') {
+				return
+			}
+
+			if (!new_url.includes('https://') && !new_url.includes('http://')) {
+				throw new Error('Need valid http url!')
+			}
+
+			const custom_sources = this.get_custom_category_sources()
+			const category_sources = custom_sources[category] ?? []
+
+			// Проверяем, не добавлен ли уже этот источник
+			if (category_sources.includes(new_url)) {
+				return
+			}
+
+			const updated_sources = {
+				...custom_sources,
+				[category]: [...category_sources, new_url],
+			}
+
+			this.set_custom_category_sources(updated_sources)
+			this.category_add_source_value(category, '')
+		}
+
+		@$mol_mem_key
+		category_custom_items(category: string) {
+			const custom_sources = this.get_custom_category_sources()
+			const category_sources = custom_sources[category] ?? []
+
+			return category_sources.map((url: string) => this.Category_custom_item(category, url))
+		}
+
+		@$mol_mem_key
+		Category_custom_item(category: string, url: string) {
+			return this.$.$mol_view.make({
+				sub: () => [
+					this.$.$mol_paragraph.make({
+						title: () => url,
+					}),
+					this.$.$mol_button_minor.make({
+						sub: () => [this.$.$mol_icon_close.make({})],
+						click: () => this.delete_category_source(category, url),
+					}),
+				],
+			})
+		}
+
+		delete_category_source(category: string, url: string) {
+			const custom_sources = this.get_custom_category_sources()
+			const category_sources = custom_sources[category] ?? []
+
+			const updated_category_sources = category_sources.filter((item: string) => item !== url)
+
+			const updated_sources = {
+				...custom_sources,
+				[category]: updated_category_sources,
+			}
+
+			this.set_custom_category_sources(updated_sources)
 		}
 	}
 }
