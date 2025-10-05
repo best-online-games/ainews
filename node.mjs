@@ -10647,6 +10647,15 @@ var $;
                 });
                 const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
                 const articles_list = this.parse_rss(xml_doc);
+                const feed_cache_list_key = 'feed_cache_list';
+                const feed_cache_list = $mol_state_local.value(feed_cache_list_key) || [];
+                const updated_feed_list = [source_url, ...feed_cache_list.filter(u => u !== source_url)].slice(0, 20);
+                feed_cache_list.forEach(old_url => {
+                    if (!updated_feed_list.includes(old_url)) {
+                        $mol_state_local.value(`feed_cache_${old_url}`, null);
+                    }
+                });
+                $mol_state_local.value(feed_cache_list_key, updated_feed_list);
                 const cache_data = {
                     timestamp: Date.now(),
                     articles: articles_list,
