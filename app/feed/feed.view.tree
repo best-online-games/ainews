@@ -5,6 +5,29 @@ $ainews_app_feed $ainews_app_page
 	app_favorites $ainews_app_favorites
 	title @ \Feed
 	Logo $mol_icon_script_text
+	tools /
+		<= Summary_all_button $mol_button_major
+			title @ \Summary all news
+			click? <=> summary_all_click? null
+		<= Summary_all_pop $mol_pop
+			showed? <=> summary_all_showed? false
+			Anchor <= Summary_all_button
+			bubble_content /
+				<= Summary_all_content $mol_page
+					title @ \Summary all news
+					minimal_width 300
+					minimal_height 200
+					style *
+						max-width \90vw
+						max-height \80vh
+						overflow \auto
+					tools /
+						<= Summary_all_close $mol_button_minor
+							title @ \Close
+							click? <=> summary_all_close_click? null
+					body /
+						<= Summary_all_text $mol_paragraph
+							title <= summary_all_result \
 	body /
 		<= Hot_fix $mol_view sub /
 			<= Searcher $mol_search
@@ -21,6 +44,28 @@ $ainews_app_feed $ainews_app_page
 	Category_page* $mol_list
 		title <= category_title* \blank category title
 		rows /
+			<= Category_summary_button* $mol_button_major
+				title @ \Summary category
+				click? <=> category_summary_click*? null
+			<= Category_summary_pop* $mol_pop
+				showed? <=> category_summary_showed*? false
+				Anchor <= Category_summary_button*
+				bubble_content /
+					<= Category_summary_content* $mol_page
+						title @ \Category summary
+						minimal_width 300
+						minimal_height 200
+						style *
+							max-width \90vw
+							max-height \80vh
+							overflow \auto
+						tools /
+							<= Category_summary_close* $mol_button_minor
+								title @ \Close
+								click? <=> category_summary_close_click*? null
+						body /
+							<= Category_summary_text* $mol_paragraph
+								title <= category_summary_result* \
 			<= Items* $mol_list rows <= articles* /
 	- <= Spoiler $mol_expander
 		label / \Murder is..

@@ -418,6 +418,110 @@ namespace $.$$ {
 			}
 			return this.app_favorites().posts().includes(id)
 		}
+
+		@$mol_action
+		summary_all_click(next?: Event) {
+			if (next) {
+				this.summary_all_showed(!this.summary_all_showed())
+			}
+			return next
+		}
+
+		@$mol_action
+		summary_all_close_click(next?: Event) {
+			if (next) {
+				this.summary_all_showed(false)
+			}
+			return next
+		}
+
+		@$mol_mem
+		summary_all_result() {
+			if (!this.summary_all_showed()) return ''
+
+			// Collect all articles from all categories
+			const all_articles: any[] = []
+			this.Categories().forEach((category_page: any) => {
+				const category_id = category_page.id(null)
+				const articles = this.articles(category_id)
+				all_articles.push(...articles)
+			})
+
+			// Collect all titles and descriptions
+			const texts = all_articles
+				.map((article: any) => {
+					const title = this.article_title(article) || ''
+					return `${title}\n`.substring(0, 500)
+				})
+				.join('\n\n')
+
+			// Make summary via API
+			if (!navigator.onLine) return 'No internet connection'
+			if (texts.length === 0) return 'No news for summary'
+
+			return this.summary_text(texts.substring(0, 10000))
+		}
+
+		@$mol_action
+		category_summary_click(category: string, next?: Event) {
+			if (next) {
+				this.category_summary_showed(category, !this.category_summary_showed(category))
+			}
+			return next
+		}
+
+		@$mol_action
+		category_summary_close_click(category: string, next?: Event) {
+			if (next) {
+				this.category_summary_showed(category, false)
+			}
+			return next
+		}
+
+		@$mol_mem_key
+		category_summary_text(category: string, text: string) {
+			if (!navigator.onLine) return text
+			const to_lang = this.app_settings().current_language()
+
+			const payload = new URLSearchParams({
+				text: text.substring(0, 10000),
+				to_lang,
+			})
+
+			const url = $ainews_app_feed_summary_url + '?' + payload.toString()
+			const result = $mol_fetch.text(url)
+
+			return result
+		}
+
+		@$mol_mem_key
+		category_summary_result(category: string): string {
+			if (!this.category_summary_showed(category)) return ''
+
+			const selected_sources = this.sources(category).map(
+				(url_id: string) => (this.app_source().runtime_links() as any)[category][url_id] ?? url_id,
+			)
+
+			const raw_articles: any[] = []
+			selected_sources.forEach((rss_link: string) => {
+				const articles_from_source = this.request_articles_from_sources(rss_link)
+				const filtered = this.filter_articles(articles_from_source)
+				raw_articles.push(...filtered)
+			})
+
+			const texts = raw_articles
+				.map((article: any) => {
+					const title = article.title || ''
+					const description = article.description || ''
+					return `${title}\n${description}`.substring(0, 500)
+				})
+				.join('\n\n')
+
+			if (!navigator.onLine) return 'No internet connection'
+			if (texts.length === 0) return 'No news for summary'
+
+			return this.category_summary_text(category, texts)
+		}
 	}
 
 	export class $ainews_app_feed_title extends $.$ainews_app_feed_title {

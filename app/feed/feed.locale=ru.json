@@ -6,5 +6,11 @@
 	"$ainews_app_feed_Go_to_source_button_title": "(тык)",
 	"$ainews_app_feed_Article_description_summary_button_title": "Сделать краткую выжимку",
 	"$ainews_app_feed_Welcome_block_p1_paragraph_title": "Пустая лента - пора выбрать несколько источников!",
-	"$ainews_app_feed_Welcome_block_p2_paragraph_title": "Для этого перейдите на страницу Источники"
+	"$ainews_app_feed_Welcome_block_p2_paragraph_title": "Для этого перейдите на страницу Источники",
+	"$ainews_app_feed_Summary_all_button_title": "Саммари всех новостей",
+	"$ainews_app_feed_Summary_all_close_title": "Закрыть",
+	"$ainews_app_feed_Summary_all_content_title": "Саммари всех новостей",
+	"$ainews_app_feed_Category_summary_button_title": "Саммари категории",
+	"$ainews_app_feed_Category_summary_close_title": "Закрыть",
+	"$ainews_app_feed_Category_summary_content_title": "Саммари категории"
 }
