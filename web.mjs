@@ -9194,7 +9194,11 @@ var $;
 	($.$ainews_app_settings) = class $ainews_app_settings extends ($.$ainews_app_page) {
 		Interface_language_select(){
 			const obj = new this.$.$mol_locale_select();
-			(obj.dictionary) = () => ({"ru": "Russian", "en": "English"});
+			(obj.dictionary) = () => ({
+				"ru": "Russian", 
+				"en": "English", 
+				"de": "Deutsch"
+			});
 			return obj;
 		}
 		Interface_language_labeler(){

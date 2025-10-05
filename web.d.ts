@@ -3790,6 +3790,7 @@ declare namespace $ {
 		({ 
 			'ru': string,
 			'en': string,
+			'de': string,
 		}) 
 		,
 		ReturnType< $mol_locale_select['dictionary'] >
