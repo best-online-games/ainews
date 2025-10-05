@@ -439,27 +439,37 @@ namespace $.$$ {
 		summary_all_result() {
 			if (!this.summary_all_showed()) return ''
 
-			// Collect all articles from all categories
-			const all_articles: any[] = []
-			this.Categories().forEach((category_page: any) => {
-				const category_id = category_page.id(null)
-				const articles = this.articles(category_id)
-				all_articles.push(...articles)
+			const all_categories = Object.keys(this.app_source().runtime_links()).filter(
+				category =>
+					$mol_state_local.value(category) != null &&
+					($mol_state_local.value(category) as string[]).length > 0,
+			)
+
+			const raw_articles: any[] = []
+			all_categories.forEach((category: string) => {
+				const selected_sources = this.sources(category).map(
+					(url_id: string) => (this.app_source().runtime_links() as any)[category][url_id] ?? url_id,
+				)
+
+				selected_sources.forEach((rss_link: string) => {
+					const articles_from_source = this.request_articles_from_sources(rss_link)
+					const filtered = this.filter_articles(articles_from_source)
+					raw_articles.push(...filtered)
+				})
 			})
 
-			// Collect all titles and descriptions
-			const texts = all_articles
+			const texts = raw_articles
 				.map((article: any) => {
-					const title = this.article_title(article) || ''
-					return `${title}\n`.substring(0, 500)
+					const title = article.title || ''
+					const description = article.description || ''
+					return `${title}\n${description}`.substring(0, 500)
 				})
 				.join('\n\n')
 
-			// Make summary via API
 			if (!navigator.onLine) return 'No internet connection'
 			if (texts.length === 0) return 'No news for summary'
 
-			return this.summary_text(texts.substring(0, 1000))
+			return this.summary_text(texts.substring(0, 10000))
 		}
 
 		@$mol_action
