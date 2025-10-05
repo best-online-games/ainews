@@ -8088,11 +8088,11 @@ var $;
             attr() {
                 const a = super.attr();
                 const src = this.src();
-                if (!src)
+                if (!src || (Array.isArray(src) && src.length === 0))
                     return {};
                 return {
                     ...a,
-                    src: src,
+                    src: Array.isArray(src) ? src[0] : src,
                     alt: this.alt() ?? '',
                     loading: 'lazy',
                     referrerpolicy: 'no-referrer',
@@ -8102,7 +8102,7 @@ var $;
             }
             render() {
                 const src = this.src();
-                if (!src)
+                if (!src || (Array.isArray(src) && src.length === 0))
                     return null;
                 return super.render();
             }
