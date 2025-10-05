@@ -20,6 +20,7 @@ $ainews_app_settings $ainews_app_page
 					dictionary *
 						ru \Russian
 						en \English
+						de \Deutsch
 		<= Translate_to_labeler $mol_labeler
 			title @ \Translate post to
 			content /
