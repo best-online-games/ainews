@@ -11539,7 +11539,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const $ainews_app_sources_custom_rss_feeds = "my";
+        const $ainews_app_sources_custom_rss_feeds = 'my';
         const $ainews_app_source_links = {
             tech: [
                 'https://devblogs.microsoft.com/landingpage/',
@@ -12593,7 +12593,17 @@ var $;
                 return category;
             }
             suggestions(category) {
-                return $ainews_app_source_links[category];
+                const urls = $ainews_app_source_links[category];
+                return urls.reduce((acc, url) => {
+                    try {
+                        const domain = new URL(url).hostname.replace('www.', '');
+                        acc[url] = domain;
+                    }
+                    catch {
+                        acc[url] = url;
+                    }
+                    return acc;
+                }, {});
             }
             sources(id, next) {
                 if (next !== undefined)
@@ -12615,15 +12625,15 @@ var $;
                 if (current_list.includes(new_url)) {
                     return;
                 }
-                if (new_url !== null && new_url.trim() !== "") {
-                    if (new_url.includes("https://") == false && new_url.includes("http://") == false) {
-                        throw "Need valid http url!";
+                if (new_url !== null && new_url.trim() !== '') {
+                    if (new_url.includes('https://') == false && new_url.includes('http://') == false) {
+                        throw 'Need valid http url!';
                     }
                 }
                 const new_list = [...current_list, new_url];
                 this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list);
                 $mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list);
-                this.Add_feed_string().value("");
+                this.Add_feed_string().value('');
             }
             my_rss_title(id) {
                 return id;

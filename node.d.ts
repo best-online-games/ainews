@@ -4906,7 +4906,7 @@ declare namespace $.$$ {
         };
         Categories(): $mol_labeler[];
         category_title(category: any): any;
-        suggestions(category: any): string[];
+        suggestions(category: any): any;
         sources(id: string, next?: any): any;
         custom_sources(id: string, next?: any): any;
         My_rss_feeds(): $mol_view[];
