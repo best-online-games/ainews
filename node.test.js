@@ -10587,6 +10587,15 @@ var $;
                         binary += String.fromCharCode(buffer[i]);
                     }
                     const base64 = 'data:image/jpeg;base64,' + btoa(binary);
+                    const cache_list_key = 'img_cache_list';
+                    const cache_list = $mol_state_local.value(cache_list_key) || [];
+                    const updated_list = [url, ...cache_list.filter(u => u !== url)].slice(0, 30);
+                    cache_list.forEach(old_url => {
+                        if (!updated_list.includes(old_url)) {
+                            $mol_state_local.value(`img_cache_${old_url}`, null);
+                        }
+                    });
+                    $mol_state_local.value(cache_list_key, updated_list);
                     $mol_state_local.value(`img_cache_${url}`, base64);
                     return base64;
                 }
@@ -10744,7 +10753,7 @@ var $;
                 return !this.app_settings().is_enable_auto_translate();
             }
             translate_click(article, next) {
-                if (next) {
+                if (next && navigator.onLine) {
                     this.force_translate(article, true);
                 }
                 return next;
