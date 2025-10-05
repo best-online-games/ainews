@@ -6,6 +6,7 @@ namespace $.$$ {
 	export class $ainews_app_feed extends $.$ainews_app_feed {
 		@$mol_mem_key
 		translate_text(text: string, to_lang: string = this.app_settings().current_language()) {
+			if (!navigator.onLine) return text
 			const payload = new URLSearchParams({
 				text: text.substring(0, 512),
 				to_lang,
@@ -13,6 +14,7 @@ namespace $.$$ {
 			return $mol_fetch.text($ainews_app_feed_translate_url + '?' + payload.toString())
 		}
 		summary_text(text: string, to_lang: string = this.app_settings().current_language()) {
+			if (!navigator.onLine) return text
 			const payload = new URLSearchParams({
 				text: text.substring(0, 1024),
 				to_lang,
