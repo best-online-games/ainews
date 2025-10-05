@@ -1,6 +1,6 @@
 namespace $ {
 	const { rem } = $mol_style_unit
-	
+
 	$mol_style_define($ainews_app_feed, {
 		// Стили для карточек новостей (Article)
 		Article: {
@@ -78,7 +78,6 @@ namespace $ {
 			},
 		},
 
-
 		Article_translate_text: {
 			font: {
 				size: rem(0.75),
@@ -93,9 +92,35 @@ namespace $ {
 				textDecoration: 'underline',
 			},
 		},
-		
+
 		Article_description_summary_button: {
 			color: $mol_theme.shade,
-		}
+		},
+
+		Category_summary_content: {
+			maxWidth: '65vw',
+			maxHeight: '80vh',
+			width: 'auto',
+			height: 'auto',
+		},
+
+		Category_summary_text: {
+			wordWrap: 'break-word',
+			overflowWrap: 'break-word',
+			whiteSpace: 'pre-wrap',
+		},
+
+		Summary_all_content: {
+			maxWidth: '65vw',
+			maxHeight: '80vh',
+			width: 'auto',
+			height: 'auto',
+		},
+
+		Summary_all_text: {
+			wordWrap: 'break-word',
+			overflowWrap: 'break-word',
+			whiteSpace: 'pre-wrap',
+		},
 	})
 }
