@@ -83,6 +83,23 @@ namespace $.$$ {
 				}
 				const base64 = 'data:image/jpeg;base64,' + btoa(binary)
 
+				// Очищаем старые изображения (оставляем только 30)
+				const cache_list_key = 'img_cache_list'
+				const cache_list = ($mol_state_local.value(cache_list_key) as string[]) || []
+
+				// Добавляем новый URL в начало списка
+				const updated_list = [url, ...cache_list.filter(u => u !== url)].slice(0, 30)
+
+				// Удаляем изображения, которые вышли за пределы лимита
+				cache_list.forEach(old_url => {
+					if (!updated_list.includes(old_url)) {
+						$mol_state_local.value(`img_cache_${old_url}`, null)
+					}
+				})
+
+				// Обновляем список
+				$mol_state_local.value(cache_list_key, updated_list)
+
 				// Сохраняем в localStorage
 				$mol_state_local.value(`img_cache_${url}`, base64)
 
