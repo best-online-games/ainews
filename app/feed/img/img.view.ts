@@ -7,11 +7,11 @@ namespace $.$$ {
 		attr() {
 			const a = super.attr() as Record<string, string | undefined>
 			const src = this.src()
-			if (!src) return {} as any
+			if (!src || (Array.isArray(src) && src.length === 0)) return {} as any
 
 			return {
 				...a,
-				src: src,
+				src: Array.isArray(src) ? src[0] : src,
 				alt: this.alt() ?? '',
 				loading: 'lazy',
 				referrerpolicy: 'no-referrer',
@@ -22,7 +22,7 @@ namespace $.$$ {
 
 		render() {
 			const src = this.src()
-			if (!src) return null
+			if (!src || (Array.isArray(src) && src.length === 0)) return null
 			return super.render()
 		}
 	}
