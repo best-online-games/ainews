@@ -4063,6 +4063,7 @@ declare namespace $ {
 		langs_list( ): ({ 
 			'ru': string,
 			'en': string,
+			'de': string,
 		}) 
 		title( ): string
 		Logo( ): $mol_icon_settings

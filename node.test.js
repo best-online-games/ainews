@@ -9756,7 +9756,11 @@ var $;
 			return "";
 		}
 		langs_list(){
-			return {"ru": "Russian", "en": "English"};
+			return {
+				"ru": "Russian", 
+				"en": "English", 
+				"de": "Deutsch"
+			};
 		}
 		title(){
 			return (this.$.$mol_locale.text("$ainews_app_settings_title"));

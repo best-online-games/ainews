@@ -548,6 +548,7 @@ $ainews_app_settings $ainews_app_page
 	langs_list *
 		ru \Russian
 		en \English
+		de \Deutsch
 	title @ \Settings
 	Logo $mol_icon_settings
 	install? null
