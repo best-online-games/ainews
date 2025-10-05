@@ -10980,23 +10980,29 @@ var $;
             summary_all_result() {
                 if (!this.summary_all_showed())
                     return '';
-                const all_articles = [];
-                this.Categories().forEach((category_page) => {
-                    const category_id = category_page.id(null);
-                    const articles = this.articles(category_id);
-                    all_articles.push(...articles);
+                const all_categories = Object.keys(this.app_source().runtime_links()).filter(category => $mol_state_local.value(category) != null &&
+                    $mol_state_local.value(category).length > 0);
+                const raw_articles = [];
+                all_categories.forEach((category) => {
+                    const selected_sources = this.sources(category).map((url_id) => this.app_source().runtime_links()[category][url_id] ?? url_id);
+                    selected_sources.forEach((rss_link) => {
+                        const articles_from_source = this.request_articles_from_sources(rss_link);
+                        const filtered = this.filter_articles(articles_from_source);
+                        raw_articles.push(...filtered);
+                    });
                 });
-                const texts = all_articles
+                const texts = raw_articles
                     .map((article) => {
-                    const title = this.article_title(article) || '';
-                    return `${title}\n`.substring(0, 500);
+                    const title = article.title || '';
+                    const description = article.description || '';
+                    return `${title}\n${description}`.substring(0, 500);
                 })
                     .join('\n\n');
                 if (!navigator.onLine)
                     return 'No internet connection';
                 if (texts.length === 0)
                     return 'No news for summary';
-                return this.summary_text(texts.substring(0, 1000));
+                return this.summary_text(texts.substring(0, 10000));
             }
             category_summary_click(category, next) {
                 if (next) {
