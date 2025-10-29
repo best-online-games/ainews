@@ -1178,6 +1178,16 @@ declare namespace $ {
     function $mol_style_define<Component extends $mol_view, Config extends $mol_style_guard<Component, Config>>(Component: new () => Component, config: Config): HTMLStyleElement | null;
 }
 
+declare namespace $.$$ {
+    class $mol_scroll extends $.$mol_scroll {
+        scroll_top(next?: number, cache?: 'cache'): number;
+        scroll_left(next?: number, cache?: 'cache'): number;
+        event_scroll(next?: Event): void;
+        minimal_height(): number;
+        minimal_width(): number;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_scroll extends $mol_view {
@@ -1197,16 +1207,6 @@ declare namespace $ {
 
 //# sourceMappingURL=scroll.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_scroll extends $.$mol_scroll {
-        scroll_top(next?: number, cache?: 'cache'): number;
-        scroll_left(next?: number, cache?: 'cache'): number;
-        event_scroll(next?: Event): void;
-        minimal_height(): number;
-        minimal_width(): number;
-    }
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -1218,6 +1218,19 @@ declare namespace $ {
 
 declare namespace $ {
     type $mol_type_enforce<Actual extends Expected, Expected> = Actual;
+}
+
+declare namespace $.$$ {
+    class $mol_book2 extends $.$mol_book2 {
+        pages_deep(): $mol_view[];
+        title(): string;
+        menu_title(): string;
+        sub(): $mol_view[];
+        bring(): void;
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1252,12 +1265,27 @@ declare namespace $ {
 
 //# sourceMappingURL=book2.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_book2 extends $.$mol_book2 {
-        pages_deep(): $mol_view[];
-        title(): string;
-        menu_title(): string;
-        sub(): $mol_view[];
-        bring(): void;
+    class $mol_pop extends $.$mol_pop {
+        showed(next?: boolean): boolean;
+        sub_visible(): any[];
+        height_max(): number;
+        align(): string;
+        align_vert(): "suspense" | "top" | "bottom";
+        align_hor(): "suspense" | "left" | "right";
+        View_port(): $mol_view;
+        view_port(): {
+            width: number;
+            height: number;
+            left: number;
+            right: number;
+            top: number;
+            bottom: number;
+        } | {
+            left: number;
+            top: number;
+            width: number;
+            height: number;
+        };
     }
 }
 
@@ -1313,31 +1341,10 @@ declare namespace $ {
 
 //# sourceMappingURL=pop.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_pop extends $.$mol_pop {
-        showed(next?: boolean): boolean;
-        sub_visible(): any[];
-        height_max(): number;
-        align(): string;
-        align_vert(): "suspense" | "top" | "bottom";
-        align_hor(): "suspense" | "left" | "right";
-        View_port(): $mol_view;
-        view_port(): {
-            width: number;
-            height: number;
-            left: number;
-            right: number;
-            top: number;
-            bottom: number;
-        } | {
-            left: number;
-            top: number;
-            width: number;
-            height: number;
-        };
+    class $mol_hotkey extends $.$mol_hotkey {
+        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
+        keydown(event?: KeyboardEvent): void;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1357,9 +1364,14 @@ declare namespace $ {
 
 //# sourceMappingURL=hotkey.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_hotkey extends $.$mol_hotkey {
-        key(): { [key in keyof typeof $mol_keyboard_code]?: (event: KeyboardEvent) => void; };
-        keydown(event?: KeyboardEvent): void;
+    class $mol_nav extends $.$mol_nav {
+        event_key(event?: KeyboardEvent): undefined;
+        event_up(event?: KeyboardEvent): undefined;
+        event_down(event?: KeyboardEvent): undefined;
+        event_left(event?: KeyboardEvent): undefined;
+        event_right(event?: KeyboardEvent): undefined;
+        index_y(): number | null;
+        index_x(): number | null;
     }
 }
 
@@ -1387,18 +1399,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=nav.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_nav extends $.$mol_nav {
-        event_key(event?: KeyboardEvent): undefined;
-        event_up(event?: KeyboardEvent): undefined;
-        event_down(event?: KeyboardEvent): undefined;
-        event_left(event?: KeyboardEvent): undefined;
-        event_right(event?: KeyboardEvent): undefined;
-        index_y(): number | null;
-        index_x(): number | null;
-    }
-}
-
 declare namespace $ {
     class $mol_lock extends $mol_object {
         protected promise: null | Promise<void>;
@@ -1419,10 +1419,9 @@ declare namespace $ {
     function $mol_charset_decode(buffer: AllowSharedBufferSource, encoding?: $mol_charset_encoding): string;
 }
 
-declare var $node: any;
-
 declare namespace $ {
-    function $mol_charset_encode(value: string): Uint8Array<ArrayBuffer>;
+    function $mol_charset_encode(str: string): Uint8Array<ArrayBuffer>;
+    function $mol_charset_encode_to(str: string, buf: Uint8Array<ArrayBuffer>, from?: number): number;
 }
 
 declare namespace $ {
@@ -1617,6 +1616,23 @@ declare namespace $ {
     }
 }
 
+declare namespace $.$$ {
+    class $mol_string extends $.$mol_string {
+        event_change(next?: Event): void;
+        error_report(): void;
+        hint_visible(): string;
+        disabled(): boolean;
+        autocomplete_native(): "on" | "off";
+        selection_watcher(): $mol_dom_listener;
+        selection_change(event: Event): void;
+        selection_start(): number;
+        selection_end(): number;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_hotkey__mod_ctrl_mol_string_1 = $mol_type_enforce<
@@ -1681,27 +1697,18 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=string.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_string extends $.$mol_string {
-        event_change(next?: Event): void;
-        error_report(): void;
-        hint_visible(): string;
-        disabled(): boolean;
-        autocomplete_native(): "on" | "off";
-        selection_watcher(): $mol_dom_listener;
-        selection_change(event: Event): void;
-        selection_start(): number;
-        selection_end(): number;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
     class $mol_state_time extends $mol_object {
         static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
         static now(precision: number): number;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
     }
 }
 
@@ -1718,14 +1725,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -1802,6 +1801,22 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=speck.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button extends $.$mol_button {
+        status(next?: any[]): any[];
+        disabled(): boolean;
+        event_activate(next: Event): void;
+        event_key_press(event: KeyboardEvent): any;
+        tab_index(): number;
+        error(): string;
+        hint_safe(): string;
+        sub_visible(): ($mol_view_content | $mol_speck)[];
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
@@ -1841,22 +1856,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_button extends $.$mol_button {
-        status(next?: any[]): any[];
-        disabled(): boolean;
-        event_activate(next: Event): void;
-        event_key_press(event: KeyboardEvent): any;
-        tab_index(): number;
-        error(): string;
-        hint_safe(): string;
-        sub_visible(): ($mol_view_content | $mol_speck)[];
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 }
 
@@ -1883,6 +1882,25 @@ declare namespace $ {
 //# sourceMappingURL=minor.view.tree.d.ts.map
 declare namespace $ {
     function $mol_support_css_overflow_anchor(this: $): boolean;
+}
+
+declare namespace $.$$ {
+    class $mol_list extends $.$mol_list {
+        sub(): readonly $mol_view[];
+        render_visible_only(): boolean;
+        view_window(next?: [number, number]): [number, number];
+        item_height_min(index: number): number;
+        row_width_min(index: number): number;
+        gap_before(): number;
+        gap_after(): number;
+        sub_visible(): $mol_view[];
+        minimal_height(): number;
+        minimal_width(): number;
+        force_render(path: Set<$mol_view>): void;
+    }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -1921,18 +1939,12 @@ declare namespace $ {
 
 //# sourceMappingURL=list.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_list extends $.$mol_list {
-        sub(): readonly $mol_view[];
-        render_visible_only(): boolean;
-        view_window(next?: [number, number]): [number, number];
-        item_height_min(index: number): number;
-        row_width_min(index: number): number;
-        gap_before(): number;
-        gap_after(): number;
-        sub_visible(): $mol_view[];
-        minimal_height(): number;
+    class $mol_paragraph extends $.$mol_paragraph {
+        maximal_width(): number;
+        width_limit(): number;
         minimal_width(): number;
-        force_render(path: Set<$mol_view>): void;
+        row_width(): number;
+        minimal_height(): number;
     }
 }
 
@@ -1952,19 +1964,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=paragraph.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_paragraph extends $.$mol_paragraph {
-        maximal_width(): number;
-        width_limit(): number;
-        minimal_width(): number;
-        row_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
     type $mol_type_equals<A, B> = (<X>() => X extends A ? 1 : 2) extends (<X>() => X extends B ? 1 : 2) ? unknown : never;
 }
@@ -2066,6 +2065,18 @@ declare namespace $ {
     export {};
 }
 
+declare namespace $.$$ {
+    class $mol_dimmer extends $.$mol_dimmer {
+        parts(): any[];
+        strings(): string[];
+        string(index: number): string;
+        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_paragraph__sub_mol_dimmer_1 = $mol_type_enforce<
@@ -2092,11 +2103,16 @@ declare namespace $ {
 
 //# sourceMappingURL=dimmer.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_dimmer extends $.$mol_dimmer {
-        parts(): any[];
-        strings(): string[];
-        string(index: number): string;
-        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
+    class $mol_search extends $.$mol_search {
+        anchor_content(): ($.$mol_string | $mol_button_minor)[];
+        suggests_showed(next?: boolean): boolean;
+        suggest_selected(next?: string): void;
+        nav_components(): ($.$mol_string | $mol_button_minor)[];
+        nav_focused(component?: $mol_view): $mol_view | $.$mol_string | null;
+        suggest_label(key: string): string;
+        menu_items(): $mol_button_minor[];
+        suggest_select(id: string, event?: MouseEvent): void;
+        clear(event?: Event): void;
     }
 }
 
@@ -2250,20 +2266,18 @@ declare namespace $ {
 
 //# sourceMappingURL=search.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_search extends $.$mol_search {
-        anchor_content(): ($.$mol_string | $mol_button_minor)[];
-        suggests_showed(next?: boolean): boolean;
-        suggest_selected(next?: string): void;
-        nav_components(): ($.$mol_string | $mol_button_minor)[];
-        nav_focused(component?: $mol_view): $mol_view | $.$mol_string | null;
-        suggest_label(key: string): string;
-        menu_items(): $mol_button_minor[];
-        suggest_select(id: string, event?: MouseEvent): void;
-        clear(event?: Event): void;
+    class $mol_link extends $.$mol_link {
+        uri_toggle(): string;
+        uri(): string;
+        uri_off(): string;
+        uri_native(): URL;
+        current(): boolean;
+        file_name(): string;
+        minimal_height(): number;
+        external(): boolean;
+        target(): '_self' | '_blank' | '_top' | '_parent' | string;
+        hint_safe(): string;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -2301,21 +2315,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=link.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_link extends $.$mol_link {
-        uri_toggle(): string;
-        uri(): string;
-        uri_off(): string;
-        uri_native(): URL;
-        current(): boolean;
-        file_name(): string;
-        minimal_height(): number;
-        external(): boolean;
-        target(): '_self' | '_blank' | '_top' | '_parent' | string;
-        hint_safe(): string;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -2407,6 +2406,31 @@ declare namespace $.$$ {
 
 declare namespace $ {
     function $mol_match_text<Variant>(query: string, values: (variant: Variant) => readonly string[]): (variant: Variant) => boolean;
+}
+
+declare namespace $.$$ {
+    class $mol_book2_catalog extends $.$mol_book2_catalog {
+        spread_current(): any;
+        pages(): any[];
+        auto(): void;
+        spread_ids(): readonly string[];
+        menu_body(): ($.$mol_list | $.$mol_search)[];
+        menu_filter_enabled(): boolean;
+        menu_links(): $mol_view[];
+        spread_ids_filtered(): string[];
+        Spread(id: string): $mol_view;
+        Spread_default(): any;
+        spread(next?: string): string;
+        arg(spread: string): {
+            [x: string]: string | null;
+        };
+        spread_close_arg(): {
+            [x: string]: null;
+        };
+        spread_title(spread: string): string;
+        spread_current_book(): $mol_book2 | null;
+        placeholders(): readonly $mol_view[];
+    }
 }
 
 declare namespace $ {
@@ -2539,34 +2563,18 @@ declare namespace $ {
 
 //# sourceMappingURL=catalog.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_book2_catalog extends $.$mol_book2_catalog {
-        spread_current(): any;
-        pages(): any[];
-        auto(): void;
-        spread_ids(): readonly string[];
-        menu_body(): ($.$mol_list | $.$mol_search)[];
-        menu_filter_enabled(): boolean;
-        menu_links(): $mol_view[];
-        spread_ids_filtered(): string[];
-        Spread(id: string): $mol_view;
-        Spread_default(): any;
-        spread(next?: string): string;
-        arg(spread: string): {
-            [x: string]: string | null;
-        };
-        spread_close_arg(): {
-            [x: string]: null;
-        };
-        spread_title(spread: string): string;
-        spread_current_book(): $mol_book2 | null;
-        placeholders(): readonly $mol_view[];
-    }
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
 }
 
 declare namespace $ {
@@ -2595,15 +2603,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
 declare namespace $ {
 }
 
@@ -2624,6 +2623,12 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=4.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_lights_toggle extends $.$mol_lights_toggle {
+        lights(next?: boolean): boolean;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_lights_toggle extends $mol_check_icon {
@@ -2637,17 +2642,17 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_lights_toggle extends $.$mol_lights_toggle {
-        lights(next?: boolean): boolean;
-    }
-}
-
 declare namespace $ {
     const $ainews_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): string;
+    }
 }
 
 declare namespace $ {
@@ -2664,12 +2669,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=auto.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): string;
-    }
-}
-
 declare namespace $ {
 
 	export class $ainews_theme_auto extends $mol_theme_auto {
@@ -2703,6 +2702,22 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check_list extends $.$mol_check_list {
+        options(): {
+            [key: string]: string;
+        };
+        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
+        option_checked(id: string, next?: boolean | null): boolean;
+        keys(): readonly string[];
+        items(): $.$mol_check[];
+        option_title(key: string): string;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
@@ -2748,22 +2763,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_check_list extends $.$mol_check_list {
-        options(): {
-            [key: string]: string;
-        };
-        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
-        option_checked(id: string, next?: boolean | null): boolean;
-        keys(): readonly string[];
-        items(): $.$mol_check[];
-        option_title(key: string): string;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
     class $mol_state_session<Value> extends $mol_object {
         static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
@@ -2778,6 +2777,13 @@ declare namespace $ {
     }
 }
 
+declare namespace $.$$ {
+    class $mol_switch extends $.$mol_switch {
+        value(next?: string): string;
+        option_checked(key: string, next?: boolean): boolean;
+    }
+}
+
 declare namespace $ {
 
 	export class $mol_switch extends $mol_check_list {
@@ -2788,9 +2794,10 @@ declare namespace $ {
 
 //# sourceMappingURL=switch.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_switch extends $.$mol_switch {
-        value(next?: string): string;
-        option_checked(key: string, next?: boolean): boolean;
+    class $mol_deck extends $.$mol_deck {
+        current(next?: string): string;
+        switch_options(): Record<string, string>;
+        Content(): $mol_view;
     }
 }
 
@@ -2818,14 +2825,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=deck.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_deck extends $.$mol_deck {
-        current(next?: string): string;
-        switch_options(): Record<string, string>;
-        Content(): $mol_view;
-    }
-}
-
 declare namespace $ {
 
 	export class $ainews_app_feed_img extends $mol_view {
@@ -3011,6 +3010,15 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $.$$ {
+    class $mol_pick extends $.$mol_pick {
+        keydown(event: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
@@ -3064,15 +3072,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=pick.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_pick extends $.$mol_pick {
-        keydown(event: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 
 	export class $mol_icon_dots_vertical extends $mol_icon {
@@ -3082,6 +3081,25 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=vertical.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_select extends $.$mol_select {
+        filter_pattern(next?: string): string;
+        open(): void;
+        options(): readonly string[];
+        options_filtered(): readonly string[];
+        option_label(id: string): any;
+        option_rows(): $mol_button_minor[];
+        option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
+        event_select(id: string, event?: MouseEvent): void;
+        nav_components(): ($.$mol_search | $mol_button_minor)[];
+        trigger_content(): readonly $mol_view_content[];
+        menu_content(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	type $mol_dimmer__haystack_mol_select_1 = $mol_type_enforce<
@@ -3192,25 +3210,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=select.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_select extends $.$mol_select {
-        filter_pattern(next?: string): string;
-        open(): void;
-        options(): readonly string[];
-        options_filtered(): readonly string[];
-        option_label(id: string): any;
-        option_rows(): $mol_button_minor[];
-        option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
-        event_select(id: string, event?: MouseEvent): void;
-        nav_components(): ($.$mol_search | $mol_button_minor)[];
-        trigger_content(): readonly $mol_view_content[];
-        menu_content(): $mol_view[];
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
     const $mol_lang_iso639: {
         ab: string;
@@ -3399,14 +3398,6 @@ declare namespace $ {
     };
 }
 
-declare namespace $ {
-
-	export class $mol_locale_select extends $mol_select {
-	}
-	
-}
-
-//# sourceMappingURL=select.view.tree.d.ts.map
 declare namespace $.$$ {
     class $mol_locale_select extends $.$mol_locale_select {
         value(next?: string): string;
@@ -3600,6 +3591,14 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_locale_select extends $mol_select {
+	}
+	
+}
+
+//# sourceMappingURL=select.view.tree.d.ts.map
+declare namespace $ {
+
 	export class $mol_icon_tick extends $mol_icon {
 		path( ): string
 	}
@@ -3647,6 +3646,20 @@ declare namespace $ {
 
 //# sourceMappingURL=right.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_number extends $.$mol_number {
+        value_limited(val?: number): number;
+        event_dec(next?: Event): void;
+        event_inc(next?: Event): void;
+        event_dec_boost(next?: Event): void;
+        event_inc_boost(next?: Event): void;
+        round(val: number): string;
+        value_string(next?: string): string;
+        dec_enabled(): boolean;
+        inc_enabled(): boolean;
+    }
 }
 
 declare namespace $ {
@@ -3754,20 +3767,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=number.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_number extends $.$mol_number {
-        value_limited(val?: number): number;
-        event_dec(next?: Event): void;
-        event_inc(next?: Event): void;
-        event_dec_boost(next?: Event): void;
-        event_inc_boost(next?: Event): void;
-        round(val: number): string;
-        value_string(next?: string): string;
-        dec_enabled(): boolean;
-        inc_enabled(): boolean;
-    }
-}
-
 declare namespace $ {
 
 	export class $mol_icon_settings extends $mol_icon {
@@ -3994,6 +3993,16 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=text.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_check_expand extends $.$mol_check_expand {
+        level_style(): string;
+        expandable(): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
 declare namespace $ {
 
 	export class $mol_check_expand extends $mol_check {
@@ -4013,8 +4022,8 @@ declare namespace $ {
 
 //# sourceMappingURL=expand.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $mol_check_expand extends $.$mol_check_expand {
-        level_style(): string;
+    class $mol_expander extends $.$mol_expander {
+        rows(): $mol_view[];
         expandable(): boolean;
     }
 }
@@ -4064,16 +4073,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=expander.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_expander extends $.$mol_expander {
-        rows(): $mol_view[];
-        expandable(): boolean;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 
 	type $mol_button_major__title_ainews_app_feed_1 = $mol_type_enforce<
@@ -4597,6 +4596,22 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=plus.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_select_list extends $.$mol_select_list {
+        value(val?: readonly string[]): readonly string[];
+        pick(key?: string): string;
+        event_select(id: string, event?: MouseEvent): void;
+        options(): readonly string[];
+        options_pickable(): readonly string[];
+        option_title(key: string): string;
+        badge_title(key: string): string;
+        pick_enabled(): boolean;
+        Badges(): $mol_button_minor[];
+        title(): string;
+        remove(key: string): void;
+    }
+}
+
 declare namespace $ {
 
 	type __mol_select_list_1 = $mol_type_enforce<
@@ -4697,22 +4712,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_select_list extends $.$mol_select_list {
-        value(val?: readonly string[]): readonly string[];
-        pick(key?: string): string;
-        event_select(id: string, event?: MouseEvent): void;
-        options(): readonly string[];
-        options_pickable(): readonly string[];
-        option_title(key: string): string;
-        badge_title(key: string): string;
-        pick_enabled(): boolean;
-        Badges(): $mol_button_minor[];
-        title(): string;
-        remove(key: string): void;
-    }
-}
-
 declare namespace $.$$ {
 }
 
