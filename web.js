@@ -29,7 +29,7 @@ var $ = ( typeof module === 'object' ) ? ( module['export'+'s'] = globalThis ) :
 $.$$ = $
 
 ;
-var $node = $node || {} ; $node[ "/ainews/favicon.svg" ] = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5ld3NwYXBlciBpY29uIj4KICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0yMCwxMUg0VjhIMjBNMjAsMTVIMTNWMTNIMjBNMjAsMTlIMTNWMTdIMjBNMTEsMTlINFYxM0gxMU0yMC4zMyw0LjY3TDE4LjY3LDNMMTcsNC42N0wxNS4zMywzTDEzLjY3LDQuNjdMMTIsM0wxMC4zMyw0LjY3TDguNjcsM0w3LDQuNjdMNS4zMywzTDMuNjcsNC42N0wyLDNWMTlBMiwyIDAgMCwwIDQsMjFIMjBBMiwyIDAgMCwwIDIyLDE5VjNMMjAuMzMsNC42N1oiLz4KPC9zdmc+Cg=="
+var $node = $node || {} ; $node[ "/bog/ainews/favicon.svg" ] = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik5ld3NwYXBlciBpY29uIj4KICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0yMCwxMUg0VjhIMjBNMjAsMTVIMTNWMTNIMjBNMjAsMTlIMTNWMTdIMjBNMTEsMTlINFYxM0gxMU0yMC4zMyw0LjY3TDE4LjY3LDNMMTcsNC42N0wxNS4zMywzTDEzLjY3LDQuNjdMMTIsM0wxMC4zMyw0LjY3TDguNjcsM0w3LDQuNjdMNS4zMywzTDMuNjcsNC42N0wyLDNWMTlBMiwyIDAgMCwwIDQsMjFIMjBBMiwyIDAgMCwwIDIyLDE5VjNMMjAuMzMsNC42N1oiLz4KPC9zdmc+Cg=="
 
 ;
 "use strict";
@@ -7755,7 +7755,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$ainews_theme = $mol_style_prop('mol_theme', [
+    $.$bog_ainews_theme = $mol_style_prop('mol_theme', [
         'back',
         'hover',
         'card',
@@ -7776,7 +7776,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("ainews/theme/theme.css", ":root {\n\t--mol_theme_hue: 645deg;\n\t--mol_theme_hue_spread: 90deg;\n\n\t/* алиасы фиксами, чтобы не ломать совместимость */\n\t--mol_theme_primary_hue: 645deg;\n\t--mol_theme_secondary_hue: 735deg;\n\t--mol_theme_tertiary_hue: 555deg;\n\t--mol_theme_accent_hue: 180deg;\n}\n\n:where([mol_theme]) {\n\tcolor: var(--mol_theme_text);\n\tfill: var(--mol_theme_text);\n\tbackground-color: var(--mol_theme_back);\n}\n\n/* ===================== DARK ===================== */\n\n:root,\n[mol_theme='$mol_theme_dark'],\n:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t--mol_theme_luma: -1;\n\t--mol_theme_image: invert(1) hue-rotate(180deg);\n\n\t/* ВАЖНО: mol_* — именно их читает демка */\n\t--mol_theme_back: #3e3e3e; /* paper dark */\n\t--mol_theme_card: #4a4a4a40; /* paper-2 dark 25% */\n\t--mol_theme_field: #4c4c4c40; /* chip dark 25% */\n\t--mol_theme_hover: #5a5a5a1a; /* edge dark 10% */\n\n\t--mol_theme_text: #bcbcbc; /* ink dark */\n\t--mol_theme_shade: #909090; /* ink-muted dark */\n\t--mol_theme_line: #5a5a5a40; /* edge dark 25% */\n\t--mol_theme_focus: #a8bcff; /* accent dark */\n\n\t--mol_theme_control: #a8bcff; /* accent dark */\n\t--mol_theme_current: #c7b18c; /* accent-2 dark */\n\t--mol_theme_special: #d4bf9d; /* accent-2 lighter */\n}\n\n/* можно оставить дубликат в @supports — тоже mol_* */\n@supports (color: oklch(0% 0 0deg)) {\n\t:root,\n\t[mol_theme='$mol_theme_dark'],\n\t:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t\t--mol_theme_back: #3e3e3e;\n\t\t--mol_theme_card: #4a4a4a40;\n\t\t--mol_theme_field: #4c4c4c40;\n\t\t--mol_theme_hover: #5a5a5a1a;\n\n\t\t--mol_theme_text: #bcbcbc;\n\t\t--mol_theme_shade: #909090;\n\t\t--mol_theme_line: #5a5a5a40;\n\t\t--mol_theme_focus: #a8bcff;\n\n\t\t--mol_theme_control: #a8bcff;\n\t\t--mol_theme_current: #c7b18c;\n\t\t--mol_theme_special: #d4bf9d;\n\t}\n}\n\n/* ===================== LIGHT ===================== */\n\n[mol_theme='$mol_theme_light'],\n:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t--mol_theme_luma: 1;\n\t--mol_theme_image: none;\n\t--mol_theme_spirit: #fbf8f1bf; /* 75% */\n\n\t--mol_theme_back: #f7f3e9; /* paper */\n\t--mol_theme_card: #fbf8f180; /* paper-2 50% */\n\t--mol_theme_field: #efe8d8bf; /* chip 75% */\n\t--mol_theme_hover: #ded7c81a; /* edge 10% */\n\n\t--mol_theme_text: #22211f; /* ink */\n\t--mol_theme_shade: #6e6a62; /* ink-muted */\n\t--mol_theme_line: #ded7c840; /* edge 25% */\n\t--mol_theme_focus: #3b5aad; /* accent */\n\n\t--mol_theme_control: #3b5aad; /* accent */\n\t--mol_theme_current: #92734b; /* accent-2 */\n\t--mol_theme_special: #c7b18c; /* accent-2 lighter */\n}\n\n@supports (color: oklch(0% 0 0deg)) {\n\t[mol_theme='$mol_theme_light'],\n\t:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t\t--mol_theme_back: #f7f3e9;\n\t\t--mol_theme_card: #fbf8f180;\n\t\t--mol_theme_field: #efe8d8bf;\n\t\t--mol_theme_hover: #ded7c81a;\n\n\t\t--mol_theme_text: #22211f;\n\t\t--mol_theme_shade: #6e6a62;\n\t\t--mol_theme_line: #ded7c840;\n\t\t--mol_theme_focus: #3b5aad;\n\n\t\t--mol_theme_control: #3b5aad;\n\t\t--mol_theme_current: #92734b;\n\t\t--mol_theme_special: #c7b18c;\n\t}\n}\n");
+    $mol_style_attach("bog/ainews/theme/theme.css", ":root {\n\t--mol_theme_hue: 645deg;\n\t--mol_theme_hue_spread: 90deg;\n\n\t/* алиасы фиксами, чтобы не ломать совместимость */\n\t--mol_theme_primary_hue: 645deg;\n\t--mol_theme_secondary_hue: 735deg;\n\t--mol_theme_tertiary_hue: 555deg;\n\t--mol_theme_accent_hue: 180deg;\n}\n\n:where([mol_theme]) {\n\tcolor: var(--mol_theme_text);\n\tfill: var(--mol_theme_text);\n\tbackground-color: var(--mol_theme_back);\n}\n\n/* ===================== DARK ===================== */\n\n:root,\n[mol_theme='$mol_theme_dark'],\n:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t--mol_theme_luma: -1;\n\t--mol_theme_image: invert(1) hue-rotate(180deg);\n\n\t/* ВАЖНО: mol_* — именно их читает демка */\n\t--mol_theme_back: #3e3e3e; /* paper dark */\n\t--mol_theme_card: #4a4a4a40; /* paper-2 dark 25% */\n\t--mol_theme_field: #4c4c4c40; /* chip dark 25% */\n\t--mol_theme_hover: #5a5a5a1a; /* edge dark 10% */\n\n\t--mol_theme_text: #bcbcbc; /* ink dark */\n\t--mol_theme_shade: #909090; /* ink-muted dark */\n\t--mol_theme_line: #5a5a5a40; /* edge dark 25% */\n\t--mol_theme_focus: #a8bcff; /* accent dark */\n\n\t--mol_theme_control: #a8bcff; /* accent dark */\n\t--mol_theme_current: #c7b18c; /* accent-2 dark */\n\t--mol_theme_special: #d4bf9d; /* accent-2 lighter */\n}\n\n/* можно оставить дубликат в @supports — тоже mol_* */\n@supports (color: oklch(0% 0 0deg)) {\n\t:root,\n\t[mol_theme='$mol_theme_dark'],\n\t:where([mol_theme='$mol_theme_dark']) [mol_theme] {\n\t\t--mol_theme_back: #3e3e3e;\n\t\t--mol_theme_card: #4a4a4a40;\n\t\t--mol_theme_field: #4c4c4c40;\n\t\t--mol_theme_hover: #5a5a5a1a;\n\n\t\t--mol_theme_text: #bcbcbc;\n\t\t--mol_theme_shade: #909090;\n\t\t--mol_theme_line: #5a5a5a40;\n\t\t--mol_theme_focus: #a8bcff;\n\n\t\t--mol_theme_control: #a8bcff;\n\t\t--mol_theme_current: #c7b18c;\n\t\t--mol_theme_special: #d4bf9d;\n\t}\n}\n\n/* ===================== LIGHT ===================== */\n\n[mol_theme='$mol_theme_light'],\n:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t--mol_theme_luma: 1;\n\t--mol_theme_image: none;\n\t--mol_theme_spirit: #fbf8f1bf; /* 75% */\n\n\t--mol_theme_back: #f7f3e9; /* paper */\n\t--mol_theme_card: #fbf8f180; /* paper-2 50% */\n\t--mol_theme_field: #efe8d8bf; /* chip 75% */\n\t--mol_theme_hover: #ded7c81a; /* edge 10% */\n\n\t--mol_theme_text: #22211f; /* ink */\n\t--mol_theme_shade: #6e6a62; /* ink-muted */\n\t--mol_theme_line: #ded7c840; /* edge 25% */\n\t--mol_theme_focus: #3b5aad; /* accent */\n\n\t--mol_theme_control: #3b5aad; /* accent */\n\t--mol_theme_current: #92734b; /* accent-2 */\n\t--mol_theme_special: #c7b18c; /* accent-2 lighter */\n}\n\n@supports (color: oklch(0% 0 0deg)) {\n\t[mol_theme='$mol_theme_light'],\n\t:where([mol_theme='$mol_theme_light']) [mol_theme] {\n\t\t--mol_theme_back: #f7f3e9;\n\t\t--mol_theme_card: #fbf8f180;\n\t\t--mol_theme_field: #efe8d8bf;\n\t\t--mol_theme_hover: #ded7c81a;\n\n\t\t--mol_theme_text: #22211f;\n\t\t--mol_theme_shade: #6e6a62;\n\t\t--mol_theme_line: #ded7c840;\n\t\t--mol_theme_focus: #3b5aad;\n\n\t\t--mol_theme_control: #3b5aad;\n\t\t--mol_theme_current: #92734b;\n\t\t--mol_theme_special: #c7b18c;\n\t}\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -7815,7 +7815,7 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_theme_auto) = class $ainews_theme_auto extends ($.$mol_theme_auto) {
+	($.$bog_ainews_theme_auto) = class $bog_ainews_theme_auto extends ($.$mol_theme_auto) {
 		light(){
 			return "$mol_theme_light";
 		}
@@ -7829,14 +7829,14 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_page) = class $ainews_app_page extends ($.$mol_page) {};
+	($.$bog_ainews_app_page) = class $bog_ainews_app_page extends ($.$mol_page) {};
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("ainews/app/page/page.view.css", "[ainews_app_page] {\n\tflex: 1 0 40rem;\n}\n");
+    $mol_style_attach("bog/ainews/app/page/page.view.css", "[bog_ainews_app_page] {\n\tflex: 1 0 40rem;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -8111,7 +8111,7 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_feed_img) = class $ainews_app_feed_img extends ($.$mol_view) {
+	($.$bog_ainews_app_feed_img) = class $bog_ainews_app_feed_img extends ($.$mol_view) {
 		src(next){
 			if(next !== undefined) return next;
 			return null;
@@ -8129,10 +8129,10 @@ var $;
 			return null;
 		}
 	};
-	($mol_mem(($.$ainews_app_feed_img.prototype), "src"));
-	($mol_mem(($.$ainews_app_feed_img.prototype), "alt"));
-	($mol_mem(($.$ainews_app_feed_img.prototype), "width"));
-	($mol_mem(($.$ainews_app_feed_img.prototype), "height"));
+	($mol_mem(($.$bog_ainews_app_feed_img.prototype), "src"));
+	($mol_mem(($.$bog_ainews_app_feed_img.prototype), "alt"));
+	($mol_mem(($.$bog_ainews_app_feed_img.prototype), "width"));
+	($mol_mem(($.$bog_ainews_app_feed_img.prototype), "height"));
 
 
 ;
@@ -8144,7 +8144,7 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $ainews_app_feed_img extends $.$ainews_app_feed_img {
+        class $bog_ainews_app_feed_img extends $.$bog_ainews_app_feed_img {
             dom_name() {
                 return 'img';
             }
@@ -8170,7 +8170,7 @@ var $;
                 return super.render();
             }
         }
-        $$.$ainews_app_feed_img = $ainews_app_feed_img;
+        $$.$bog_ainews_app_feed_img = $bog_ainews_app_feed_img;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -8179,7 +8179,7 @@ var $;
 var $;
 (function ($) {
     const { rem } = $mol_style_unit;
-    $mol_style_define($.$$.$ainews_app_feed_img, {
+    $mol_style_define($.$$.$bog_ainews_app_feed_img, {
         display: 'block',
         objectFit: 'cover',
         borderRadius: rem(0.5),
@@ -8248,7 +8248,7 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_filters) = class $ainews_app_filters extends ($.$ainews_app_page) {
+	($.$bog_ainews_app_filters) = class $bog_ainews_app_filters extends ($.$bog_ainews_app_page) {
 		include_string_value(next){
 			if(next !== undefined) return next;
 			return "";
@@ -8275,7 +8275,7 @@ var $;
 		}
 		Include_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Include_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_filters_Include_labeler_title")));
 			(obj.content) = () => ([(this.Include_string()), (this.Include_string_clear_button())]);
 			return obj;
 		}
@@ -8305,23 +8305,23 @@ var $;
 		}
 		Excldue_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Excldue_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_filters_Excldue_labeler_title")));
 			(obj.content) = () => ([(this.Exclude_string()), (this.Exclude_string_clear_button())]);
 			return obj;
 		}
 		Tip(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Tip_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_filters_Tip_title")));
 			return obj;
 		}
 		Tip_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_filters_Tip_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_filters_Tip_labeler_title")));
 			(obj.content) = () => ([(this.Tip())]);
 			return obj;
 		}
 		title(){
-			return (this.$.$mol_locale.text("$ainews_app_filters_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_filters_title"));
 		}
 		body(){
 			return [
@@ -8331,20 +8331,20 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$ainews_app_filters.prototype), "include_string_value"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Include_string"));
-	($mol_mem(($.$ainews_app_filters.prototype), "include_string_clear_click"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Include_string_close_icon"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Include_string_clear_button"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Include_labeler"));
-	($mol_mem(($.$ainews_app_filters.prototype), "exclude_string_value"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Exclude_string"));
-	($mol_mem(($.$ainews_app_filters.prototype), "exclude_string_clear_click"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Exclude_string_close_icon"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Exclude_string_clear_button"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Excldue_labeler"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Tip"));
-	($mol_mem(($.$ainews_app_filters.prototype), "Tip_labeler"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "include_string_value"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Include_string"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "include_string_clear_click"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Include_string_close_icon"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Include_string_clear_button"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Include_labeler"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "exclude_string_value"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Exclude_string"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "exclude_string_clear_click"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Exclude_string_close_icon"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Exclude_string_clear_button"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Excldue_labeler"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Tip"));
+	($mol_mem(($.$bog_ainews_app_filters.prototype), "Tip_labeler"));
 
 
 ;
@@ -8356,31 +8356,31 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $ainews_app_filters extends $.$ainews_app_filters {
+        class $bog_ainews_app_filters extends $.$bog_ainews_app_filters {
             include_string_value(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("include_string_value", next);
-                return $mol_state_local.value("include_string_value") ?? "";
+                    return $mol_state_local.value('include_string_value', next);
+                return $mol_state_local.value('include_string_value') ?? '';
             }
             exclude_string_value(next) {
                 if (next !== undefined)
-                    return $mol_state_local.value("exclude_string_value", next);
-                return $mol_state_local.value("exclude_string_value") ?? "";
+                    return $mol_state_local.value('exclude_string_value', next);
+                return $mol_state_local.value('exclude_string_value') ?? '';
             }
             include_string_clear_click() {
-                $mol_state_local.value("include_string_value", null);
+                $mol_state_local.value('include_string_value', null);
             }
             exclude_string_clear_click() {
-                $mol_state_local.value("exclude_string_value", null);
+                $mol_state_local.value('exclude_string_value', null);
             }
         }
         __decorate([
             $mol_mem
-        ], $ainews_app_filters.prototype, "include_string_value", null);
+        ], $bog_ainews_app_filters.prototype, "include_string_value", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_filters.prototype, "exclude_string_value", null);
-        $$.$ainews_app_filters = $ainews_app_filters;
+        ], $bog_ainews_app_filters.prototype, "exclude_string_value", null);
+        $$.$bog_ainews_app_filters = $bog_ainews_app_filters;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -9236,7 +9236,7 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_settings) = class $ainews_app_settings extends ($.$ainews_app_page) {
+	($.$bog_ainews_app_settings) = class $bog_ainews_app_settings extends ($.$bog_ainews_app_page) {
 		Interface_language_select(){
 			const obj = new this.$.$mol_locale_select();
 			(obj.dictionary) = () => ({
@@ -9248,7 +9248,7 @@ var $;
 		}
 		Interface_language_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Interface_language_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Interface_language_labeler_title")));
 			(obj.content) = () => ([(this.Interface_language_select())]);
 			return obj;
 		}
@@ -9264,7 +9264,7 @@ var $;
 		}
 		Translate_to_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Translate_to_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Translate_to_labeler_title")));
 			(obj.content) = () => ([(this.Translate_to_select())]);
 			return obj;
 		}
@@ -9274,13 +9274,13 @@ var $;
 		}
 		Auto_translate(){
 			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Auto_translate_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Auto_translate_title")));
 			(obj.checked) = (next) => ((this.is_enable_auto_translate(next)));
 			return obj;
 		}
 		Localization_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Localization_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Localization_labeler_title")));
 			(obj.content) = () => ([(this.Auto_translate())]);
 			return obj;
 		}
@@ -9297,7 +9297,7 @@ var $;
 		}
 		Description_count_limiter_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Description_count_limiter_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Description_count_limiter_labeler_title")));
 			(obj.content) = () => ([(this.Description_count_limiter())]);
 			return obj;
 		}
@@ -9307,7 +9307,7 @@ var $;
 		}
 		Auto_open_spoiler_check_box(){
 			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Auto_open_spoiler_check_box_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Auto_open_spoiler_check_box_title")));
 			(obj.checked) = (next) => ((this.auto_open_spoiler_check_box_value(next)));
 			return obj;
 		}
@@ -9317,7 +9317,7 @@ var $;
 		}
 		Open_links_in_new_tabs_check_box(){
 			const obj = new this.$.$mol_check_box();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Open_links_in_new_tabs_check_box_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Open_links_in_new_tabs_check_box_title")));
 			(obj.checked) = (next) => ((this.open_links_in_new_tabs_check_box_value(next)));
 			return obj;
 		}
@@ -9328,19 +9328,19 @@ var $;
 		}
 		Spoilers_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Spoilers_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Spoilers_labeler_title")));
 			(obj.content) = () => ([(this.Spoilers_labeler_list())]);
 			return obj;
 		}
 		Install_button(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Install_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Install_button_title")));
 			(obj.click) = (next) => ((this.install(next)));
 			return obj;
 		}
 		Install_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_settings_Install_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_settings_Install_labeler_title")));
 			(obj.content) = () => ([(this.Install_button())]);
 			return obj;
 		}
@@ -9355,7 +9355,7 @@ var $;
 			};
 		}
 		title(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_title"));
 		}
 		Logo(){
 			const obj = new this.$.$mol_icon_settings();
@@ -9366,19 +9366,19 @@ var $;
 			return null;
 		}
 		install_ios_instruction(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_install_ios_instruction"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_install_ios_instruction"));
 		}
 		install_chrome_instruction(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_install_chrome_instruction"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_install_chrome_instruction"));
 		}
 		install_edge_instruction(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_install_edge_instruction"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_install_edge_instruction"));
 		}
 		install_unsupported_browser(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_install_unsupported_browser"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_install_unsupported_browser"));
 		}
 		install_already_installed(){
-			return (this.$.$mol_locale.text("$ainews_app_settings_install_already_installed"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_settings_install_already_installed"));
 		}
 		body(){
 			return [
@@ -9391,27 +9391,27 @@ var $;
 			];
 		}
 	};
-	($mol_mem(($.$ainews_app_settings.prototype), "Interface_language_select"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Interface_language_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "current_language_code"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Translate_to_select"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Translate_to_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "is_enable_auto_translate"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Auto_translate"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Localization_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "description_count_limiter_value"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Description_count_limiter"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Description_count_limiter_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "auto_open_spoiler_check_box_value"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Auto_open_spoiler_check_box"));
-	($mol_mem(($.$ainews_app_settings.prototype), "open_links_in_new_tabs_check_box_value"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Open_links_in_new_tabs_check_box"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Spoilers_labeler_list"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Spoilers_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Install_button"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Install_labeler"));
-	($mol_mem(($.$ainews_app_settings.prototype), "Logo"));
-	($mol_mem(($.$ainews_app_settings.prototype), "install"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Interface_language_select"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Interface_language_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "current_language_code"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Translate_to_select"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Translate_to_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "is_enable_auto_translate"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Auto_translate"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Localization_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "description_count_limiter_value"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Description_count_limiter"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Description_count_limiter_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "auto_open_spoiler_check_box_value"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Auto_open_spoiler_check_box"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "open_links_in_new_tabs_check_box_value"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Open_links_in_new_tabs_check_box"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Spoilers_labeler_list"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Spoilers_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Install_button"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Install_labeler"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "Logo"));
+	($mol_mem(($.$bog_ainews_app_settings.prototype), "install"));
 
 
 ;
@@ -9423,8 +9423,8 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $$.$ainews_app_settings_font_size_value = () => $mol_state_local.value('font_size_value') ? $mol_state_local.value('font_size_value') + 'rem' : '0.4rem';
-        class $ainews_app_settings extends $.$ainews_app_settings {
+        $$.$bog_ainews_app_settings_font_size_value = () => $mol_state_local.value('font_size_value') ? $mol_state_local.value('font_size_value') + 'rem' : '0.4rem';
+        class $bog_ainews_app_settings extends $.$bog_ainews_app_settings {
             is_enable_auto_translate(next) {
                 if (next !== undefined)
                     return $mol_state_local.value('is_enable_auto_translate', next);
@@ -9498,26 +9498,26 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "is_enable_auto_translate", null);
+        ], $bog_ainews_app_settings.prototype, "is_enable_auto_translate", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "description_count_limiter_value", null);
+        ], $bog_ainews_app_settings.prototype, "description_count_limiter_value", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "current_language_code", null);
+        ], $bog_ainews_app_settings.prototype, "current_language_code", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "current_language", null);
+        ], $bog_ainews_app_settings.prototype, "current_language", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "auto_open_spoiler_check_box_value", null);
+        ], $bog_ainews_app_settings.prototype, "auto_open_spoiler_check_box_value", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_settings.prototype, "open_links_in_new_tabs_check_box_value", null);
+        ], $bog_ainews_app_settings.prototype, "open_links_in_new_tabs_check_box_value", null);
         __decorate([
             $mol_action
-        ], $ainews_app_settings.prototype, "install", null);
-        $$.$ainews_app_settings = $ainews_app_settings;
+        ], $bog_ainews_app_settings.prototype, "install", null);
+        $$.$bog_ainews_app_settings = $bog_ainews_app_settings;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -9526,7 +9526,7 @@ var $;
 var $;
 (function ($) {
     const { rem } = $mol_style_unit;
-    $mol_style_define($ainews_app_settings, {});
+    $mol_style_define($bog_ainews_app_settings, {});
 })($ || ($ = {}));
 
 ;
@@ -9692,14 +9692,14 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_feed) = class $ainews_app_feed extends ($.$ainews_app_page) {
+	($.$bog_ainews_app_feed) = class $bog_ainews_app_feed extends ($.$bog_ainews_app_page) {
 		summary_all_click(next){
 			if(next !== undefined) return next;
 			return null;
 		}
 		Summary_all_button(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Summary_all_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Summary_all_button_title")));
 			(obj.click) = (next) => ((this.summary_all_click(next)));
 			return obj;
 		}
@@ -9713,7 +9713,7 @@ var $;
 		}
 		Summary_all_close(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Summary_all_close_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Summary_all_close_title")));
 			(obj.click) = (next) => ((this.summary_all_close_click(next)));
 			return obj;
 		}
@@ -9727,7 +9727,7 @@ var $;
 		}
 		Summary_all_content(){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Summary_all_content_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Summary_all_content_title")));
 			(obj.tools) = () => ([(this.Summary_all_close())]);
 			(obj.body) = () => ([(this.Summary_all_text())]);
 			return obj;
@@ -9763,13 +9763,13 @@ var $;
 		}
 		Welcome_block_p1_paragraph(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Welcome_block_p1_paragraph_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Welcome_block_p1_paragraph_title")));
 			(obj.dom_name) = () => ("h4");
 			return obj;
 		}
 		Welcome_block_p2_paragraph(){
 			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Welcome_block_p2_paragraph_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Welcome_block_p2_paragraph_title")));
 			(obj.uri) = () => ("#!=sources");
 			return obj;
 		}
@@ -9792,7 +9792,7 @@ var $;
 		}
 		Category_summary_button(id){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Category_summary_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Category_summary_button_title")));
 			(obj.click) = (next) => ((this.category_summary_click(id, next)));
 			return obj;
 		}
@@ -9806,7 +9806,7 @@ var $;
 		}
 		Category_summary_close(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Category_summary_close_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Category_summary_close_title")));
 			(obj.click) = (next) => ((this.category_summary_close_click(id, next)));
 			return obj;
 		}
@@ -9820,7 +9820,7 @@ var $;
 		}
 		Category_summary_content(id){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Category_summary_content_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Category_summary_content_title")));
 			(obj.tools) = () => ([(this.Category_summary_close(id))]);
 			(obj.body) = () => ([(this.Category_summary_text(id))]);
 			return obj;
@@ -9851,7 +9851,7 @@ var $;
 			return [];
 		}
 		Article_thumbnail(id){
-			const obj = new this.$.$ainews_app_feed_img();
+			const obj = new this.$.$bog_ainews_app_feed_img();
 			(obj.src) = () => ((this.article_image_src(id)));
 			(obj.alt) = () => ((this.article_title(id)));
 			(obj.width) = () => (192);
@@ -9864,7 +9864,7 @@ var $;
 		}
 		Article_description_summary_button(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Article_description_summary_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Article_description_summary_button_title")));
 			(obj.click) = (next) => ((this.summary_description_click(id, next)));
 			return obj;
 		}
@@ -9884,7 +9884,7 @@ var $;
 		}
 		Article_link(id){
 			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Article_link_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Article_link_title")));
 			(obj.target) = () => ((this.open_in_new_tab(id)));
 			(obj.uri_toggle) = () => ((this.article_link(id)));
 			return obj;
@@ -9894,7 +9894,7 @@ var $;
 		}
 		Article_translated_link(id){
 			const obj = new this.$.$mol_link();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Article_translated_link_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Article_translated_link_title")));
 			(obj.target) = () => ((this.open_in_new_tab(id)));
 			(obj.uri_toggle) = () => ((this.article_translated_link(id)));
 			return obj;
@@ -9905,7 +9905,7 @@ var $;
 		}
 		Article_translate_text(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_feed_Article_translate_text_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_feed_Article_translate_text_title")));
 			(obj.click) = (next) => ((this.translate_click(id, next)));
 			return obj;
 		}
@@ -9934,23 +9934,23 @@ var $;
 			return obj;
 		}
 		app_filters(){
-			const obj = new this.$.$ainews_app_filters();
+			const obj = new this.$.$bog_ainews_app_filters();
 			return obj;
 		}
 		app_settings(){
-			const obj = new this.$.$ainews_app_settings();
+			const obj = new this.$.$bog_ainews_app_settings();
 			return obj;
 		}
 		app_source(){
-			const obj = new this.$.$ainews_app_sources();
+			const obj = new this.$.$bog_ainews_app_sources();
 			return obj;
 		}
 		app_favorites(){
-			const obj = new this.$.$ainews_app_favorites();
+			const obj = new this.$.$bog_ainews_app_favorites();
 			return obj;
 		}
 		title(){
-			return (this.$.$mol_locale.text("$ainews_app_feed_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_feed_title"));
 		}
 		Logo(){
 			const obj = new this.$.$mol_icon_script_text();
@@ -9989,52 +9989,52 @@ var $;
 			return obj;
 		}
 	};
-	($mol_mem(($.$ainews_app_feed.prototype), "summary_all_click"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Summary_all_button"));
-	($mol_mem(($.$ainews_app_feed.prototype), "summary_all_showed"));
-	($mol_mem(($.$ainews_app_feed.prototype), "summary_all_close_click"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Summary_all_close"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Summary_all_text"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Summary_all_content"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Summary_all_pop"));
-	($mol_mem(($.$ainews_app_feed.prototype), "search_word"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Searcher"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Hot_fix"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Tabs"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p1_paragraph"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2_paragraph"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block_p2"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Welcome_block"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "category_summary_click"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_summary_button"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "category_summary_showed"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "category_summary_close_click"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_summary_close"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_summary_text"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_summary_content"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_summary_pop"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Items"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "openned_post"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_thumbnail"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "summary_description_click"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_description_summary_button"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_description"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_link"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_translated_link"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "translate_click"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article_translate_text"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Base_icon"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "base_checked"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Favorite"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Spoiler_tools"));
-	($mol_mem(($.$ainews_app_feed.prototype), "app_filters"));
-	($mol_mem(($.$ainews_app_feed.prototype), "app_settings"));
-	($mol_mem(($.$ainews_app_feed.prototype), "app_source"));
-	($mol_mem(($.$ainews_app_feed.prototype), "app_favorites"));
-	($mol_mem(($.$ainews_app_feed.prototype), "Logo"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Category_page"));
-	($mol_mem_key(($.$ainews_app_feed.prototype), "Article"));
-	($.$ainews_app_feed_title) = class $ainews_app_feed_title extends ($.$mol_paragraph) {
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "summary_all_click"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Summary_all_button"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "summary_all_showed"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "summary_all_close_click"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Summary_all_close"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Summary_all_text"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Summary_all_content"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Summary_all_pop"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "search_word"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Searcher"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Hot_fix"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Tabs"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Welcome_block_p1_paragraph"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Welcome_block_p2_paragraph"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Welcome_block_p2"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Welcome_block"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "category_summary_click"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_summary_button"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "category_summary_showed"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "category_summary_close_click"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_summary_close"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_summary_text"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_summary_content"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_summary_pop"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Items"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "openned_post"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_thumbnail"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "summary_description_click"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_description_summary_button"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_description"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_link"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_translated_link"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "translate_click"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article_translate_text"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Base_icon"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "base_checked"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Favorite"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Spoiler_tools"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "app_filters"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "app_settings"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "app_source"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "app_favorites"));
+	($mol_mem(($.$bog_ainews_app_feed.prototype), "Logo"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Category_page"));
+	($mol_mem_key(($.$bog_ainews_app_feed.prototype), "Article"));
+	($.$bog_ainews_app_feed_title) = class $bog_ainews_app_feed_title extends ($.$mol_paragraph) {
 		font_size_title(){
 			return "1.22rem";
 		}
@@ -10053,10 +10053,10 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $$.$ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy';
-        $$.$ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate';
-        $$.$ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary';
-        class $ainews_app_feed extends $.$ainews_app_feed {
+        $$.$bog_ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy';
+        $$.$bog_ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate';
+        $$.$bog_ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary';
+        class $bog_ainews_app_feed extends $.$bog_ainews_app_feed {
             translate_text(text, to_lang = this.app_settings().current_language()) {
                 if (!navigator.onLine)
                     return text;
@@ -10064,7 +10064,7 @@ var $;
                     text: text.substring(0, 512),
                     to_lang,
                 });
-                return $mol_fetch.text($$.$ainews_app_feed_translate_url + '?' + payload.toString());
+                return $mol_fetch.text($$.$bog_ainews_app_feed_translate_url + '?' + payload.toString());
             }
             summary_text(text, to_lang = this.app_settings().current_language()) {
                 if (!navigator.onLine)
@@ -10073,7 +10073,7 @@ var $;
                     text: text.substring(0, 1024),
                     to_lang,
                 });
-                return $mol_fetch.text($$.$ainews_app_feed_summary_url + '?' + payload.toString());
+                return $mol_fetch.text($$.$bog_ainews_app_feed_summary_url + '?' + payload.toString());
             }
             parse_rss(xml_doc) {
                 return Array.from(xml_doc.querySelectorAll('item')).map((item) => {
@@ -10140,10 +10140,10 @@ var $;
                 }
             }
             make_proxy(url) {
-                return $$.$ainews_app_feed_proxy_url + url;
+                return $$.$bog_ainews_app_feed_proxy_url + url;
             }
             make_translate(text) {
-                return $$.$ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256));
+                return $$.$bog_ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256));
             }
             articles(category) {
                 const selected_sources = this.sources(category).map((url_id) => this.app_source().runtime_links()[category][url_id] ?? url_id);
@@ -10168,7 +10168,7 @@ var $;
                 const payload = new URLSearchParams({
                     link: source_url,
                 });
-                const xml_doc = $mol_fetch.xml($$.$ainews_app_feed_proxy_url + '?' + payload.toString());
+                const xml_doc = $mol_fetch.xml($$.$bog_ainews_app_feed_proxy_url + '?' + payload.toString());
                 const articles_list = this.parse_rss(xml_doc);
                 const feed_cache_list_key = 'feed_cache_list';
                 const feed_cache_list = $mol_state_local.value(feed_cache_list_key) || [];
@@ -10432,7 +10432,7 @@ var $;
                     text: text.substring(0, 1000),
                     to_lang,
                 });
-                const url = $$.$ainews_app_feed_summary_url + '?' + payload.toString();
+                const url = $$.$bog_ainews_app_feed_summary_url + '?' + payload.toString();
                 const result = $mol_fetch.text(url);
                 return result;
             }
@@ -10462,74 +10462,74 @@ var $;
         }
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "translate_text", null);
+        ], $bog_ainews_app_feed.prototype, "translate_text", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "cache_image", null);
+        ], $bog_ainews_app_feed.prototype, "cache_image", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "request_articles_from_sources", null);
+        ], $bog_ainews_app_feed.prototype, "request_articles_from_sources", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "get_articles_from_sources", null);
+        ], $bog_ainews_app_feed.prototype, "get_articles_from_sources", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "force_translate", null);
+        ], $bog_ainews_app_feed.prototype, "force_translate", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "article_title", null);
+        ], $bog_ainews_app_feed.prototype, "article_title", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "article_description", null);
+        ], $bog_ainews_app_feed.prototype, "article_description", null);
         __decorate([
             $mol_action
-        ], $ainews_app_feed.prototype, "summary_description_click", null);
+        ], $bog_ainews_app_feed.prototype, "summary_description_click", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "force_summary", null);
+        ], $bog_ainews_app_feed.prototype, "force_summary", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "sources", null);
+        ], $bog_ainews_app_feed.prototype, "sources", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "openned_post", null);
+        ], $bog_ainews_app_feed.prototype, "openned_post", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "open_in_new_tab", null);
+        ], $bog_ainews_app_feed.prototype, "open_in_new_tab", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_feed.prototype, "Spoiler_tools", null);
+        ], $bog_ainews_app_feed.prototype, "Spoiler_tools", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "base_checked", null);
+        ], $bog_ainews_app_feed.prototype, "base_checked", null);
         __decorate([
             $mol_action
-        ], $ainews_app_feed.prototype, "summary_all_click", null);
+        ], $bog_ainews_app_feed.prototype, "summary_all_click", null);
         __decorate([
             $mol_action
-        ], $ainews_app_feed.prototype, "summary_all_close_click", null);
+        ], $bog_ainews_app_feed.prototype, "summary_all_close_click", null);
         __decorate([
             $mol_mem
-        ], $ainews_app_feed.prototype, "summary_all_result", null);
+        ], $bog_ainews_app_feed.prototype, "summary_all_result", null);
         __decorate([
             $mol_action
-        ], $ainews_app_feed.prototype, "category_summary_click", null);
+        ], $bog_ainews_app_feed.prototype, "category_summary_click", null);
         __decorate([
             $mol_action
-        ], $ainews_app_feed.prototype, "category_summary_close_click", null);
+        ], $bog_ainews_app_feed.prototype, "category_summary_close_click", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "category_summary_text", null);
+        ], $bog_ainews_app_feed.prototype, "category_summary_text", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_feed.prototype, "category_summary_result", null);
-        $$.$ainews_app_feed = $ainews_app_feed;
-        class $ainews_app_feed_title extends $.$ainews_app_feed_title {
+        ], $bog_ainews_app_feed.prototype, "category_summary_result", null);
+        $$.$bog_ainews_app_feed = $bog_ainews_app_feed;
+        class $bog_ainews_app_feed_title extends $.$bog_ainews_app_feed_title {
             font_size_title() {
-                return $ainews_app_settings_font_size_value();
+                return $bog_ainews_app_settings_font_size_value();
             }
         }
-        $$.$ainews_app_feed_title = $ainews_app_feed_title;
+        $$.$bog_ainews_app_feed_title = $bog_ainews_app_feed_title;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -10538,7 +10538,7 @@ var $;
 var $;
 (function ($) {
     const { rem } = $mol_style_unit;
-    $mol_style_define($ainews_app_feed, {
+    $mol_style_define($bog_ainews_app_feed, {
         Article: {
             background: {
                 color: $mol_theme.card,
@@ -10633,9 +10633,9 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$ainews_app_favorites) = class $ainews_app_favorites extends ($.$ainews_app_feed) {
+	($.$bog_ainews_app_favorites) = class $bog_ainews_app_favorites extends ($.$bog_ainews_app_feed) {
 		title(){
-			return (this.$.$mol_locale.text("$ainews_app_favorites_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_favorites_title"));
 		}
 		category_title(id){
 			return " ";
@@ -10652,8 +10652,8 @@ var $;
 			return [];
 		}
 	};
-	($mol_mem(($.$ainews_app_favorites.prototype), "add_post"));
-	($mol_mem(($.$ainews_app_favorites.prototype), "remove_post"));
+	($mol_mem(($.$bog_ainews_app_favorites.prototype), "add_post"));
+	($mol_mem(($.$bog_ainews_app_favorites.prototype), "remove_post"));
 
 
 ;
@@ -10665,42 +10665,42 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        $$.$ainews_app_favorites_key = "favorites";
-        class $ainews_app_favorites extends $.$ainews_app_favorites {
+        $$.$bog_ainews_app_favorites_key = 'favorites';
+        class $bog_ainews_app_favorites extends $.$bog_ainews_app_favorites {
             Categories() {
-                return [this.Category_page("favorites")];
+                return [this.Category_page('favorites')];
             }
             articles(category) {
-                const articles = this.app_source().custom_sources($$.$ainews_app_favorites_key);
+                const articles = this.app_source().custom_sources($$.$bog_ainews_app_favorites_key);
                 const filtered_articles = this.filter_articles(articles);
                 return filtered_articles.map((article) => this.Article(article));
             }
             add_post(post) {
-                const current_list = this.app_source().custom_sources($$.$ainews_app_favorites_key);
+                const current_list = this.app_source().custom_sources($$.$bog_ainews_app_favorites_key);
                 if (current_list.includes(post)) {
                     return;
                 }
                 const new_list = [...current_list, post];
-                this.app_source().custom_sources($$.$ainews_app_favorites_key, new_list);
+                this.app_source().custom_sources($$.$bog_ainews_app_favorites_key, new_list);
             }
             remove_post(id) {
-                const current_list = this.app_source().custom_sources($$.$ainews_app_favorites_key);
+                const current_list = this.app_source().custom_sources($$.$bog_ainews_app_favorites_key);
                 const new_list = current_list.filter((item) => item != id);
-                this.app_source().custom_sources($$.$ainews_app_favorites_key, new_list);
+                this.app_source().custom_sources($$.$bog_ainews_app_favorites_key, new_list);
             }
             posts() {
-                return this.app_source().custom_sources($$.$ainews_app_favorites_key);
+                return this.app_source().custom_sources($$.$bog_ainews_app_favorites_key);
             }
             filter_articles(articles_list) {
-                if (this.search_word().trim() !== "")
-                    return articles_list.filter((item) => new RegExp(this.search_word(), "ig").test(item.title));
+                if (this.search_word().trim() !== '')
+                    return articles_list.filter((item) => new RegExp(this.search_word(), 'ig').test(item.title));
                 return articles_list;
             }
         }
         __decorate([
             $mol_mem
-        ], $ainews_app_favorites.prototype, "posts", null);
-        $$.$ainews_app_favorites = $ainews_app_favorites;
+        ], $bog_ainews_app_favorites.prototype, "posts", null);
+        $$.$bog_ainews_app_favorites = $bog_ainews_app_favorites;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -10716,48 +10716,48 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app) = class $ainews_app extends ($.$mol_book2_catalog) {
+	($.$bog_ainews_app) = class $bog_ainews_app extends ($.$mol_book2_catalog) {
 		Lights(){
 			const obj = new this.$.$mol_lights_toggle();
 			return obj;
 		}
 		Theme(){
-			const obj = new this.$.$ainews_theme_auto();
+			const obj = new this.$.$bog_ainews_theme_auto();
 			return obj;
 		}
 		Feed(){
-			const obj = new this.$.$ainews_app_feed();
+			const obj = new this.$.$bog_ainews_app_feed();
 			return obj;
 		}
 		Favorite(){
-			const obj = new this.$.$ainews_app_favorites();
+			const obj = new this.$.$bog_ainews_app_favorites();
 			return obj;
 		}
 		Sources(){
-			const obj = new this.$.$ainews_app_sources();
+			const obj = new this.$.$bog_ainews_app_sources();
 			return obj;
 		}
 		Filters(){
-			const obj = new this.$.$ainews_app_filters();
+			const obj = new this.$.$bog_ainews_app_filters();
 			return obj;
 		}
 		Settings(){
-			const obj = new this.$.$ainews_app_settings();
+			const obj = new this.$.$bog_ainews_app_settings();
 			return obj;
 		}
 		Feat_1(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Feat_1_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_Feat_1_title")));
 			return obj;
 		}
 		Feat_2(){
 			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Feat_2_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_Feat_2_title")));
 			return obj;
 		}
 		Features(){
 			const obj = new this.$.$mol_page();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_Features_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_Features_title")));
 			(obj.body) = () => ([(this.Feat_1()), (this.Feat_2())]);
 			return obj;
 		}
@@ -10769,7 +10769,7 @@ var $;
 			return obj;
 		}
 		menu_title(){
-			return (this.$.$mol_locale.text("$ainews_app_menu_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_menu_title"));
 		}
 		menu_tools(){
 			return [(this.Lights())];
@@ -10788,17 +10788,17 @@ var $;
 			};
 		}
 	};
-	($mol_mem(($.$ainews_app.prototype), "Lights"));
-	($mol_mem(($.$ainews_app.prototype), "Theme"));
-	($mol_mem(($.$ainews_app.prototype), "Feed"));
-	($mol_mem(($.$ainews_app.prototype), "Favorite"));
-	($mol_mem(($.$ainews_app.prototype), "Sources"));
-	($mol_mem(($.$ainews_app.prototype), "Filters"));
-	($mol_mem(($.$ainews_app.prototype), "Settings"));
-	($mol_mem(($.$ainews_app.prototype), "Feat_1"));
-	($mol_mem(($.$ainews_app.prototype), "Feat_2"));
-	($mol_mem(($.$ainews_app.prototype), "Features"));
-	($mol_mem(($.$ainews_app.prototype), "Menu_logo"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Lights"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Theme"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Feed"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Favorite"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Sources"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Filters"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Settings"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Feat_1"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Feat_2"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Features"));
+	($mol_mem(($.$bog_ainews_app.prototype), "Menu_logo"));
 
 
 ;
@@ -10924,9 +10924,9 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        class $ainews_app extends $.$ainews_app {
+        class $bog_ainews_app extends $.$bog_ainews_app {
         }
-        $$.$ainews_app = $ainews_app;
+        $$.$bog_ainews_app = $bog_ainews_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -10935,7 +10935,7 @@ var $;
 var $;
 (function ($) {
     const { rem } = $mol_style_unit;
-    $mol_style_define($ainews_app, {});
+    $mol_style_define($bog_ainews_app, {});
 })($ || ($ = {}));
 
 ;
@@ -11151,7 +11151,7 @@ var $;
 "use strict";
 
 ;
-	($.$ainews_app_sources) = class $ainews_app_sources extends ($.$ainews_app_page) {
+	($.$bog_ainews_app_sources) = class $bog_ainews_app_sources extends ($.$bog_ainews_app_page) {
 		My_rss_feeds(){
 			return [];
 		}
@@ -11170,7 +11170,7 @@ var $;
 		}
 		Add_feed_button(){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Add_feed_button_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_sources_Add_feed_button_title")));
 			(obj.click) = (next) => ((this.add_custom_feed_click(next)));
 			return obj;
 		}
@@ -11185,7 +11185,7 @@ var $;
 		}
 		My_sources_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_My_sources_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_sources_My_sources_labeler_title")));
 			(obj.content) = () => ([(this.My_sources_labeler_content())]);
 			return obj;
 		}
@@ -11199,7 +11199,7 @@ var $;
 		}
 		Sources_labeler(){
 			const obj = new this.$.$mol_labeler();
-			(obj.title) = () => ((this.$.$mol_locale.text("$ainews_app_sources_Sources_labeler_title")));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_ainews_app_sources_Sources_labeler_title")));
 			(obj.content) = () => ([(this.Tabs())]);
 			return obj;
 		}
@@ -11257,7 +11257,7 @@ var $;
 			return [];
 		}
 		title(){
-			return (this.$.$mol_locale.text("$ainews_app_sources_title"));
+			return (this.$.$mol_locale.text("$bog_ainews_app_sources_title"));
 		}
 		Logo(){
 			const obj = new this.$.$mol_icon_open_source_initiative();
@@ -11278,25 +11278,25 @@ var $;
 			return obj;
 		}
 	};
-	($mol_mem(($.$ainews_app_sources.prototype), "My"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Add_feed_string"));
-	($mol_mem(($.$ainews_app_sources.prototype), "add_custom_feed_click"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Add_feed_button"));
-	($mol_mem(($.$ainews_app_sources.prototype), "My_sources_labeler_content"));
-	($mol_mem(($.$ainews_app_sources.prototype), "My_sources_labeler"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Tabs"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Sources_labeler"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "sources"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Sources"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Items"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "RSS_title"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Delete_close_icon"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "delete_custom_feed_click"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Delete_my_feed_button"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "custom_sources"));
-	($mol_mem(($.$ainews_app_sources.prototype), "Logo"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "Category_page"));
-	($mol_mem_key(($.$ainews_app_sources.prototype), "My_rss_item"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "My"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "Add_feed_string"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "add_custom_feed_click"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "Add_feed_button"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "My_sources_labeler_content"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "My_sources_labeler"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "Tabs"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "Sources_labeler"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "sources"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "Sources"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "Items"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "RSS_title"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "Delete_close_icon"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "delete_custom_feed_click"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "Delete_my_feed_button"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "custom_sources"));
+	($mol_mem(($.$bog_ainews_app_sources.prototype), "Logo"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "Category_page"));
+	($mol_mem_key(($.$bog_ainews_app_sources.prototype), "My_rss_item"));
 
 
 ;
@@ -11308,8 +11308,8 @@ var $;
 (function ($) {
     var $$;
     (function ($$) {
-        const $ainews_app_sources_custom_rss_feeds = 'my';
-        const $ainews_app_source_links = {
+        const $bog_ainews_app_sources_custom_rss_feeds = 'my';
+        const $bog_ainews_app_source_links = {
             tech: [
                 'https://devblogs.microsoft.com/landingpage/',
                 'https://blogs.unity3d.com/feed/',
@@ -12350,19 +12350,19 @@ var $;
                 'https://www.youtube.com/feeds/videos.xml?channel_id=UCQfwfsi5VrQ8yKZ-UWmAEFg',
             ],
         };
-        class $ainews_app_sources extends $.$ainews_app_sources {
+        class $bog_ainews_app_sources extends $.$bog_ainews_app_sources {
             runtime_links() {
-                const custom_rss = this.custom_sources($ainews_app_sources_custom_rss_feeds);
-                return { ...$ainews_app_source_links, my: custom_rss };
+                const custom_rss = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds);
+                return { ...$bog_ainews_app_source_links, my: custom_rss };
             }
             Categories() {
-                return Object.keys($ainews_app_source_links).map(category => this.Category_page(category));
+                return Object.keys($bog_ainews_app_source_links).map(category => this.Category_page(category));
             }
             category_title(category) {
                 return category;
             }
             suggestions(category) {
-                const urls = $ainews_app_source_links[category];
+                const urls = $bog_ainews_app_source_links[category];
                 return urls.reduce((acc, url) => {
                     try {
                         const domain = new URL(url).hostname.replace('www.', '');
@@ -12385,12 +12385,12 @@ var $;
                 return $mol_state_local.value(id) ?? [];
             }
             My_rss_feeds() {
-                const my_rss = $mol_state_local.value($ainews_app_sources_custom_rss_feeds) ?? [];
+                const my_rss = $mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds) ?? [];
                 return my_rss.map((category) => this.My_rss_item(category));
             }
             add_custom_feed_click() {
                 const new_url = this.Add_feed_string().value();
-                const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds);
+                const current_list = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds);
                 if (current_list.includes(new_url)) {
                     return;
                 }
@@ -12400,27 +12400,27 @@ var $;
                     }
                 }
                 const new_list = [...current_list, new_url];
-                this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list);
-                $mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list);
+                this.custom_sources($bog_ainews_app_sources_custom_rss_feeds, new_list);
+                $mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds, new_list);
                 this.Add_feed_string().value('');
             }
             my_rss_title(id) {
                 return id;
             }
             delete_custom_feed_click(id) {
-                const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds);
+                const current_list = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds);
                 const new_list = current_list.filter((item) => item != id);
-                this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list);
-                $mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list);
+                this.custom_sources($bog_ainews_app_sources_custom_rss_feeds, new_list);
+                $mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds, new_list);
             }
         }
         __decorate([
             $mol_mem_key
-        ], $ainews_app_sources.prototype, "custom_sources", null);
+        ], $bog_ainews_app_sources.prototype, "custom_sources", null);
         __decorate([
             $mol_mem_key
-        ], $ainews_app_sources.prototype, "my_rss_title", null);
-        $$.$ainews_app_sources = $ainews_app_sources;
+        ], $bog_ainews_app_sources.prototype, "my_rss_title", null);
+        $$.$bog_ainews_app_sources = $bog_ainews_app_sources;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 

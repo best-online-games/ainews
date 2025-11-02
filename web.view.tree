@@ -357,11 +357,11 @@ $mol_theme_auto $mol_plugin
 	light \$mol_theme_light
 	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
-$ainews_theme_auto $mol_theme_auto
+$bog_ainews_theme_auto $mol_theme_auto
 	light \$mol_theme_light
 	dark \$mol_theme_dark
 
-$ainews_app_page $mol_page
+$bog_ainews_app_page $mol_page
 
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
@@ -390,7 +390,7 @@ $mol_deck $mol_list
 			options <= switch_options *
 		<= Content $mol_view
 
-$ainews_app_feed_img $mol_view
+$bog_ainews_app_feed_img $mol_view
 	src? null
 	alt? null
 	width? null
@@ -410,11 +410,11 @@ $mol_labeler $mol_list
 			minimal_height 24
 			sub <= content /
 
-$ainews_app_filters $ainews_app_page
+$bog_ainews_app_filters $bog_ainews_app_page
 	title @ \Filters
 	body /
 		<= Include_labeler $mol_labeler
-			title @ \Post must include  text:
+			title @ \Post must include text:
 			content /
 				<= Include_string $mol_string
 					value? <=> include_string_value? \
@@ -424,7 +424,7 @@ $ainews_app_filters $ainews_app_page
 					sub /
 						<= Include_string_close_icon $mol_icon_close
 		<= Excldue_labeler $mol_labeler
-			title @ \Post must exclude  text:
+			title @ \Post must exclude text:
 			content /
 				<= Exclude_string $mol_string
 					value? <=> exclude_string_value? \
@@ -538,7 +538,7 @@ $mol_number $mol_view
 
 $mol_icon_settings $mol_icon path \M12,15.5C10.07,15.5 8.5,13.93 8.5,12C8.5,10.07 10.07,8.5 12,8.5C13.93,8.5 15.5,10.07 15.5,12C15.5,13.93 13.93,15.5 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z
 
-$ainews_app_settings $ainews_app_page
+$bog_ainews_app_settings $bog_ainews_app_page
 	current_language \
 	langs_list *
 		ru \Russian
@@ -630,11 +630,11 @@ $mol_expander $mol_list
 		<= Content $mol_list
 			rows <= content /
 
-$ainews_app_feed $ainews_app_page
-	app_filters $ainews_app_filters
-	app_settings $ainews_app_settings
-	app_source $ainews_app_sources
-	app_favorites $ainews_app_favorites
+$bog_ainews_app_feed $bog_ainews_app_page
+	app_filters $bog_ainews_app_filters
+	app_settings $bog_ainews_app_settings
+	app_source $bog_ainews_app_sources
+	app_favorites $bog_ainews_app_favorites
 	title @ \Feed
 	Logo $mol_icon_script_text
 	tools /
@@ -697,12 +697,12 @@ $ainews_app_feed $ainews_app_page
 		expanded? <=> openned_post*? false
 		label / <= article_title* \
 		content /
-			<= Article_thumbnail* $ainews_app_feed_img
+			<= Article_thumbnail* $bog_ainews_app_feed_img
 				src <= article_image_src* /
 				alt <= article_title*
 				width 192
 				height 108
-			- <= Article_title* $ainews_app_feed_title
+			- <= Article_title* $bog_ainews_app_feed_title
 				line_height <= font_size_value* 7
 				title <= article_title* \
 			<= Article_description_summary_button* $mol_button_minor
@@ -727,12 +727,12 @@ $ainews_app_feed $ainews_app_page
 				<= Favorite* $mol_check_icon
 					Icon <= Base_icon* $mol_icon_cards_heart
 					checked? <=> base_checked*? false
-$ainews_app_feed_title $mol_paragraph
+$bog_ainews_app_feed_title $mol_paragraph
 	style *
 		^
 		font-size <= font_size_title \1.22rem
 
-$ainews_app_favorites $ainews_app_feed
+$bog_ainews_app_favorites $bog_ainews_app_feed
 	title @ \Favorites
 	category_title* \ 
 	add_post? null
@@ -741,23 +741,23 @@ $ainews_app_favorites $ainews_app_feed
 
 $mol_icon_newspaper $mol_icon path \M20,11H4V8H20M20,15H13V13H20M20,19H13V17H20M11,19H4V13H11M20.33,4.67L18.67,3L17,4.67L15.33,3L13.67,4.67L12,3L10.33,4.67L8.67,3L7,4.67L5.33,3L3.67,4.67L2,3V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V3L20.33,4.67Z
 
-$ainews_app $mol_book2_catalog
+$bog_ainews_app $mol_book2_catalog
 	Placeholder null
 	Menu_logo $mol_icon_newspaper
 	menu_title @ \VibeNews - your favorites 
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	plugins /
-		<= Theme $ainews_theme_auto
+		<= Theme $bog_ainews_theme_auto
 	spreads *
 		\
-			- <= FAQ $ainews_app_faq
-			<= Feed $ainews_app_feed
-		- feed <= Feed $ainews_app_feed
-		favorite <= Favorite $ainews_app_favorites
-		sources <= Sources $ainews_app_sources
-		filters <= Filters $ainews_app_filters
-		settings <= Settings $ainews_app_settings
+			- <= FAQ $bog_ainews_app_faq
+			<= Feed $bog_ainews_app_feed
+		- feed <= Feed $bog_ainews_app_feed
+		favorite <= Favorite $bog_ainews_app_favorites
+		sources <= Sources $bog_ainews_app_sources
+		filters <= Filters $bog_ainews_app_filters
+		settings <= Settings $bog_ainews_app_settings
 		features <= Features $mol_page
 			title @ \Features list
 			body /
@@ -790,7 +790,7 @@ $mol_select_list $mol_view
 
 $mol_icon_open_source_initiative $mol_icon path \M15.41,22C15.35,22 15.28,22 15.22,22C15.1,21.95 15,21.85 14.96,21.73L12.74,15.93C12.65,15.69 12.77,15.42 13,15.32C13.71,15.06 14.28,14.5 14.58,13.83C15.22,12.4 14.58,10.73 13.15,10.09C11.72,9.45 10.05,10.09 9.41,11.5C9.11,12.21 9.09,13 9.36,13.69C9.66,14.43 10.25,15 11,15.28C11.24,15.37 11.37,15.64 11.28,15.89L9,21.69C8.96,21.81 8.87,21.91 8.75,21.96C8.63,22 8.5,22 8.39,21.96C3.24,19.97 0.67,14.18 2.66,9.03C4.65,3.88 10.44,1.31 15.59,3.3C18.06,4.26 20.05,6.15 21.13,8.57C22.22,11 22.29,13.75 21.33,16.22C20.32,18.88 18.23,21 15.58,22C15.5,22 15.47,22 15.41,22M12,3.59C7.03,3.46 2.9,7.39 2.77,12.36C2.68,16.08 4.88,19.47 8.32,20.9L10.21,16C8.38,15 7.69,12.72 8.68,10.89C9.67,9.06 11.96,8.38 13.79,9.36C15.62,10.35 16.31,12.64 15.32,14.47C14.97,15.12 14.44,15.65 13.79,16L15.68,20.93C17.86,19.95 19.57,18.16 20.44,15.93C22.28,11.31 20.04,6.08 15.42,4.23C14.33,3.8 13.17,3.58 12,3.59Z
 
-$ainews_app_sources $ainews_app_page
+$bog_ainews_app_sources $bog_ainews_app_page
 	runtime_links null
 	custom_sources*? /
 	title @ \Source

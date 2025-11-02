@@ -15,11 +15,20 @@
 	pack rise git \https://github.com/stan-donarise/mam_rise.git
 	pack yuf git \https://github.com/zerkalica/yuf.git
 	pack apxu git \https://github.com/ApxuTechTop/apxu
+	pack bog git \https://github.com/best-online-games/bog.git
+	pack mws git \https://github.com/reatailret/milkywaystd_mol.git
+\/bog
+	pack horrorgamelanding git \https://github.com/best-online-games/horrorgamelanding.com.git
+	pack theme git \https://github.com/best-online-games/theme.git
+	pack game git \https://github.com/best-online-games/game.git
+	pack pay git \https://github.com/best-online-games/pay.git
+	pack prof git \https://github.com/best-online-games/prof.git
+	pack ainews git \https://github.com/best-online-games/ainews.git
 \/mol
 	pack icon git \https://github.com/nin-jin/mol_icon.git
 \/mol/view
 	include \/mol/view/tree/test
-\/ainews/app
+\/bog/ainews/app
 	include \/mol/offline/install
-	deploy \/ainews/favicon.svg
-	deploy \/ainews/manifest.webmanifest
+	deploy \/bog/ainews/favicon.svg
+	deploy \/bog/ainews/manifest.webmanifest
