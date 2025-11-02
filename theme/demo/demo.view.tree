@@ -1,6 +1,6 @@
-$ainews_theme_demo $mol_example_large
+$bog_ainews_theme_demo $mol_example_large
 	plugins /
-		<= Theme $ainews_theme_auto
+		<= Theme $bog_ainews_theme_auto
 	style *
 		--mol_theme_hue <= hue_deg \
 		--mol_theme_hue_spread <= hue_spread_deg \
@@ -20,20 +20,20 @@ $ainews_theme_demo $mol_example_large
 				name \Lights
 				Content <= Lights $mol_lights_toggle
 		<= Scroll $mol_scroll sub /
-			<= Cases $ainews_theme_demo_case
+			<= Cases $bog_ainews_theme_demo_case
 				title \Current light
 				inner /
-					<= Base $ainews_theme_demo_case theme \$mol_theme_base
-					<= Current $ainews_theme_demo_case theme \$mol_theme_current
-					<= Special $ainews_theme_demo_case theme \$mol_theme_special
-					<= Accent $ainews_theme_demo_case theme \$mol_theme_accent
+					<= Base $bog_ainews_theme_demo_case theme \$mol_theme_base
+					<= Current $bog_ainews_theme_demo_case theme \$mol_theme_current
+					<= Special $bog_ainews_theme_demo_case theme \$mol_theme_special
+					<= Accent $bog_ainews_theme_demo_case theme \$mol_theme_accent
 	tags /
 		\theme
 		\skin
 	aspects /
 		\Type/Color
 
-$ainews_theme_demo_case $mol_view
+$bog_ainews_theme_demo_case $mol_view
 	title <= theme \
 	sub /
 		<= Self $mol_list rows /

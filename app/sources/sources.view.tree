@@ -1,4 +1,4 @@
-$ainews_app_sources $ainews_app_page
+$bog_ainews_app_sources $bog_ainews_app_page
 	runtime_links null
 	custom_sources*? /
 	title @ \Source

@@ -1,4 +1,4 @@
-$ainews_app_favorites $ainews_app_feed
+$bog_ainews_app_favorites $bog_ainews_app_feed
 	title @ \Favorites
 	category_title* \ 
 	add_post? null

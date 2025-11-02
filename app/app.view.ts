@@ -1,5 +1,3 @@
 namespace $.$$ {
-    export class $ainews_app extends $.$ainews_app {
-       
-    }
+	export class $bog_ainews_app extends $.$bog_ainews_app {}
 }

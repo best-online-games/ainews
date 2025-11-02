@@ -1,9 +1,9 @@
 namespace $.$$ {
-	export const $ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy'
-	export const $ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate'
-	export const $ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary'
+	export const $bog_ainews_app_feed_proxy_url = 'https://proxy.kinsle.ru/proxy'
+	export const $bog_ainews_app_feed_translate_url = 'https://proxy.kinsle.ru/translate'
+	export const $bog_ainews_app_feed_summary_url = 'https://proxy.kinsle.ru/summary'
 
-	export class $ainews_app_feed extends $.$ainews_app_feed {
+	export class $bog_ainews_app_feed extends $.$bog_ainews_app_feed {
 		@$mol_mem_key
 		translate_text(text: string, to_lang: string = this.app_settings().current_language()) {
 			if (!navigator.onLine) return text
@@ -11,7 +11,7 @@ namespace $.$$ {
 				text: text.substring(0, 512),
 				to_lang,
 			})
-			return $mol_fetch.text($ainews_app_feed_translate_url + '?' + payload.toString())
+			return $mol_fetch.text($bog_ainews_app_feed_translate_url + '?' + payload.toString())
 		}
 		summary_text(text: string, to_lang: string = this.app_settings().current_language()) {
 			if (!navigator.onLine) return text
@@ -19,7 +19,7 @@ namespace $.$$ {
 				text: text.substring(0, 1024),
 				to_lang,
 			})
-			return $mol_fetch.text($ainews_app_feed_summary_url + '?' + payload.toString())
+			return $mol_fetch.text($bog_ainews_app_feed_summary_url + '?' + payload.toString())
 		}
 
 		parse_rss(xml_doc: Document) {
@@ -112,10 +112,10 @@ namespace $.$$ {
 		}
 
 		make_proxy(url: string) {
-			return $ainews_app_feed_proxy_url + url
+			return $bog_ainews_app_feed_proxy_url + url
 		}
 		make_translate(text: string) {
-			return $ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256))
+			return $bog_ainews_app_feed_translate_url + decodeURIComponent(text.substring(0, 256))
 		}
 
 		articles(category: string) {
@@ -150,7 +150,7 @@ namespace $.$$ {
 			const payload = new URLSearchParams({
 				link: source_url,
 			})
-			const xml_doc = $mol_fetch.xml($ainews_app_feed_proxy_url + '?' + payload.toString())
+			const xml_doc = $mol_fetch.xml($bog_ainews_app_feed_proxy_url + '?' + payload.toString())
 			const articles_list = this.parse_rss(xml_doc)
 
 			// Очищаем старые фиды (оставляем только 20)
@@ -498,7 +498,7 @@ namespace $.$$ {
 				to_lang,
 			})
 
-			const url = $ainews_app_feed_summary_url + '?' + payload.toString()
+			const url = $bog_ainews_app_feed_summary_url + '?' + payload.toString()
 			const result = $mol_fetch.text(url)
 
 			return result
@@ -534,9 +534,9 @@ namespace $.$$ {
 		}
 	}
 
-	export class $ainews_app_feed_title extends $.$ainews_app_feed_title {
+	export class $bog_ainews_app_feed_title extends $.$bog_ainews_app_feed_title {
 		font_size_title() {
-			return $ainews_app_settings_font_size_value() //$mol_state_local.value("font_size_value") ?? 7 //super.font_size_value()
+			return $bog_ainews_app_settings_font_size_value() //$mol_state_local.value("font_size_value") ?? 7 //super.font_size_value()
 		}
 	}
 }

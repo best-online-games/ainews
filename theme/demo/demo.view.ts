@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $ainews_theme_demo extends $.$ainews_theme_demo {
+	export class $bog_ainews_theme_demo extends $.$bog_ainews_theme_demo {
 		hue_deg() {
 			return this.hue() + 'deg'
 		}

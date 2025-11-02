@@ -1,8 +1,8 @@
-$ainews_app_feed $ainews_app_page
-	app_filters $ainews_app_filters
-	app_settings $ainews_app_settings
-	app_source $ainews_app_sources
-	app_favorites $ainews_app_favorites
+$bog_ainews_app_feed $bog_ainews_app_page
+	app_filters $bog_ainews_app_filters
+	app_settings $bog_ainews_app_settings
+	app_source $bog_ainews_app_sources
+	app_favorites $bog_ainews_app_favorites
 	title @ \Feed
 	Logo $mol_icon_script_text
 	tools /
@@ -65,12 +65,12 @@ $ainews_app_feed $ainews_app_page
 		expanded? <=> openned_post*? false
 		label / <= article_title* \
 		content /
-			<= Article_thumbnail* $ainews_app_feed_img
+			<= Article_thumbnail* $bog_ainews_app_feed_img
 				src <= article_image_src* /
 				alt <= article_title*
 				width 192
 				height 108
-			- <= Article_title* $ainews_app_feed_title
+			- <= Article_title* $bog_ainews_app_feed_title
 				line_height <= font_size_value* 7
 				title <= article_title* \
 			<= Article_description_summary_button* $mol_button_minor
@@ -95,7 +95,7 @@ $ainews_app_feed $ainews_app_page
 				<= Favorite* $mol_check_icon
 					Icon <= Base_icon* $mol_icon_cards_heart
 					checked? <=> base_checked*? false
-$ainews_app_feed_title $mol_paragraph
+$bog_ainews_app_feed_title $mol_paragraph
 	style *
 		^
 		font-size <= font_size_title \1.22rem

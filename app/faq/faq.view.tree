@@ -1,4 +1,4 @@
-$ainews_app_faq $ainews_app_page
+$bog_ainews_app_faq $bog_ainews_app_page
 	title @ \FAQ
 	Logo $mol_icon_frequently_asked_questions
 	body /

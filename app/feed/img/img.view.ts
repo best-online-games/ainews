@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $ainews_app_feed_img extends $.$ainews_app_feed_img {
+	export class $bog_ainews_app_feed_img extends $.$bog_ainews_app_feed_img {
 		dom_name() {
 			return 'img' as const
 		}

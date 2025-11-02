@@ -3,7 +3,7 @@ namespace $ {
 	 * Theme css variables
 	 * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
 	 */
-	export const $ainews_theme = $mol_style_prop('mol_theme', [
+	export const $bog_ainews_theme = $mol_style_prop('mol_theme', [
 		'back',
 		'hover',
 		'card',

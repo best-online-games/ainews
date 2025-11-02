@@ -1,20 +1,20 @@
-$ainews_app $mol_book2_catalog
+$bog_ainews_app $mol_book2_catalog
 	Placeholder null
 	Menu_logo $mol_icon_newspaper
 	menu_title @ \VibeNews - your favorites 
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	plugins /
-		<= Theme $ainews_theme_auto
+		<= Theme $bog_ainews_theme_auto
 	spreads *
 		\
-			- <= FAQ $ainews_app_faq
-			<= Feed $ainews_app_feed
-		- feed <= Feed $ainews_app_feed
-		favorite <= Favorite $ainews_app_favorites
-		sources <= Sources $ainews_app_sources
-		filters <= Filters $ainews_app_filters
-		settings <= Settings $ainews_app_settings
+			- <= FAQ $bog_ainews_app_faq
+			<= Feed $bog_ainews_app_feed
+		- feed <= Feed $bog_ainews_app_feed
+		favorite <= Favorite $bog_ainews_app_favorites
+		sources <= Sources $bog_ainews_app_sources
+		filters <= Filters $bog_ainews_app_filters
+		settings <= Settings $bog_ainews_app_settings
 		features <= Features $mol_page
 			title @ \Features list
 			body /

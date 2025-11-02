@@ -1,4 +1,4 @@
-name: $ainews_app
+name: $bog_ainews_app
 
 permissions: write-all
 
@@ -18,10 +18,10 @@ jobs:
 
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'ainews'
+        package: 'bog/ainews'
         modules: 'app'
 
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:
-        folder: 'ainews/app/-'
+        folder: 'bog/ainews/app/-'

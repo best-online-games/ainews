@@ -1,4 +1,4 @@
-$ainews_app_settings $ainews_app_page
+$bog_ainews_app_settings $bog_ainews_app_page
 	current_language \
 	langs_list *
 		ru \Russian

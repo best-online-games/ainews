@@ -1,7 +1,7 @@
 namespace $.$$ {
-	const $ainews_app_sources_custom_rss_feeds = 'my'
+	const $bog_ainews_app_sources_custom_rss_feeds = 'my'
 
-	const $ainews_app_source_links = {
+	const $bog_ainews_app_source_links = {
 		tech: [
 			'https://devblogs.microsoft.com/landingpage/',
 			'https://blogs.unity3d.com/feed/',
@@ -1043,22 +1043,22 @@ namespace $.$$ {
 		],
 	}
 
-	export class $ainews_app_sources extends $.$ainews_app_sources {
+	export class $bog_ainews_app_sources extends $.$bog_ainews_app_sources {
 		runtime_links() {
-			const custom_rss = this.custom_sources($ainews_app_sources_custom_rss_feeds)
-			return { ...$ainews_app_source_links, my: custom_rss }
+			const custom_rss = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds)
+			return { ...$bog_ainews_app_source_links, my: custom_rss }
 		}
 
 		// tabs fields
 		Categories() {
-			return Object.keys($ainews_app_source_links).map(category => this.Category_page(category))
+			return Object.keys($bog_ainews_app_source_links).map(category => this.Category_page(category))
 		}
 		category_title(category: any) {
 			return category
 		}
 		// sources fileds
 		suggestions(category: any) {
-			const urls = $ainews_app_source_links[category as keyof typeof $ainews_app_source_links]
+			const urls = $bog_ainews_app_source_links[category as keyof typeof $bog_ainews_app_source_links]
 			// Преобразуем массив URL в объект {url: domain}
 			return urls.reduce((acc: any, url: string) => {
 				try {
@@ -1084,13 +1084,13 @@ namespace $.$$ {
 		}
 
 		My_rss_feeds() {
-			const my_rss = ($mol_state_local.value($ainews_app_sources_custom_rss_feeds) as string[]) ?? []
+			const my_rss = ($mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds) as string[]) ?? []
 			return my_rss.map((category: any) => this.My_rss_item(category))
 		}
 
 		add_custom_feed_click() {
 			const new_url = this.Add_feed_string().value()
-			const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds)
+			const current_list = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds)
 
 			// skip if alrady added
 			if (current_list.includes(new_url)) {
@@ -1103,8 +1103,8 @@ namespace $.$$ {
 				}
 			}
 			const new_list = [...current_list, new_url]
-			this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list)
-			$mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list)
+			this.custom_sources($bog_ainews_app_sources_custom_rss_feeds, new_list)
+			$mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds, new_list)
 			this.Add_feed_string().value('')
 		}
 
@@ -1114,10 +1114,10 @@ namespace $.$$ {
 		}
 
 		delete_custom_feed_click(id: string) {
-			const current_list = this.custom_sources($ainews_app_sources_custom_rss_feeds)
+			const current_list = this.custom_sources($bog_ainews_app_sources_custom_rss_feeds)
 			const new_list = current_list.filter((item: any) => item != id)
-			this.custom_sources($ainews_app_sources_custom_rss_feeds, new_list)
-			$mol_state_local.value($ainews_app_sources_custom_rss_feeds, new_list)
+			this.custom_sources($bog_ainews_app_sources_custom_rss_feeds, new_list)
+			$mol_state_local.value($bog_ainews_app_sources_custom_rss_feeds, new_list)
 		}
 	}
 }

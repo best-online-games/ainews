@@ -16,7 +16,7 @@
 - Language: TypeScript + $mol components.
 - Indentation: tabs; keep existing formatting.
 - Files: pair `*.view.ts` with `*.view.tree` and optional `*.view.css.ts`.
-- Names: prefix app scope with `$ainews_…` (e.g., `$ainews_app_feed`). Methods/vars in camelCase; avoid default exports.
+- Names: prefix app scope with `$bog_ainews_…` (e.g., `$bog_ainews_app_feed`). Methods/vars in camelCase; avoid default exports.
 - Keep modules small; memoize with `$mol_mem`/`$mol_mem_key` where needed.
 
 ## Commit & Pull Request Guidelines

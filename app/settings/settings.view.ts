@@ -1,8 +1,8 @@
 namespace $.$$ {
-	export const $ainews_app_settings_font_size_value = () =>
+	export const $bog_ainews_app_settings_font_size_value = () =>
 		$mol_state_local.value('font_size_value') ? $mol_state_local.value('font_size_value') + 'rem' : '0.4rem'
 
-	export class $ainews_app_settings extends $.$ainews_app_settings {
+	export class $bog_ainews_app_settings extends $.$bog_ainews_app_settings {
 		@$mol_mem
 		is_enable_auto_translate(next?: any) {
 			if (next !== undefined) return $mol_state_local.value('is_enable_auto_translate', next)
