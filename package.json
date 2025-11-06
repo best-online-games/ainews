@@ -227,6 +227,8 @@
     "$mol_expander",
     "$mol_check_expand",
     "$mol_fetch",
+    "$mol_rest_code",
+    "$mol_rest",
     "$mol_dom_parse",
     "$mol_icon_newspaper",
     "$mol_offline_install",
