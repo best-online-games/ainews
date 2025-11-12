@@ -25,6 +25,8 @@
 	pack prof git \https://github.com/best-online-games/prof.git
 	pack ainews git \https://github.com/best-online-games/ainews.git
 	pack favicon git \https://github.com/best-online-games/favicon.git
+	pack bhelper git \https://github.com/best-online-games/bhelper
+	pack dobro git \https://github.com/best-online-games/bhelper
 \/mol
 	pack icon git \https://github.com/nin-jin/mol_icon.git
 \/mol/view
