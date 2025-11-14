@@ -5,7 +5,12 @@ $bog_ainews_app $mol_book2_catalog
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	plugins /
-		<= Theme $bog_ainews_theme_auto
+		<= Theme $bog_theme_auto
+			themes /
+				\$mol_theme_ainews_light
+				\$mol_theme_ainews_dark
+			theme_light \$mol_theme_ainews_light
+			theme_dark \$mol_theme_ainews_dark
 	spreads *
 		\
 			- <= FAQ $bog_ainews_app_faq
