@@ -2719,37 +2719,40 @@ declare namespace $ {
 
 //# sourceMappingURL=toggle.view.tree.d.ts.map
 declare namespace $ {
-    const $bog_ainews_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
+    const $bog_theme: Record<"image" | "line" | "text" | "field" | "focus" | "back" | "hover" | "card" | "current" | "special" | "control" | "shade" | "spirit", $mol_style_func<"var", unknown>>;
+    const $bog_theme_names: readonly ["$mol_theme_light", "$mol_theme_dark", "$mol_theme_upwork", "$mol_theme_ainews_light", "$mol_theme_ainews_dark"];
+    type $bog_theme_name = (typeof $bog_theme_names)[number];
 }
 
 declare namespace $ {
 }
 
 declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): string;
+    class $bog_theme_auto extends $.$bog_theme_auto {
+        themes_default(): readonly $.$bog_theme_name[];
+        theme_index(next?: number): number;
+        system_theme_index(): number;
+        theme(): any;
+        theme_next(): void;
+        theme_prev(): void;
+        theme_set(index: number): void;
     }
 }
 
 declare namespace $ {
 
-	export class $mol_theme_auto extends $mol_plugin {
-		dark( ): string
-		theme( ): ReturnType< $mol_theme_auto['dark'] >
-		light( ): string
+	export class $bog_theme_auto extends $mol_plugin {
+		themes_default( ): readonly(any)[]
+		theme( ): string
+		themes( ): ReturnType< $bog_theme_auto['themes_default'] >
+		theme_light( ): string
+		theme_dark( ): string
+		theme_next( next?: any ): any
+		theme_prev( next?: any ): any
+		theme_set( next?: any ): any
 		attr( ): ({ 
-			'mol_theme': ReturnType< $mol_theme_auto['theme'] >,
+			'mol_theme': ReturnType< $bog_theme_auto['theme'] >,
 		}) 
-	}
-	
-}
-
-//# sourceMappingURL=auto.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $bog_ainews_theme_auto extends $mol_theme_auto {
-		light( ): string
-		dark( ): string
 	}
 	
 }
@@ -4606,29 +4609,44 @@ declare namespace $ {
 
 declare namespace $ {
 
-	type $mol_paragraph__title_bog_ainews_app_1 = $mol_type_enforce<
+	type $bog_theme_auto__themes_bog_ainews_app_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_theme_auto['themes'] >
+	>
+	type $bog_theme_auto__theme_light_bog_ainews_app_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_theme_auto['theme_light'] >
+	>
+	type $bog_theme_auto__theme_dark_bog_ainews_app_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_theme_auto['theme_dark'] >
+	>
+	type $mol_paragraph__title_bog_ainews_app_4 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_bog_ainews_app_2 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_ainews_app_5 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_page__title_bog_ainews_app_3 = $mol_type_enforce<
+	type $mol_page__title_bog_ainews_app_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__body_bog_ainews_app_4 = $mol_type_enforce<
+	type $mol_page__body_bog_ainews_app_7 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
 	export class $bog_ainews_app extends $mol_book2_catalog {
 		Lights( ): $mol_lights_toggle
-		Theme( ): $bog_ainews_theme_auto
+		Theme( ): $bog_theme_auto
 		Feed( ): $bog_ainews_app_feed
 		Favorite( ): $bog_ainews_app_favorites
 		Sources( ): $bog_ainews_app_sources

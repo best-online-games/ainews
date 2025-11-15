@@ -354,13 +354,14 @@ $mol_lights_toggle $mol_check_icon
 	hint @ \Toggle lights
 	checked? <=> lights? false
 
-$mol_theme_auto $mol_plugin
-	light \$mol_theme_light
-	attr * mol_theme <= theme <= dark \$mol_theme_dark
-
-$bog_ainews_theme_auto $mol_theme_auto
-	light \$mol_theme_light
-	dark \$mol_theme_dark
+$bog_theme_auto $mol_plugin
+	themes <= themes_default /
+	theme_light \$mol_theme_light
+	theme_dark \$mol_theme_dark
+	theme_next? null
+	theme_prev? null
+	theme_set? null
+	attr * mol_theme <= theme \
 
 $bog_ainews_app_page $mol_page
 
@@ -749,7 +750,12 @@ $bog_ainews_app $mol_book2_catalog
 	menu_tools /
 		<= Lights $mol_lights_toggle
 	plugins /
-		<= Theme $bog_ainews_theme_auto
+		<= Theme $bog_theme_auto
+			themes /
+				\$mol_theme_ainews_light
+				\$mol_theme_ainews_dark
+			theme_light \$mol_theme_ainews_light
+			theme_dark \$mol_theme_ainews_dark
 	spreads *
 		\
 			- <= FAQ $bog_ainews_app_faq
